@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="C:\Users\usuario\Downloads\muvix.png" alt="Muvix Banner" width="100%">
-</div>
+<img width="1584" height="672" alt="muvix" src="https://github.com/user-attachments/assets/9026a93c-bbd8-4cc9-bcdc-bad3f27d8a6a" />
 
 <br>
 
