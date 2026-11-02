@@ -1,0 +1,66 @@
+<aside 
+    class="w-64 h-full bg-white text-slate-700 flex flex-col justify-between shrink-0 border-r border-gray-200 transition-all duration-300 z-20 shadow-sm">
+    
+    <div class="p-4 space-y-4">
+  
+      <div class="h-12 px-2 flex items-center justify-between border-b border-gray-100 pb-3">
+        <span class="font-bold text-lg text-slate-900 tracking-wide">
+          Muvix <span class="text-xs bg-rose-500 text-white px-2 py-0.5 rounded-full ml-1" >Vendedor</span>
+        </span>
+      </div>
+
+
+      <!-- Links de navegación -->
+      <nav class="space-y-1.5">
+        
+        <a routerLink="/dashboard" 
+           routerLinkActive="bg-slate-900 text-white font-semibold shadow-sm" 
+           [routerLinkActiveOptions]="{exact: true}"
+           class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl text-slate-600 hover:bg-gray-100 hover:text-slate-900 transition">
+          <ng-icon name="heroChartBar" strokeWidth="2" class="text-lg"></ng-icon>
+          <span>Dashboard General</span>
+        </a>
+
+        <a routerLink="/dashboard/listings" 
+           routerLinkActive="bg-slate-900 text-white font-semibold shadow-sm"
+           class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl text-slate-600 hover:bg-gray-100 hover:text-slate-900 transition">
+           <ng-icon name="heroArchiveBox" strokeWidth="2" class="text-lg"></ng-icon> 
+           <span>Mis Publicaciones</span>
+        </a>
+
+        <a routerLink="/dashboard/storage" 
+           routerLinkActive="bg-slate-900 text-white font-semibold shadow-sm"
+           class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl text-slate-600 hover:bg-gray-100 hover:text-slate-900 transition">
+          <ng-icon name="heroTag" strokeWidth="2" class="text-lg"></ng-icon>
+          <span>Inventario y Lotes</span>
+        </a>
+
+        <a routerLink="/dashboard/agenda" 
+           routerLinkActive="bg-slate-900 text-white font-semibold shadow-sm"
+           class="flex items-center justify-between px-4 py-3 text-sm rounded-xl text-slate-600 hover:bg-gray-100 hover:text-slate-900 transition">
+          <div class="flex items-center gap-3">
+            <ng-icon name="heroKey" strokeWidth="2" class="text-lg"></ng-icon>
+            <span>Órdenes y PIN</span>
+          </div>
+        </a>
+
+        <a routerLink="/profile/me" 
+           routerLinkActive="bg-slate-900 text-white font-semibold shadow-sm"
+           class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl text-slate-600 hover:bg-gray-100 hover:text-slate-900 transition">
+          <ng-icon name="heroUser" strokeWidth="2" class="text-lg"></ng-icon>
+          <span>Mi Perfil Público</span>
+        </a>
+
+      </nav>
+    </div>
+
+    
+    <div class="p-4 border-t border-gray-100 space-y-2">
+      <button (click)="logout()" 
+              class="w-full text-left flex items-center gap-2 px-3 py-2 text-xs font-medium text-red-500 hover:text-red-700 transition rounded-md hover:bg-red-50">
+        <ng-icon name="heroArrowLeftOnRectangle" strokeWidth="2"></ng-icon>
+        Cerrar Sesión
+      </button>
+    </div>
+
+  </aside>
