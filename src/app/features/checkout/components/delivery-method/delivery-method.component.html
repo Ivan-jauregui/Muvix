@@ -1,0 +1,115 @@
+<section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-3">
+
+      <span
+        class="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
+        1
+      </span>
+
+      <h2 class="font-bold text-base">
+        Método de Retiro o Entrega
+      </h2>
+
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+    <!-- RETIRO PRESENCIAL -->
+    <button
+      type="button"
+      (click)="selectDelivery('pickup')"
+      class="text-left border-2 rounded-xl p-3 transition"
+      [class.border-gray-900]="deliveryMethod() === 'pickup'"
+      [class.bg-gray-50]="deliveryMethod() === 'pickup'"
+      [class.border-gray-200]="deliveryMethod() !== 'pickup'">
+
+      <div class="flex items-center gap-3">
+
+        <span
+          class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0"
+          [class.border-gray-900]="deliveryMethod() === 'pickup'">
+
+          @if (deliveryMethod() === 'pickup') {
+            <span class="w-2 h-2 bg-gray-900 rounded-full"></span>
+          }
+
+        </span>
+
+        <ng-icon
+          name="heroMapPin"
+          size="22"
+          class="text-gray-600 shrink-0" />
+
+        <div class="flex-1">
+
+          <p class="text-xs font-semibold">
+            Retiro presencial
+            <span class="text-[9px] bg-gray-200 px-2 py-0.5 rounded-full">
+              PALERMO
+            </span>
+          </p>
+
+          <p class="text-[11px] text-gray-400 mt-1">
+            Coordina horario · Planta Baja
+          </p>
+
+        </div>
+
+        <span class="text-xs font-bold text-emerald-600">
+          Gratis
+        </span>
+
+      </div>
+    </button>
+
+    <!-- ENVÍO -->
+    <button
+      type="button"
+      (click)="selectDelivery('shipping')"
+      class="text-left border-2 rounded-xl p-3 transition"
+      [class.border-gray-900]="deliveryMethod() === 'shipping'"
+      [class.bg-gray-50]="deliveryMethod() === 'shipping'"
+      [class.border-gray-200]="deliveryMethod() !== 'shipping'">
+
+      <div class="flex items-center gap-3">
+
+        <span
+          class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0"
+          [class.border-gray-900]="deliveryMethod() === 'shipping'">
+
+          @if (deliveryMethod() === 'shipping') {
+            <span class="w-2 h-2 bg-gray-900 rounded-full"></span>
+          }
+
+        </span>
+
+        <ng-icon
+          name="heroTruck"
+          size="22"
+          class="text-gray-600 shrink-0" />
+
+        <div class="flex-1">
+
+          <p class="text-xs font-semibold">
+            Flete Express / OCA
+          </p>
+
+          <p class="text-[11px] text-gray-400 mt-1">
+            Puerta a puerta con tracking
+          </p>
+
+        </div>
+
+        <span class="text-xs font-bold">
+          +$5.800
+        </span>
+
+      </div>
+    </button>
+
+  </div>
+
+</section>

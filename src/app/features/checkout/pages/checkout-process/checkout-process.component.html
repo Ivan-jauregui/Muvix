@@ -1,1 +1,85 @@
-<p>checkout-process works!</p>
+<div class="min-h-screen bg-[#fafafa] text-gray-900">
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    @if (publication(); as item) {
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- 1. MÉTODO DE RETIRO -->
+        <delivery-method [deliveryMethod]="deliveryMethod()" (deliveryMethodChange)="selectDelivery($event)" />
+
+        <!-- 2. DATOS DE RETIRO -->
+        <app-pickup-data [form]="pickupForm" />
+
+        <!-- GARANTÍA ESCROW -->
+        <section class="bg-gray-50 rounded-2xl border border-gray-200 p-4">
+
+          <div class="flex items-start gap-3">
+
+            <div class="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center shrink-0">
+              <ng-icon name="heroShieldCheck" size="24" class="text-emerald-600" />
+            </div>
+
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="text-xs font-bold">
+                  Garantía de Custodia Escrow (100% Blindado)
+                </h3>
+
+
+              </div>
+
+              <p class="text-xs text-gray-500 leading-relaxed mt-2">
+                Tu dinero no se transfiere al vendedor hasta que recibas el mueble en el domicilio.
+                Al comprobar su estado óptimo, le entregás tu
+                <strong class="text-gray-800">PIN de 4 dígitos</strong>
+                para liberar los fondos.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 3. MEDIO DE PAGO -->
+        <payment-method [paymentMethod]="paymentMethod()" (paymentMethodChange)="selectPayment($event)" [cardForm]="cardForm" />
+
+      </div>
+
+
+      <!-- COLUMNA DERECHA -->
+        <checkout-summary
+          [publication]="item"
+          [seller]="seller()"
+          [deliveryMethod]="deliveryMethod()"
+          [subtotal]="subtotal()"
+          [deliveryCost]="deliveryCost()"
+          [total]="total()"
+          (checkout)="confirmCheckout()"
+        />
+    </div>
+
+    } @else {
+
+    <div class="min-h-[60vh] flex items-center justify-center">
+      <div class="text-center">
+
+        <ng-icon name="heroShoppingCart" size="40" class="text-gray-400 mb-3" />
+
+        <h2 class="font-bold text-lg">Cargando publicación...</h2>
+
+        <p class="text-sm text-gray-500 mt-2">
+          Estamos preparando tu liquidación.
+        </p>
+
+      </div>
+    </div>
+
+    }
+
+  </main>
+
+</div>

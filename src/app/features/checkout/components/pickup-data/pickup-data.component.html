@@ -1,0 +1,110 @@
+
+<section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+
+
+  <div class="flex items-center gap-3 mb-5">
+
+    <span class="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
+      2
+    </span>
+
+    <div>
+      <h2 class="font-bold text-base">Datos de Retiro</h2>
+
+      <p class="text-xs text-gray-400 mt-1">
+        Presentará DNI y PIN al retirar
+      </p>
+    </div>
+
+  </div>
+
+  <!-- FORMULARIO -->
+  <div [formGroup]="form()" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+    <!-- NOMBRE -->
+    <label class="space-y-1">
+
+      <span class="block text-[11px] font-semibold text-gray-500">
+        Nombre y Apellido
+      </span>
+
+      <input
+        type="text"
+        formControlName="firstName"
+        placeholder="Ingresá tu nombre y apellido"
+        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-rose-100">
+
+      @if (form().get('firstName')?.touched && form().get('firstName')?.invalid) {
+        <span class="text-xs text-red-500">
+          Ingresá tu nombre y apellido.
+        </span>
+      }
+
+    </label>
+
+    <!-- DNI -->
+    <label class="space-y-1">
+
+      <span class="block text-[11px] font-semibold text-gray-500">
+        DNI / Documento
+      </span>
+
+      <input
+        type="text"
+        formControlName="dni"
+        placeholder="Ej: 38.452.910"
+        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-rose-100">
+
+      @if (form().get('dni')?.touched && form().get('dni')?.invalid) {
+        <span class="text-xs text-red-500">
+          Ingresá un DNI válido.
+        </span>
+      }
+
+    </label>
+
+    <!-- WHATSAPP -->
+    <label class="space-y-1">
+
+      <span class="block text-[11px] font-semibold text-gray-500">
+        WhatsApp de Coordinación
+      </span>
+
+      <input
+        type="tel"
+        formControlName="whatsapp"
+        placeholder="+54 9 11..."
+        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-rose-100">
+
+      @if (form().get('whatsapp')?.touched && form().get('whatsapp')?.invalid) {
+        <span class="text-xs text-red-500">
+          Ingresá un teléfono válido.
+        </span>
+      }
+
+    </label>
+
+    <!-- EMAIL -->
+    <label class="space-y-1">
+
+      <span class="block text-[11px] font-semibold text-gray-500">
+        Email para recibir el PIN
+      </span>
+
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="tu@email.com"
+        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-rose-100">
+
+      @if (form().get('email')?.touched && form().get('email')?.invalid) {
+        <span class="text-xs text-red-500">
+          Ingresá un email válido.
+        </span>
+      }
+
+    </label>
+
+  </div>
+
+</section>

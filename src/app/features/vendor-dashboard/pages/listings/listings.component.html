@@ -1,1 +1,81 @@
-<p>listings works!</p>
+<main class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
+        @for (item of publications(); track item.id) {
+          <!-- Tarjeta de Producto con el estilo de la imagen -->
+          <article 
+          class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group relative"
+          (click)="viewDetails(item.id!)">
+            
+            <!-- Contenedor de Imagen con tags superpuestos -->
+            <figure class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
+              <img [src]="getMainImageUrl(item)"
+                class="w-full h-full object-cover">
+              <!-- Tag Flotante 1: Descuento Hardcodeado (Calculable si tenés precio original) -->
+              <span class="absolute top-3 left-3 bg-black text-white text-xs font-black px-2 py-0.5 rounded">
+                -50%
+              </span>
+    
+              <!-- Tag Flotante 2: Urgencia / Stock -->
+              <span class="absolute top-3 right-3 bg-rose-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                <span class="w-1 h-1 bg-white rounded-full animate-ping"></span>
+                ¡Solo queda 1!
+              </span>
+            </figure>
+    
+            <!-- Información del Producto -->
+            <div class="p-5 flex flex-col flex-grow">
+              
+              <!-- Fila: Título e Insignia de Estado -->
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h2 class="text-base font-bold text-gray-900 line-clamp-2 leading-tight group-hover:text-rose-600 transition-colors">
+                  {{ item.title }}
+                </h2>
+                <span class="bg-gray-100 text-gray-500 text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap border border-gray-200/50">
+                  {{ item.condition }}
+                </span>
+              </div>
+    
+              <!-- Descripción corta -->
+              <p class="text-xs text-gray-500 line-clamp-2 mb-4 flex-grow">
+                {{ item.description }}
+              </p>
+    
+              <!-- Bloque de Precios (Actual vs Tachado) -->
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-2xl font-black text-rose-600">${{ item.price | number:'1.0-0' }}</span>
+                <!-- Simulación de precio de lista tachado -->
+                <span class="text-xs text-gray-400 line-through">${{ (item.price * 2) | number:'1.0-0' }}</span>
+              </div>
+    
+              <!-- Fila inferior: Vistas y Tag de Demanda -->
+              <div class="flex items-center justify-between text-[10px] text-gray-400 font-medium pb-4 border-b border-gray-100 mb-4">
+                <span>Vistas hoy: 45</span>
+                <span class="text-rose-600 font-bold uppercase tracking-wider">Alta demanda</span>
+              </div>
+    
+              <!-- Botones de Acción (Estilo doble botón de la captura) -->
+              <div class="grid grid-cols-2 gap-3 mt-auto">
+                <button class="bg-red-950 hover:bg-red-900 text-white text-xs font-bold py-2.5 px-4 rounded-lg transition-colors shadow-sm">
+                  Comprar Ya
+                </button>
+                <button class="bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold py-2.5 px-4 rounded-lg transition-colors">
+                  Hacer Oferta
+                </button>
+              </div>
+            </div>
+    
+          </article>
+        } @empty {
+          <!-- Estado vacío -->
+          <div class="col-span-full bg-white rounded-xl border border-gray-200 p-12 text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            <h3 class="mt-4 text-lg font-bold text-gray-900">No hay publicaciones</h3>
+            <p class="mt-2 text-sm text-gray-500">No se encontraron productos con estos filtros.</p>
+          </div>
+        }
+    
+      </div>
+    </main>

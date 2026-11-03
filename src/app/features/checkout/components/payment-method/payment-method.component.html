@@ -1,0 +1,167 @@
+<section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+
+  <!-- HEADER -->
+  <div class="flex items-center justify-between mb-5">
+
+    <div class="flex items-center gap-3">
+      <span
+        class="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
+        3
+      </span>
+
+      <h2 class="font-bold text-base">
+        Medio de Pago
+      </h2>
+    </div>
+
+    <span class="text-[10px] text-emerald-600 flex items-center gap-1">
+      <ng-icon name="heroLockClosed" size="14" />
+      Encriptado TLS 256-bit
+    </span>
+
+  </div>
+
+  <!-- OPCIONES DE PAGO -->
+  <div class="grid grid-cols-3 gap-2 bg-gray-100 rounded-xl p-1 mb-6">
+
+    <button
+      type="button"
+      (click)="selectPayment('card')"
+      class="rounded-lg py-2 text-xs font-semibold transition flex items-center justify-center gap-1"
+      [class.bg-white]="paymentMethod() === 'card'"
+      [class.shadow-sm]="paymentMethod() === 'card'">
+
+      <ng-icon name="heroCreditCard" size="17" />
+      Tarjeta
+    </button>
+
+    <button
+      type="button"
+      (click)="selectPayment('transfer')"
+      class="rounded-lg py-2 text-xs font-semibold transition flex items-center justify-center gap-1"
+      [class.bg-white]="paymentMethod() === 'transfer'"
+      [class.shadow-sm]="paymentMethod() === 'transfer'">
+
+      <ng-icon name="heroBuildingLibrary" size="17" />
+      Transferencia (-5%)
+    </button>
+
+    <button
+      type="button"
+      (click)="selectPayment('mercadopago')"
+      class="rounded-lg py-2 text-xs font-semibold transition flex items-center justify-center gap-1"
+      [class.bg-white]="paymentMethod() === 'mercadopago'"
+      [class.shadow-sm]="paymentMethod() === 'mercadopago'">
+
+      <ng-icon name="heroWallet" size="17" />
+      Mercado Pago
+    </button>
+
+  </div>
+
+  <!-- PAGO CON TARJETA -->
+  @if (paymentMethod() === 'card') {
+
+    <div [formGroup]="cardForm()" class="space-y-4">
+
+      <label class="block space-y-1">
+        <span class="text-[11px] font-semibold text-gray-500">
+          Número de tarjeta
+        </span>
+
+        <input
+          type="text"
+          formControlName="cardNumber"
+          placeholder="0000 0000 0000 0000"
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-rose-100">
+      </label>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+
+        <label class="space-y-1 col-span-2 sm:col-span-1">
+          <span class="text-[11px] font-semibold text-gray-500">
+            Titular
+          </span>
+
+          <input
+            type="text"
+            formControlName="cardHolder"
+            placeholder="NOMBRE Y APELLIDO"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none">
+        </label>
+
+        <label class="space-y-1">
+          <span class="text-[11px] font-semibold text-gray-500">
+            Vto
+          </span>
+
+          <input
+            type="text"
+            formControlName="cardExpiry"
+            placeholder="MM/AA"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none">
+        </label>
+
+        <label class="space-y-1">
+          <span class="text-[11px] font-semibold text-gray-500">
+            CVV
+          </span>
+
+          <input
+            type="password"
+            formControlName="cardCvv"
+            placeholder="•••"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm outline-none">
+        </label>
+
+      </div>
+
+    </div>
+
+  } @else if (paymentMethod() === 'transfer') {
+
+    <!-- TRANSFERENCIA -->
+    <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
+
+      <div class="flex items-center gap-2">
+        <ng-icon
+          name="heroBuildingLibrary"
+          size="20"
+          class="text-emerald-700" />
+
+        <p class="text-sm font-semibold text-emerald-800">
+          Transferencia bancaria
+        </p>
+      </div>
+
+      <p class="text-xs text-emerald-700 mt-1">
+        Vas a recibir los datos bancarios al continuar.
+      </p>
+
+    </div>
+
+  } @else {
+
+    <!-- MERCADO PAGO -->
+    <div class="rounded-xl bg-blue-50 border border-blue-100 p-4">
+
+      <div class="flex items-center gap-2">
+        <ng-icon
+          name="heroWallet"
+          size="20"
+          class="text-blue-700" />
+
+        <p class="text-sm font-semibold text-blue-800">
+          Mercado Pago
+        </p>
+      </div>
+
+      <p class="text-xs text-blue-700 mt-1">
+        Vas a poder continuar con Mercado Pago.
+      </p>
+
+    </div>
+
+  }
+
+</section>

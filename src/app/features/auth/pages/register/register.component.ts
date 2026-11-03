@@ -61,6 +61,10 @@ export class RegisterComponent implements OnInit{
         lastName: formValue.lastName,
         email: formValue.email,
         phoneNumber: formValue.phoneNumber,
+        country: formValue.country,
+        state: formValue.state,
+        city: formValue.city,
+        address: formValue.address,
         password: formValue.password,
       }
 

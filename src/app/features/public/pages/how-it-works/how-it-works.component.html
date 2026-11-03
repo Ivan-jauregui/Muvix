@@ -1,1 +1,282 @@
-<p>how-it-works works!</p>
+<main class="min-h-screen bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
+  <div class="max-w-7xl mx-auto space-y-16">
+
+    <!-- HERO SECTION -->
+    <section class="text-center max-w-3xl mx-auto space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold tracking-wide uppercase">
+       
+      </div>
+      
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        Transparencia absoluta en <span class="text-rose-600">cada vaciado</span>
+      </h1>
+      
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        Liquidación express de departamentos con fondos protegidos en fideicomiso. Máxima seguridad para el comprador antes de la entrega y garantía de desocupación efectiva para el vendedor.
+      </p>
+
+      <!-- SWITCH TABS: PARA COMPRADORES / VENDEDORES -->
+      <div class="inline-flex bg-slate-200/70 p-1.5 rounded-full shadow-inner">
+        <button type="button" (click)="setTab('compradores')" [class]="activeTab === 'compradores' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="px-6 py-2 rounded-full text-xs font-semibold transition-all">
+          Para Compradores
+        </button>
+        <button type="button" (click)="setTab('vendedores')" [class]="activeTab === 'vendedores' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="px-6 py-2 rounded-full text-xs font-semibold transition-all">
+          Para Vendedores
+        </button>
+      </div>
+    </section>
+
+    <!-- PASOS PARA COMPRAR CON CUSTODIA -->
+    <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+        <div>
+          <span class="text-[10px] font-bold text-rose-600 uppercase tracking-widest">Ruta Segura</span>
+          <h2 class="text-xl font-bold text-slate-900">Pasos para comprar con custodia</h2>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200/60 self-start sm:self-auto">
+    
+        </div>
+      </div>
+
+      <!-- 4 STEPS GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Step 01 -->
+        <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paso 01</span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Apartá tu lote con seña</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Explorá lotes completos de mudanza o muebles por unidad a precio de liquidación directa. Congelás el precio con pago digital protegido.
+            </p>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-100">
+            ✓ Descuentos reales de hasta -70%
+          </div>
+        </div>
+
+        <!-- Step 02 -->
+        <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paso 02</span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Custodia 100% blindada</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              El dinero nunca ingresa al vendedor por anticipado. Queda depositado en una cuenta escrow neutral hasta que finalice la inspección física.
+            </p>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-100">
+            ✓ Cero riesgo de estafa o seña perdida
+          </div>
+        </div>
+
+        <!-- Step 03 -->
+        <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paso 03</span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Coordiná retiro o flete</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Desbloqueás la dirección exacta, contactás al titular o elegís Flete Oficial con ayudantes. Vas al inmueble y corroborás el estado declarado.
+            </p>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-100">
+            ✓ Ventanas de horario sincronizadas
+          </div>
+        </div>
+
+        <!-- Step 04 -->
+        <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paso 04</span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Liberación con PIN Secreto</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Solo cuando los muebles están cargados a satisfacción le dictás el código de 4 dígitos. ¿No condice el estado? Cancelás con reembolso total.
+            </p>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-100">
+            ✓ Garantía de reintegro en el acto
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INGENIERÍA DE PAGO: FLUJO DE CUSTODIA EN 3 NODOS -->
+    <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+      <div class="space-y-1">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ingeniería de Pago</span>
+        <h2 class="text-xl font-bold text-slate-900">El flujo de custodia en 3 nodos inviolables</h2>
+        <p class="text-xs text-slate-500">Ninguna de las dos partes corre riesgos financieros. La transacción está dividida en un ciclo sincrónico resguardado por un PIN confidencial.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        
+        <!-- Node 1 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md">NODO 01</span>
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Depósito de Reserva</h4>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">El comprador abona el monto total. El dinero sale de su cuenta pero <strong>no ingresa a la del vendedor</strong>.</p>
+          </div>
+          <div class="text-[11px] font-medium text-amber-600 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            Estado: Fondos retenidos
+          </div>
+        </div>
+
+        <!-- Node 2 (Escrow BIND Highlighted) -->
+        <div class="bg-gradient-to-br from-black to-rose-950 text-white border border-slate-800 rounded-2xl p-6 space-y-4 shadow-lg relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold bg-slate-500/20 text-slate-400 border border-slate-500/30 px-2.5 py-0.5 rounded-md">NODO 02</span>
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-white text-sm">Custodia Fiduciaria BIND</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">Subcuenta segregada e inembargable. Genera una llave de liberación criptográfica de 4 dígitos única para esta operación.</p>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 text-[10px]">PIN SECRETO</span>
+            <div class="flex gap-1 ">
+              <span class="bg-slate-800 px-2 py-1 rounded">4</span>
+              <span class="bg-slate-800 px-2 py-1 rounded">8</span>
+              <span class="bg-slate-800 px-2 py-1 rounded">2</span>
+              <span class="bg-slate-800 px-2 py-1 rounded">9</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md">NODO 03</span>
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Acreditación instantánea</h4>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">Una vez cargados los muebles, el comprador entrega su PIN. El sistema transfiere de inmediato el monto al CBU del vendedor.</p>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Estado: Liquidación en tiempo real
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer info bar inside card -->
+      <div class="bg-slate-50 border border-slate-100 rounded-2xl p-3 flex items-center justify-between text-xs text-slate-500">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          ¿Discrepancia en el inmueble? Se cancela en el acto y se restituye el 100% al comprador sin deducción.
+        </span>
+        <span class="text-[10px] text-slate-400 font-mono hidden sm:inline">Protocolo v2.4 Compliant</span>
+      </div>
+    </section>
+
+    <!-- MUVIX VS MARKETPLATES TRADICIONALES -->
+    <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+      <div class="text-center space-y-2 max-w-xl mx-auto">
+        <span class="text-[10px] font-bold text-rose-600 uppercase tracking-widest">Diferencial Operativo</span>
+        <h2 class="text-2xl font-bold text-slate-900">Muvix vs. Marketplaces Tradicionales</h2>
+        <p class="text-xs text-slate-500">La diferencia entre coordinar una mudanza crítica con seguridad o correr riesgos innecesarios.</p>
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-x-auto border border-slate-100 rounded-2xl">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 uppercase tracking-wider text-[10px]">
+              <th class="py-3.5 px-4 font-semibold">Criterio Operativo</th>
+              <th class="py-3.5 px-4 font-semibold">Plataformas Clásicas / Redes</th>
+              <th class="py-3.5 px-4 font-semibold text-emerald-700 bg-emerald-50/50">Protocolo Muvix</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Resguardo de Fondos <span class="block text-[10px] text-slate-400 font-normal">Protección durante la reserva</span></td>
+              <td class="py-3.5 px-4 text-slate-500">Transferencias directas por alias sin seguro ni mediación posible si el vendedor desaparece.</td>
+              <td class="py-3.5 px-4 bg-emerald-50/30 text-emerald-900 font-medium">✓ Escrow 100% retenido <span class="block text-[10px] text-emerald-600 font-normal">Liberación únicamente con PIN presencial.</span></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Compromiso de Retiro <span class="block text-[10px] text-slate-400 font-normal">Cumplimiento en fechas límite</span></td>
+              <td class="py-3.5 px-4 text-slate-500">Compradores informales que cancelan a horas de la entrega de llaves.</td>
+              <td class="py-3.5 px-4 bg-emerald-50/30 text-emerald-900 font-medium">Compradores confirmados <span class="block text-[10px] text-emerald-600 font-normal">Solo asisten quienes ya tienen los fondos congelados.</span></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Logística de Edificio <span class="block text-[10px] text-slate-400 font-normal">Montacargas y peones</span></td>
+              <td class="py-3.5 px-4 text-slate-500">Fletes improvisados, sin permiso de consorcio ni seguro de transporte.</td>
+              <td class="py-3.5 px-4 bg-emerald-50/30 text-emerald-900 font-medium">Flete Oficial Certificado <span class="block text-[10px] text-emerald-600 font-normal">Coordinación de ascensores, peones y mantas.</span></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Verificación de Urgencia <span class="block text-[10px] text-slate-400 font-normal">Autenticidad de los precios</span></td>
+              <td class="py-3.5 px-4 text-slate-500">Revendedores con precios inflados disfrazados de liquidación.</td>
+              <td class="py-3.5 px-4 bg-emerald-50/30 text-emerald-900 font-medium">✓ Vaciados Auditados <span class="block text-[10px] text-emerald-600 font-normal">Validación de rescisión o entrega de inmueble.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section class="max-w-4xl mx-auto space-y-6">
+      <div class="text-center space-y-1">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dudas Habituales</span>
+        <h2 class="text-2xl font-bold text-slate-900">Preguntas Frecuentes</h2>
+        <p class="text-xs text-slate-500">Todo lo que necesitás tener claro antes de reservar o publicar un lote.</p>
+      </div>
+
+      <div class="space-y-3">
+        @for (faq of faqs; track $index) {
+          <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm space-y-2">
+            <h4 class="text-sm font-bold text-slate-900 flex items-center justify-between">
+              <span>{{ faq.question }}</span>
+              <span class="text-slate-400 text-base font-normal">+</span>
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed pr-6">
+              {{ faq.answer }}
+            </p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION DARK BANNER -->
+    <section class="bg-gradient-to-br from-black to-rose-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="space-y-2 z-10 text-center sm:text-left">
+        <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase bg-slate-500/10 px-2.5 py-1 rounded-md border border-slate-500/20">Empezá Hoy</span>
+        <h3 class="text-xl sm:text-2xl font-bold tracking-tight">¿Tenés que vaciar tu espacio o buscás oportunidades únicas?</h3>
+        <p class="text-xs text-slate-300 max-w-xl">Ahorrá hasta un 70% en mobiliario de calidad o liquidá todo tu departamento en menos de una semana con respaldo fiduciario total.</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3 z-10 shrink-0">
+        <a routerLink="/catalog" class="px-5 py-2.5 bg-white hover:bg-slate-100 text-slate-900 font-semibold text-xs rounded-3xl shadow-md transition-all">
+          Explorar Catálogo Express
+        </a>
+        <a routerLink="/publish" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-3xl border border-slate-800 transition-all">
+          Publicar mi Mudanza
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
