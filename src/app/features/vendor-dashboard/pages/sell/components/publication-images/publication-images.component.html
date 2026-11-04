@@ -1,0 +1,99 @@
+<div class="flex flex-col gap-3">
+
+
+  <div>
+    <span class="text-sm font-semibold text-gray-700">
+      Fotos de la publicación
+    </span>
+
+    <p class="text-xs text-gray-500 mt-1">
+      Agregá imágenes para mostrar tu publicación.
+    </p>
+  </div>
+
+
+  <label
+    for="file-upload"
+    class="flex items-center justify-center gap-2 w-full max-w-xs px-4 py-2 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 cursor-pointer shadow-sm transition">
+
+    📷 Seleccionar fotos
+
+  </label>
+
+  <input
+    id="file-upload"
+    type="file"
+    accept="image/*"
+    multiple
+    (change)="onFileSelected($event)"
+    class="hidden"
+  />
+
+
+  @if (images().length > 0) {
+
+    <div class="flex flex-wrap gap-3 mt-2">
+
+      @for (img of images(); track img.id) {
+
+        <div
+          class="relative w-24 h-24 border rounded-lg overflow-hidden group shadow-sm"
+          [class.border-green-500]="img.esPrincipal"
+          [class.border-gray-200]="!img.esPrincipal">
+
+          <img
+            [src]="img.url_images"
+            alt="Vista previa"
+            class="w-full h-full object-cover"
+          />
+
+          <button
+            type="button"
+            (click)="removeImage(img.id)"
+            class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-md hover:bg-red-700 transition">
+
+            ✕
+
+          </button>
+
+          <!-- HACER PRINCIPAL -->
+          @if (!img.esPrincipal) {
+
+            <button
+              type="button"
+              (click)="makePrincipal(img.id)"
+              class="absolute bottom-1 right-1 bg-white text-gray-700 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-md hover:bg-green-100 transition"
+              title="Hacer principal">
+
+              ★
+
+            </button>
+
+          }
+
+        
+          @if (img.esPrincipal) {
+
+            <span class="absolute bottom-1 left-1 bg-green-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow">
+
+              Principal
+
+            </span>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <p class="text-xs text-gray-400">
+      Todavía no seleccionaste imágenes.
+    </p>
+
+  }
+
+</div>

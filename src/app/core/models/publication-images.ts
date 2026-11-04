@@ -1,6 +1,6 @@
 export interface PublicationImages{
-    id:number;
+    id?:number;
     url_images:string;
     esPrincipal: boolean;
-    publicationId: number;
+    publicationId: string;
 }

@@ -12,7 +12,7 @@
         "name": "Muebles"
       },
       "type": "INDIVIDUAL",
-      "userId":"1",
+      "userId": "1",
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
@@ -27,7 +27,7 @@
         "name": "Muebles"
       },
       "type": "INDIVIDUAL",
-      "userId":"1",
+      "userId": "1",
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
@@ -42,7 +42,7 @@
         "name": "Muebles"
       },
       "type": "INDIVIDUAL",
-      "userId":"1",
+      "userId": "1",
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
@@ -57,7 +57,7 @@
         "name": "Muebles"
       },
       "type": "LOTE",
-      "userId":"1",
+      "userId": "1",
       "createdAt": "2026-10-28T21:20:00.000Z"
     }
   ],
@@ -99,21 +99,58 @@
       "publicationId": "4"
     }
   ],
-  
-    "users": [
-      {
-        "id": "1",
-        "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-        "firstName": "Ivan",
-        "lastName": "Jauregui",
-        "email": "ivanjauregui22@gmail.com",
-        "phoneNumber": "2233009292",
-        "password": "1234",
-        "country": "Argentina",
-        "state": "Buenos Aires",
-        "city": "Mar del Plata",
-        "address": "Av. Colón 1234"
-      }
-    ],
+  "users": [
+    {
+      "id": "1",
+      "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      "firstName": "Ivan",
+      "lastName": "Jauregui",
+      "email": "ivanjauregui22@gmail.com",
+      "phoneNumber": "2233009292",
+      "password": "1234",
+      "country": "Argentina",
+      "state": "Buenos Aires",
+      "city": "Mar del Plata",
+      "address": "Av. Colón 1234"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Muebles y Living"
+    },
+    {
+      "id": "2",
+      "name": "Decoración e Iluminación"
+    },
+    {
+      "id": "3",
+      "name": "Electrodomésticos de Cocina"
+    },
+    {
+      "id": "4",
+      "name": "Bazar y Utensilios"
+    },
+    {
+      "id": "5",
+      "name": "Blanco y Cama (Sábanas, Toallas)"
+    },
+    {
+      "id": "6",
+      "name": "Organización y Almacenamiento"
+    },
+    {
+      "id": "7",
+      "name": "Herramientas y Bricolaje"
+    },
+    {
+      "id": "8",
+      "name": "Jardín y Exteriores"
+    },
+    {
+      "id": "9",
+      "name": "Limpieza y Cuidado del Hogar"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,1 +1,335 @@
-<p>sell works!</p>
+<div class="min-h-screen bg-gray-50 py-10 px-4">
+
+  <div class="max-w-3xl mx-auto">
+
+    <!-- ENCABEZADO -->
+    <div class="mb-8">
+      <span class="text-sm font-semibold text-rose-500">
+        NUEVA PUBLICACIÓN
+      </span>
+
+      <h1 class="text-3xl font-bold text-gray-900 mt-2">
+        Publicá tu producto
+      </h1>
+
+      <p class="text-gray-500 mt-2">
+        Completá la información para que otros usuarios puedan encontrar tu publicación.
+      </p>
+    </div>
+
+    <form
+      [formGroup]="productForm"
+      (ngSubmit)="onSubmit()"
+      class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 space-y-8"
+    >
+
+      <!-- INFORMACIÓN GENERAL -->
+      <section class="space-y-5">
+
+        <div>
+          <h2 class="text-lg font-bold text-gray-900">
+            Información general
+          </h2>
+
+          <p class="text-sm text-gray-500 mt-1">
+            Contanos qué estás ofreciendo.
+          </p>
+        </div>
+
+        <!-- TÍTULO -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Título de la publicación
+          </label>
+
+          <input
+            type="text"
+            formControlName="title"
+            placeholder="Ej: Notebook Lenovo IdeaPad 15"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+          />
+
+          @if (productForm.get('title')?.touched && productForm.get('title')?.invalid) {
+            <p class="text-xs text-rose-500 mt-2">
+              El título es obligatorio y debe tener al menos 3 caracteres.
+            </p>
+          }
+        </div>
+
+        <!-- DESCRIPCIÓN -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Descripción
+          </label>
+
+          <textarea
+            formControlName="description"
+            rows="5"
+            placeholder="Describí tu producto, sus características, detalles y estado..."
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none resize-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+          ></textarea>
+
+          @if (productForm.get('description')?.touched && productForm.get('description')?.invalid) {
+            <p class="text-xs text-rose-500 mt-2">
+              La descripción debe tener al menos 10 caracteres.
+            </p>
+          }
+        </div>
+
+        <!-- PRECIO -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Precio
+          </label>
+
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
+              $
+            </span>
+
+            <input
+              type="number"
+              formControlName="price"
+              min="1"
+              placeholder="0"
+              class="w-full border border-gray-200 rounded-xl pl-9 pr-4 py-3 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+            />
+          </div>
+
+          @if (productForm.get('price')?.touched && productForm.get('price')?.invalid) {
+            <p class="text-xs text-rose-500 mt-2">
+              Ingresá un precio válido.
+            </p>
+          }
+        </div>
+
+      </section>
+
+      <div class="border-t border-gray-100"></div>
+
+      <!-- CLASIFICACIÓN -->
+      <section class="space-y-5">
+
+        <div>
+          <h2 class="text-lg font-bold text-gray-900">
+            Clasificación
+          </h2>
+
+          <p class="text-sm text-gray-500 mt-1">
+            Ayudá a los usuarios a encontrar tu publicación.
+          </p>
+        </div>
+
+        <!-- CATEGORÍA -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Categoría
+          </label>
+
+          <select
+            formControlName="category"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+          >
+            <option value="">Seleccioná una categoría</option>
+
+            @for (category of categories(); track category.id) {
+              <option [value]="category.id">
+                {{ category.name }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- ESTADO -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Estado del producto
+          </label>
+
+          <select
+            formControlName="condition"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+          >
+            <option value="">Seleccioná el estado</option>
+            <option value="Nuevo">Nuevo</option>
+            <option value="Usado - Como nuevo">Usado - Como nuevo</option>
+            <option value="Usado - Buen estado">Usado - Buen estado</option>
+            <option value="Usado - Regular">Usado - Regular</option>
+          </select>
+        </div>
+
+        <!-- TIPO -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Tipo de publicación
+          </label>
+
+          <select
+            formControlName="type"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+          >
+            <option value="product">Producto</option>
+            <option value="service">Servicio</option>
+          </select>
+        </div>
+
+      </section>
+
+      <div class="border-t border-gray-100"></div>
+
+
+
+
+      
+<!-- IMÁGENES -->
+<section class="space-y-5">
+
+  <div>
+    <h2 class="text-lg font-bold text-gray-900">
+      Fotografías
+    </h2>
+
+    <p class="text-sm text-gray-500 mt-1">
+      Seleccioná las fotografías desde tu dispositivo.
+    </p>
+  </div>
+
+  <!-- SELECTOR DE ARCHIVOS -->
+  <label
+    class="flex flex-col items-center justify-center w-full min-h-44 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer hover:border-rose-400 hover:bg-rose-50/30 transition p-6"
+  >
+
+    <div class="w-14 h-14 rounded-full bg-rose-50 flex items-center justify-center mb-3">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-7 h-7 text-rose-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.8"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 10.5L12 6m0 0L7.5 10.5M12 6v12"
+        />
+      </svg>
+    </div>
+
+    <span class="font-semibold text-gray-800">
+      Seleccionar fotografías
+    </span>
+
+    <span class="text-sm text-gray-400 mt-1">
+      Desde tu celular o computadora
+    </span>
+
+    <span class="text-xs text-gray-400 mt-2">
+      Formatos JPG, PNG o WEBP
+    </span>
+
+    <input
+      type="file"
+      accept="image/*"
+      multiple
+      (change)="onFilesSelected($event)"
+      class="hidden"
+    />
+
+  </label>
+
+  <!-- VISTA PREVIA -->
+  @if (selectedImages().length > 0) {
+
+    <div class="space-y-3">
+
+      <div class="flex items-center justify-between">
+
+        <h3 class="font-semibold text-gray-800">
+          Imágenes seleccionadas
+        </h3>
+
+        <span class="text-sm text-gray-400">
+          {{ selectedImages().length }} imágenes
+        </span>
+
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+        @for (image of selectedImages(); track image.preview; let i = $index) {
+
+          <div class="relative group rounded-xl overflow-hidden border border-gray-200">
+
+            <img
+              [src]="image.preview"
+              alt="Imagen seleccionada"
+              class="w-full h-36 object-cover"
+            />
+
+            <!-- PRINCIPAL -->
+            @if (image.esPrincipal) {
+              <span class="absolute top-2 left-2 bg-rose-500 text-white text-xs font-semibold px-2 py-1 rounded-lg">
+                Principal
+              </span>
+            }
+
+            <!-- ELIMINAR -->
+            <button
+              type="button"
+              (click)="removeSelectedImage(i)"
+              class="absolute top-2 right-2 bg-white text-rose-500 rounded-full w-7 h-7 flex items-center justify-center shadow hover:bg-rose-50"
+            >
+              ✕
+            </button>
+
+            <!-- SELECCIONAR PRINCIPAL -->
+            <button
+              type="button"
+              (click)="setPrincipalImage(i)"
+              class="w-full py-2 text-xs font-semibold transition"
+              [class.bg-rose-50]="image.esPrincipal"
+              [class.text-rose-600]="image.esPrincipal"
+              [class.bg-white]="!image.esPrincipal"
+              [class.text-gray-600]="!image.esPrincipal"
+            >
+              {{ image.esPrincipal ? 'Imagen principal' : 'Establecer como principal' }}
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</section>
+
+      <div class="border-t border-gray-100"></div>
+
+      <!-- PUBLICAR -->
+      <div class="space-y-3">
+
+        <button
+          type="submit"
+          [disabled]="loading()"
+          class="w-full bg-rose-500 hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition shadow-sm"
+        >
+          {{ loading() ? 'Publicando...' : 'Publicar producto' }}
+        </button>
+
+        <p class="text-xs text-center text-gray-400">
+          Revisá que toda la información sea correcta antes de publicar.
+        </p>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+```
