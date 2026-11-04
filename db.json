@@ -13,6 +13,7 @@
       },
       "type": "INDIVIDUAL",
       "userId": "1",
+      "active":true,
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
@@ -28,6 +29,7 @@
       },
       "type": "INDIVIDUAL",
       "userId": "1",
+      "active":true,
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
@@ -43,13 +45,14 @@
       },
       "type": "INDIVIDUAL",
       "userId": "1",
+      "active":true,
       "createdAt": "2026-10-28T21:20:00.000Z"
     },
     {
       "id": "4",
       "title": "Lote Completo de Muebles para Comedor",
       "description": "Combo ideal para renovar tu comedor. Incluye mesa, 6 sillas y aparador combinados.",
-      "price": 60000,
+      "price": 0,
       "status": "Buen estado",
       "publicationId": null,
       "category": {
@@ -58,6 +61,7 @@
       },
       "type": "LOTE",
       "userId": "1",
+      "active":true,
       "createdAt": "2026-10-28T21:20:00.000Z"
     }
   ],

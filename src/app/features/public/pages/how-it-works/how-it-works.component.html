@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
   <div class="max-w-7xl mx-auto space-y-16">
 
-    <!-- HERO SECTION -->
+
     <section class="text-center max-w-3xl mx-auto space-y-6">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold tracking-wide uppercase">
        
@@ -15,7 +15,6 @@
         Liquidación express de departamentos con fondos protegidos en fideicomiso. Máxima seguridad para el comprador antes de la entrega y garantía de desocupación efectiva para el vendedor.
       </p>
 
-      <!-- SWITCH TABS: PARA COMPRADORES / VENDEDORES -->
       <div class="inline-flex bg-slate-200/70 p-1.5 rounded-full shadow-inner">
         <button type="button" (click)="setTab('compradores')" [class]="activeTab === 'compradores' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="px-6 py-2 rounded-full text-xs font-semibold transition-all">
           Para Compradores
@@ -26,7 +25,6 @@
       </div>
     </section>
 
-    <!-- PASOS PARA COMPRAR CON CUSTODIA -->
     <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-2">
         <div>
@@ -38,10 +36,9 @@
         </div>
       </div>
 
-      <!-- 4 STEPS GRID -->
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Step 01 -->
+      
         <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -58,7 +55,6 @@
           </div>
         </div>
 
-        <!-- Step 02 -->
         <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -75,7 +71,7 @@
           </div>
         </div>
 
-        <!-- Step 03 -->
+     
         <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -92,7 +88,7 @@
           </div>
         </div>
 
-        <!-- Step 04 -->
+        
         <div class="bg-slate-50/70 border border-slate-100 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -112,7 +108,7 @@
       </div>
     </section>
 
-    <!-- INGENIERÍA DE PAGO: FLUJO DE CUSTODIA EN 3 NODOS -->
+
     <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
       <div class="space-y-1">
         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ingeniería de Pago</span>
@@ -121,8 +117,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        
-        <!-- Node 1 -->
+    
         <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md">NODO 01</span>
@@ -132,13 +127,9 @@
             <h4 class="font-bold text-slate-900 text-sm">Depósito de Reserva</h4>
             <p class="text-xs text-slate-600 mt-1 leading-relaxed">El comprador abona el monto total. El dinero sale de su cuenta pero <strong>no ingresa a la del vendedor</strong>.</p>
           </div>
-          <div class="text-[11px] font-medium text-amber-600 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-            Estado: Fondos retenidos
-          </div>
+          
         </div>
 
-        <!-- Node 2 (Escrow BIND Highlighted) -->
         <div class="bg-gradient-to-br from-black to-rose-950 text-white border border-slate-800 rounded-2xl p-6 space-y-4 shadow-lg relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
           
@@ -163,7 +154,6 @@
           </div>
         </div>
 
-        <!-- Node 3 -->
         <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md">NODO 03</span>
@@ -191,7 +181,7 @@
       </div>
     </section>
 
-    <!-- MUVIX VS MARKETPLATES TRADICIONALES -->
+
     <section class="bg-white border border-slate-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
       <div class="text-center space-y-2 max-w-xl mx-auto">
         <span class="text-[10px] font-bold text-rose-600 uppercase tracking-widest">Diferencial Operativo</span>
@@ -199,7 +189,7 @@
         <p class="text-xs text-slate-500">La diferencia entre coordinar una mudanza crítica con seguridad o correr riesgos innecesarios.</p>
       </div>
 
-      <!-- Table -->
+
       <div class="overflow-x-auto border border-slate-100 rounded-2xl">
         <table class="w-full text-left border-collapse text-xs">
           <thead>
@@ -235,7 +225,7 @@
       </div>
     </section>
 
-    <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+
     <section class="max-w-4xl mx-auto space-y-6">
       <div class="text-center space-y-1">
         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dudas Habituales</span>

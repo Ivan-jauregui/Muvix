@@ -13,5 +13,6 @@ export interface Publication{
     category:Category;
     type:string;
     userId?:string;
+    active:boolean;
     createdAt:Date;
 }

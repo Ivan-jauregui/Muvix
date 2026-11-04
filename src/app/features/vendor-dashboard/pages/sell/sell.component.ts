@@ -127,6 +127,7 @@ setPrincipalImage(index: number): void {
       category => String(category.id) === formValue.category
     )!,
     type: formValue.type!,
+    active:true,
     createdAt: new Date()
   };
 
