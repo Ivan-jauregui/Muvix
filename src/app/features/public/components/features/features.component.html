@@ -1,0 +1,27 @@
+<section class="w-full max-w-7xl mx-auto px-6 py-12 font-sans bg-white text-slate-900">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
+    
+    @for (feature of features; track feature.id) {
+      <div class="flex flex-col items-start text-left space-y-3">
+      
+        <div class="mb-1">
+          <ng-icon 
+            [name]="feature.icon" 
+            class="text-2xl text-slate-900 stroke-1">
+          </ng-icon>
+        </div>
+
+
+        <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">
+          {{ feature.title }}
+        </h3>
+
+       
+        <p class="text-slate-600 text-sm leading-relaxed font-normal">
+          {{ feature.description }}
+        </p>
+      </div>
+    }
+
+  </div>
+</section>

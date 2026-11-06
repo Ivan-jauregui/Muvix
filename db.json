@@ -63,6 +63,22 @@
       "userId": "1",
       "active":true,
       "createdAt": "2026-10-28T21:20:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Rack Panel para TV de hasta 65 pulgadas",
+      "description": "Mueble flotante para televisión con estantes para consolas de videojuegos y pasacables oculto.",
+      "price": 195000,
+      "condition": "Excelente estado",
+      "publicationId": 7,
+      "category": {
+        "id": 5,
+        "name": "Muebles"
+      },
+      "type": "INDIVIDUAL",
+      "userId": "1",
+      "active": true,
+      "createdAt": "2026-11-06T10:02:00.000Z"
     }
   ],
   "images": [
@@ -101,6 +117,12 @@
       "url_images": "https://i.pinimg.com/1200x/9a/6e/60/9a6e6006e6d3a9372f6ca9402b862fc0.jpg",
       "esPrincipal": true,
       "publicationId": "4"
+    },
+    {
+      "id": "7",
+      "url_images": "https://acdn-us.mitiendanube.com/stores/794/840/products/a1d544b1-0741-4631-912d-2cc613fd0a62-cc6411a93ce0df388c17114791014928-1024-1024.webp?w=1024",
+      "esPrincipal": true,
+      "publicationId": "5"
     }
   ],
   "users": [

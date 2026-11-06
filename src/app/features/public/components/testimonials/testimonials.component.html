@@ -1,0 +1,50 @@
+<section class="w-full bg-slate-950 text-white py-16 my-12 font-sans relative overflow-hidden">
+  
+  <div class="max-w-7xl mx-auto px-6 py-4 relative z-10">
+    
+    <!-- Encabezado minimalista -->
+    <div class="max-w-2xl mb-12 space-y-2">
+      <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-white">
+        La comunidad que transforma el traspaso de hogar
+      </h2>
+      <p class="text-slate-400 text-sm font-normal">
+        Experiencias reales de quienes compran y venden en mudanzas coordinadas.
+      </p>
+    </div>
+
+    <!-- Grid de 3 Cards oscuras y ultra minimalistas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (item of testimonials; track item.id) {
+        <div class="bg-slate-900/60 border border-white/5 p-7 rounded-2xl flex flex-col justify-between hover:border-white/10 transition-colors duration-200">
+          
+          <div class="space-y-4">
+            <!-- Calificación sobria en trazo fino sin amarillo estridente -->
+            <div class="flex items-center gap-1 text-slate-400">
+              @for (star of [1,2,3,4,5]; track star) {
+                <ng-icon name="heroStarSolid" color="#F2BB1F" class="text-xs stroke-1"></ng-icon>
+              }
+            </div>
+
+            <!-- Texto de testimonio limpio -->
+            <p class="text-slate-300 text-sm leading-relaxed font-normal">
+              {{ item.comment }}
+            </p>
+          </div>
+
+          <!-- Footer del usuario sin cajas pesadas -->
+          <div class="flex items-center gap-3 pt-6 mt-6 border-t border-white/5">
+            <div class="w-9 h-9 rounded-full bg-slate-800/80 border border-white/10 flex items-center justify-center font-semibold text-xs text-slate-300 tracking-wider">
+              {{ item.avatarText }}
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-white leading-none">{{ item.name }}</h4>
+              <p class="text-xs text-slate-500 mt-1 font-normal">{{ item.role }}</p>
+            </div>
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
