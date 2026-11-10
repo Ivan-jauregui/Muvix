@@ -1,2 +1,38 @@
 
 @import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+router-outlet + * {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+}
