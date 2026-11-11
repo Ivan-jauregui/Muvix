@@ -9,6 +9,8 @@ interface Testimonial {
   role: string;
   avatarText: string;
   comment: string;
+  productTitle:string;
+  productImage:string;
   rating: number;
 }
 
@@ -30,28 +32,34 @@ interface Testimonial {
 export class TestimonialsComponent {
   testimonials: Testimonial[] = [
     {
-      id: 1,
-      name: 'Camila R.',
-      role: 'Vendedora',
-      avatarText: 'CR',
-      comment: 'Entregaba el depto en 4 días y me quedaba el juego de comedor y el rack. Armé el lote en Muvix y un solo comprador retiró todo en flete. Me salvó el depósito.',
-      rating: 5
+      "id": 1,
+      "name": "Camila R.",
+      "role": "Vendedora",
+      "avatarText": "CR",
+      "comment": "Entregaba el depto en 4 días y me quedaba el juego de comedor y el rack. Armé el lote en Muvix y un solo comprador retiró todo en flete. Me salvó el depósito.",
+      "productTitle": "Rack",
+      "productImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHdsbpxZl1NEI2kGnYrzqw4lCxbZ0aSgqDO3otWQtqLg&s=10",
+      "rating": 5
     },
     {
-      id: 2,
-      name: 'Gonzalo M.',
-      role: 'Comprador',
-      avatarText: 'GM',
-      comment: 'Conseguí un sillón y mesa de madera maciza a menos de la mitad de lo que valen nuevos. La reserva con fondos en custodia me dio la tranquilidad para transferir.',
-      rating: 5
+      "id": 2,
+      "name": "Gonzalo M.",
+      "role": "Comprador",
+      "avatarText": "GM",
+      "comment": "Conseguí un sillón y mesa de madera maciza a menos de la mitad de lo que valen nuevos. La reserva con fondos en custodia me dio la tranquilidad para transferir.",
+      "productTitle": "Sillon y mesa",
+      "productImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPnOpZcQfE-pQcL5ckMzE8d3mOzm_SJ1mwk2ISAB7x5w&s=10",
+      "rating": 5
     },
     {
-      id: 3,
-      name: 'Lucía & Tomás',
-      role: 'Vendedores',
-      avatarText: 'LT',
-      comment: 'La mejor experiencia para evitar visitas dudosas. Validaron al comprador antes del retiro y cobramos al instante por PIN en la entrega.',
-      rating: 5
+      "id": 3,
+      "name": "Lucía & Tomás",
+      "role": "Vendedores",
+      "avatarText": "LT",
+      "comment": "La mejor experiencia para evitar visitas dudosas. Validaron al comprador antes del retiro y cobramos al instante por PIN en la entrega.",
+      "productTitle": "Rack",
+      "productImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHdsbpxZl1NEI2kGnYrzqw4lCxbZ0aSgqDO3otWQtqLg&s=10",
+      "rating": 5
     }
   ];
 }
