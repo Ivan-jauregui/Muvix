@@ -1,86 +1,33 @@
 {
-  "publications": [
+  "storage": [
     {
-      "id": "1",
-      "title": "Mesa de Comedor de Madera",
-      "description": "Mesa robusta de madera maciza para 6 personas.",
-      "price": 180000,
-      "condition": "Buen estado",
-      "publicationId": 4,
-      "category": {
-        "id": 5,
-        "name": "Muebles"
-      },
-      "type": "INDIVIDUAL",
       "userId": "1",
-      "active":true,
-      "createdAt": "2026-10-28T21:20:00.000Z"
+      "title": "mesa",
+      "description": "mesamesamesa",
+      "categoryId": "mesa",
+      "condition": "LIKE_NEW",
+      "status": "STORED",
+      "images": [
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1794588553/5349768c993a7afcff8dd6e988211b19.jpg"
+      ],
+      "createdAt": "2026-11-13T16:49:12.393Z",
+      "id": "I_4q-2fSwMA"
     },
     {
-      "id": "2",
-      "title": "Juego de 6 Sillas de Comedor",
-      "description": "Sillas tapizadas a juego con la mesa principal.",
-      "price": 180000,
-      "condition": "Buen estado",
-      "publicationId": 4,
-      "category": {
-        "id": 5,
-        "name": "Muebles"
-      },
-      "type": "INDIVIDUAL",
       "userId": "1",
-      "active":true,
-      "createdAt": "2026-10-28T21:20:00.000Z"
-    },
-    {
-      "id": "3",
-      "title": "Aparador / Vajillero de Madera",
-      "description": "Mueble organizador con estantes y puertas de vidrio.",
-      "price": 22000,
-      "condition": "Como nuevo",
-      "publicationId": 4,
-      "category": {
-        "id": 5,
-        "name": "Muebles"
-      },
-      "type": "INDIVIDUAL",
-      "userId": "1",
-      "active":true,
-      "createdAt": "2026-10-28T21:20:00.000Z"
-    },
-    {
-      "id": "4",
-      "title": "Lote Completo de Muebles para Comedor",
-      "description": "Combo ideal para renovar tu comedor. Incluye mesa, 6 sillas y aparador combinados.",
-      "price": 0,
-      "status": "Buen estado",
-      "publicationId": null,
-      "category": {
-        "id": 5,
-        "name": "Muebles"
-      },
-      "type": "LOTE",
-      "userId": "1",
-      "active":true,
-      "createdAt": "2026-10-28T21:20:00.000Z"
-    },
-    {
-      "id": "5",
-      "title": "Rack Panel para TV de hasta 65 pulgadas",
-      "description": "Mueble flotante para televisión con estantes para consolas de videojuegos y pasacables oculto.",
-      "price": 195000,
-      "condition": "Excelente estado",
-      "publicationId": 7,
-      "category": {
-        "id": 5,
-        "name": "Muebles"
-      },
-      "type": "INDIVIDUAL",
-      "userId": "1",
-      "active": true,
-      "createdAt": "2026-11-06T10:02:00.000Z"
+      "title": "dsadasdasd",
+      "description": "dasdasddassd",
+      "categoryId": "dasdasd",
+      "condition": "FAIR",
+      "status": "STORED",
+      "images": [
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1794591091/descarga.jpg"
+      ],
+      "createdAt": "2026-11-13T17:31:29.690Z",
+      "id": "5Gg6JbKLj9Y"
     }
   ],
+  "publications": [],
   "images": [
     {
       "id": "1",

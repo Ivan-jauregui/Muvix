@@ -19,7 +19,7 @@ import { heroPauseCircleMicro,heroPencilMicro } from '@ng-icons/heroicons/micro'
   styleUrl: './admin-publication-card.component.css'
 })
 export class AdminPublicationCardComponent {
-  router = inject(Router)
+  /*router = inject(Router)
   publication = input<Publication>();
   statusChanged = output<Publication>()
 
@@ -49,5 +49,5 @@ export class AdminPublicationCardComponent {
     };
 
     this.statusChanged.emit(updatedPublication);
-  }
+  }*/
 }

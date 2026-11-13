@@ -31,7 +31,7 @@ import { PublicationFiltersComponent } from '../../components/publication-filter
   styleUrl: './public-profile.component.css'
 })
 export class PublicProfileComponent {
-
+/*
   private readonly userService = inject(UserService);
   private readonly publicationService = inject(PublicationService);
   private readonly router = inject(Router);
@@ -269,6 +269,6 @@ export class PublicProfileComponent {
   selectCategory(category: string): void {
     this.selectedCategory.set(category);
   }
-
+*/
 
 }

@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './publication-carrousel.component.css'
 })
 export class PublicationCarrouselComponent {
-  private publicationService = inject(PublicationService);
+  /*private publicationService = inject(PublicationService);
 
   publications = signal<Publication[]>([]);
 
@@ -35,5 +35,5 @@ export class PublicationCarrouselComponent {
       const principal = images.find((img: PublicationImages) => img.esPrincipal);
    
       return principal ? principal.url_images : images[0].url_images;
-    }
+    }*/
 }

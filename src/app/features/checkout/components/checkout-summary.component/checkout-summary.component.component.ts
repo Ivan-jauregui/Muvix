@@ -33,7 +33,7 @@ import { Router } from '@angular/router';
   }
 })
 export class CheckoutSummaryComponent{
-
+/*
   private readonly router = inject(Router);
 
   // DATOS RECIBIDOS DEL PADRE
@@ -70,5 +70,5 @@ export class CheckoutSummaryComponent{
     //this.checkout.emit();
      this.router.navigate(["/checkout/success",this.publication().id])
   }
-
+*/
 }

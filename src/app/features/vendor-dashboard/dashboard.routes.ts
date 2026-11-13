@@ -10,6 +10,10 @@ export const DASHBOARD_ROUTES: Routes = [
     loadComponent: () => import('./pages/storage/storage.component').then(m => m.StorageComponent) 
   },
   { 
+    path: 'storage/form', 
+    loadComponent: () => import('./pages/storage-item-form/storage-item-form.component').then(m => m.StorageItemFormComponent) 
+  },
+  { 
     path: 'listings', 
     loadComponent: () => import('./pages/listings/listings.component').then(m => m.ListingsComponent) 
   },

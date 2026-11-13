@@ -3,16 +3,14 @@ import { PublicationImages } from "./publication-images";
 
 
 export interface Publication{
-    id?:string;
+    id?:string
+    userId?:string;
     title:string;
-    images?: PublicationImages[]; 
     description:string;
     price:number;
-    condition:string;
-    publicationId:number;
-    category:Category;
-    type:string;
-    userId?:string;
-    active:boolean;
-    createdAt:Date;
+    type: 'INDIVIDUAL' | 'BATCH';
+    status: 'ACTIVE' | 'PAUSED' | 'RESERVERD' | 'SOLD'
+    category:string;
+    itemIds: string[];
+    createdAt:string;
 }

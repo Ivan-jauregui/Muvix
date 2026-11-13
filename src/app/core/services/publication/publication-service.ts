@@ -28,9 +28,9 @@ export class PublicationService {
     return this.http.get<Publication[]>(this.apiUrl, { params });
   }
 
-  getPublicationsByBatchId(id: number): Observable<Publication[]> {
+  getPublicationsByBatchId(id: string): Observable<Publication[]> {
     return this.getAll().pipe(
-      map((data: Publication[]) => data.filter(p => p.publicationId === id))
+      map((data: Publication[]) => data.filter(p => p.id === id))
     );
   }
 }

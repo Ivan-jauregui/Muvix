@@ -16,6 +16,7 @@ import { PublicationImages } from '../../../../core/models/publication-images';
   templateUrl: './sell.component.html'
 })
 export class SellComponent {
+  /*
 
   private fb = inject(FormBuilder);
   private publicationService = inject(PublicationService);
@@ -160,5 +161,5 @@ setPrincipalImage(index: number): void {
       this.loading.set(false);
     }
   });
-}
+}*/
 }

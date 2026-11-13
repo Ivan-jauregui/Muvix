@@ -13,7 +13,7 @@ import { PublicationFilterComponent } from '../../components/publication-filter/
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent {
-  private router = inject(Router)
+  /*private router = inject(Router)
   private publicationService = inject(PublicationService);
 
   public publications = signal<Publication[]>([]);
@@ -200,5 +200,5 @@ export class CatalogComponent {
   selectCategory(category: string): void {
     this.selectedCategory.set(category);
   }
-
+*/
 }

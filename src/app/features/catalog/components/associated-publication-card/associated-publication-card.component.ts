@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './associated-publication-card.component.css'
 })
 export class AssociatedPublicationCard {
+  /*
   associated_publication = input.required<Publication>();
   index = input<number>(0);
   total = input<number>(1);
@@ -32,5 +33,5 @@ export class AssociatedPublicationCard {
     if (id) {
       this.onSelect.emit(id);
     }
-  }
+  }*/
 }

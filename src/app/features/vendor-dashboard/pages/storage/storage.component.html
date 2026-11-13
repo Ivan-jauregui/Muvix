@@ -1,53 +1,79 @@
 <main class="min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8">
 
-    <div class="flex flex-col gap-2 mb-10">
-        <p class="text-3xl text-slate-900 font-semibold">Mi Inventario</p>
-        <p class="text-gray-500">Tu espacio privado para precargar los muebles y objetos de la mudanza sin la presión de publicarlos de inmediato. 
-        Organizalos, guardalos bajo custodia digital y agrupalos en lotes cuando llegue el momento oportuno de liquidarlos.</p>
+  <div class="flex flex-col gap-2 mb-10">
+    <p class="text-3xl text-slate-900 font-semibold">Mi Inventario</p>
+    <p class="text-gray-500">
+      Tu espacio privado para precargar los muebles y objetos de la mudanza sin la presión de publicarlos de inmediato.
+      Organizalos, guardalos bajo custodia digital y agrupalos en lotes cuando llegue el momento oportuno de
+      liquidarlos.
+    </p>
+  </div>
+
+  <button routerLink="/dashboard/storage/form"
+    class="mb-8 inline-flex items-center gap-2 rounded-xl bg-rose-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700">
+    <ng-icon name="heroPlus" size="18" />
+    Crear item
+  </button>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    @for (item of storageItem(); track item.id) {
+
+    <article class="bg-white rounded-xl shadow-sm border-2 border-gray-300 overflow-hidden flex flex-col group">
+
+      <figure class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
+        <img [src]="item.images[0]"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+      </figure>
+
+      <div class="p-5 flex flex-col flex-grow">
+
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <h2
+            class="text-base font-bold text-gray-900 line-clamp-2 leading-tight group-hover:text-rose-600 transition-colors">
+            {{ item.title }}
+          </h2>
+
+          <span
+            class="bg-gray-100 text-gray-500 text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap border border-gray-200/50">
+            {{ item.condition }}
+          </span>
+        </div>
+
+        <p class="text-xs text-gray-500 line-clamp-2 mb-5 flex-grow">
+          {{ item.description }}
+        </p>
+
+        <div class="flex justify-end mt-2">
+          <button title="Publicar producto" class="w-9 h-9 flex items-center justify-center rounded-full
+           bg-rose-50 text-rose-600 border border-rose-100
+           transition-all duration-200
+           hover:bg-rose-600 hover:text-white hover:shadow-md hover:scale-105">
+
+            <ng-icon name="heroArrowUpRight" size="17" />
+
+          </button>
+        </div>
+
+      </div>
+
+    </article>
+
+    } @empty {
+
+    <div class="col-span-full bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+      </svg>
+
+      <h3 class="mt-4 text-lg font-bold text-gray-900">Tu inventario está vacío</h3>
+      <p class="mt-2 text-sm text-gray-500">
+        Todavía no agregaste productos a tu inventario.
+      </p>
     </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          @for (item of publications(); track item.id) {
+    }
 
-            <article 
-            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group relative">
-            
-              <figure class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
-                <img [src]="getMainImageUrl(item)"
-                  class="w-full h-full object-cover">
-              </figure>
-
-
-              <div class="p-5 flex flex-col flex-grow">
-                
- 
-                <div class="flex items-start justify-between gap-2 mb-2">
-                  <h2 class="text-base font-bold text-gray-900 line-clamp-2 leading-tight group-hover:text-rose-600 transition-colors">
-                    {{ item.title }}
-                  </h2>
-                  <span class="bg-gray-100 text-gray-500 text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap border border-gray-200/50">
-                    {{ item.condition }}
-                  </span>
-                </div>
-
-         
-                <p class="text-xs text-gray-500 line-clamp-2 mb-4 flex-grow">
-                  {{ item.description }}
-                </p>
-              </div>
-
-            </article>
-          } @empty {
-       
-            <div class="col-span-full bg-white rounded-xl border border-gray-200 p-12 text-center">
-              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-              <h3 class="mt-4 text-lg font-bold text-gray-900">No hay publicaciones</h3>
-              <p class="mt-2 text-sm text-gray-500">No se encontraron productos con estos filtros.</p>
-            </div>
-          }
-
-        </div>
+  </div>
 </main>

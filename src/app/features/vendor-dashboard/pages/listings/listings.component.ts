@@ -22,8 +22,8 @@ import { AdminPublicationCardComponent } from './components/admin-publication-ca
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.css'
 })
-export class ListingsComponent implements OnInit{
-  private readonly publicationService = inject(PublicationService);
+export class ListingsComponent {
+ /* private readonly publicationService = inject(PublicationService);
   private readonly categoryService = inject(CategoryService);
   publications = signal<Publication[]>([])
   publication = model.required<Publication>();
@@ -257,5 +257,5 @@ export class ListingsComponent implements OnInit{
   // 4. Filtrar las pausadas/inactivas
   inactivePublications = computed(() => 
     this.publications().filter(p => !p.active).length
-  );
+  );*/
 }

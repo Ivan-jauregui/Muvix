@@ -72,7 +72,7 @@ import { CheckoutSummaryComponent } from '../../components/checkout-summary.comp
   styleUrl: './checkout-process.component.css'
 })
 export class CheckoutProcessComponent {
-
+/*
   // SERVICIOS
   private readonly route = inject(ActivatedRoute);
   private readonly publicationService = inject(PublicationService);
@@ -214,6 +214,6 @@ export class CheckoutProcessComponent {
     console.log('Total:', this.total());
   }
 
-
+*/
 
 }

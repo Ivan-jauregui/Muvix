@@ -15,7 +15,8 @@ import { SellerCard } from '../../components/seller-card/seller-card.component';
   templateUrl: './publication-detail.component.html',
   styleUrl: './publication-detail.component.css'
 })
-export class PublicationDetailComponent implements OnInit{
+export class PublicationDetailComponent {
+  /*
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private publicationService = inject(PublicationService);
@@ -97,5 +98,5 @@ export class PublicationDetailComponent implements OnInit{
     if (id) {
       this.router.navigate(['/catalog', id]);
     }
-  }
+  }*/
 }

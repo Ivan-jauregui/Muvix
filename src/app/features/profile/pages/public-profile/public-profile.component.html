@@ -1,18 +1,17 @@
-@if (user(); as u) {
+<!--@if (user(); as u) {
 <div class="min-h-screen bg-gray-50 text-gray-900">
 
-  <!-- BANNER -->
+
   <div class="h-44 md:h-48 bg-gradient-to-r from-rose-500 via-rose-900 to-neutral-900"></div>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
 
 
 
-    <!-- PERFIL -->
+  
     <profile-info-section [user]="u" [totalCount]="totalCount()"></profile-info-section>
 
 
-    <!-- INVENTARIO -->
     <section class="mt-14 space-y-5">
 
       <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-gray-200">
@@ -30,8 +29,6 @@
         </div>
 
 
-
-        <!-- ORDENAR -->
         <div class="flex items-center gap-4 text-sm">
           <label class="flex items-center gap-2 text-gray-400">
             Ordenar por:
@@ -52,7 +49,7 @@
 
 
 
-        <!-- FILTROS -->
+
         <publication-filters [categories]="categories" [conditions]="conditions" [selectedCategory]="selectedCategory()"
           [selectedCondition]="condition()" [search]="search()" [maxPrice]="maxPrice()" [minPriceLimit]="minPriceLimit"
           [maxPriceLimit]="maxPriceLimit" [categoryCount]="categoryCount.bind(this)"
@@ -101,4 +98,4 @@
     <p class="text-gray-500">Cargando perfil...</p>
   </div>
 </div>
-}
+}-->
