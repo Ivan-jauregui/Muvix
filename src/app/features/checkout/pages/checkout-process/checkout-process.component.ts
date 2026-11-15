@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 // MODELOS
 import { Publication } from '../../../../core/models/publicacion';
@@ -37,6 +37,10 @@ import { PickupDataComponent } from '../../components/pickup-data/pickup-data.co
 import { DeliveryMethodComponent } from '../../components/delivery-method/delivery-method.component';
 import { PaymentMethod, PaymentMethodComponent } from '../../components/payment-method/payment-method.component';
 import { CheckoutSummaryComponent } from '../../components/checkout-summary.component/checkout-summary.component.component';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
+import { ReservationService } from '../../../../core/services/reservation/reservation.service';
+import { Reservation } from '../../../../core/models/dto/request/reservation';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-checkout-process',
@@ -72,25 +76,28 @@ import { CheckoutSummaryComponent } from '../../components/checkout-summary.comp
   styleUrl: './checkout-process.component.css'
 })
 export class CheckoutProcessComponent {
-/*
+
   // SERVICIOS
+  private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly authService = inject(AuthService)
   private readonly publicationService = inject(PublicationService);
   private readonly userService = inject(UserService);
+  private readonly reservationService = inject(ReservationService)
   private readonly fb = inject(FormBuilder);
 
-  // PUBLICACIÓN
-  readonly publication = signal<Publication | null>(null);
 
-  // VENDEDOR
+  readonly publication = signal<PublicationResponse | null>(null);
+
+
   readonly seller = signal<User | null>(null);
 
-  // ESTADOS DEL CHECKOUT
+
   readonly deliveryMethod = signal<DeliveryMethod>('pickup');
 
   readonly paymentMethod = signal<PaymentMethod>('card');
 
-  // FORMULARIO DE DATOS DE RETIRO
+
   readonly pickupForm = this.fb.group({
     firstName: ['', Validators.required],
 
@@ -145,7 +152,7 @@ export class CheckoutProcessComponent {
     });
   }
 
-  // CARGAR PUBLICACIÓN
+
   private loadPublication(id: string): void {
 
     this.publicationService.getById(id).subscribe({
@@ -164,7 +171,7 @@ export class CheckoutProcessComponent {
     });
   }
 
-  // CARGAR VENDEDOR
+
   private loadSeller(userId: string): void {
 
     this.userService.getById(userId).subscribe({
@@ -176,19 +183,8 @@ export class CheckoutProcessComponent {
     });
   }
 
-  // IMAGEN PRINCIPAL
-  getMainImageUrl(publication: Publication): string {
 
-    const images = publication.images ?? [];
 
-    const mainImage = images.find(image => image.esPrincipal);
-
-    return mainImage?.url_images
-      ?? images[0]?.url_images
-      ?? 'assets/no-image.jpg';
-  }
-
-  // MÉTODO DE RETIRO O ENTREGA
   selectDelivery(method: DeliveryMethod): void {
     this.deliveryMethod.set(method);
   }
@@ -198,22 +194,60 @@ export class CheckoutProcessComponent {
   this.paymentMethod.set(method);
 }
 
-  // CONFIRMAR CHECKOUT
-  confirmCheckout(): void {
 
-    if (this.pickupForm.invalid) {
-      this.pickupForm.markAllAsTouched();
-      return;
-    }
+  
+confirmCheckout(): void {
 
-    const pickupData = this.pickupForm.getRawValue();
-
-    console.log('Método de entrega:', this.deliveryMethod());
-    console.log('Método de pago:', this.paymentMethod());
-    console.log('Datos de retiro:', pickupData);
-    console.log('Total:', this.total());
+  /*
+  if (this.pickupForm.invalid) {
+    this.pickupForm.markAllAsTouched();
+    return;
   }
 
-*/
+  if (!publication?.id || !user?.id) {
+    console.error('No se encontró la publicación o el usuario autenticado');
+    return;
+  }*/
+
+  const pickupData = this.pickupForm.getRawValue();
+
+  const publication = this.publication();
+  const user = this.authService.currentUser();
+
+  if (!publication?.id || !user?.id) {
+    console.error('No se encontró la publicación o el usuario autenticado');
+    return;
+  }
+
+  const newReservation: Reservation = {
+    publicationId: publication.id,
+    userId: user.id,
+    price: this.total(),
+    pickup_date: null,
+    pin: null
+  };
+
+  this.reservationService.save(newReservation).subscribe({
+    next: (reservation) => {
+
+      console.log('Reserva creada:', reservation);
+
+      this.router.navigate([
+        '/success',
+        publication.id
+      ]);
+
+    },
+    error: (err) => {
+      console.error('Error al guardar la reserva:', err);
+    }
+  });
+
+  console.log('Método de entrega:', this.deliveryMethod());
+  console.log('Método de pago:', this.paymentMethod());
+  console.log('Datos de retiro:', pickupData);
+}
+
+
 
 }

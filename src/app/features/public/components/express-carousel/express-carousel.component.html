@@ -1,8 +1,7 @@
-<!--
 <section class="mx-auto w-full min-w-0 max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
 
- 
-  
+
+
   <div class="mb-5 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
 
     <div class="min-w-0">
@@ -17,71 +16,58 @@
   </div>
 
 
-  
+
   <div
-    class="flex w-full min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-hidden scroll-smooth pb-4 sm:gap-5"
-  >
+    class="flex w-full min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-hidden scroll-smooth pb-4 sm:gap-5">
 
     @for (publication of publications(); track publication.id) {
 
-      <article
-        class="group w-[72%] min-w-[72%] max-w-[72%] shrink-0 cursor-pointer snap-start sm:w-[220px] sm:min-w-[220px] sm:max-w-[220px] lg:w-[240px] lg:min-w-[240px] lg:max-w-[240px]"
-      >
+    <article
+      class="group w-[72%] min-w-[72%] max-w-[72%] shrink-0 cursor-pointer snap-start sm:w-[220px] sm:min-w-[220px] sm:max-w-[220px] lg:w-[240px] lg:min-w-[240px] lg:max-w-[240px]">
 
 
-        <div
-          class="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100"
-        >
+      <div class="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
+        <img [src]="publication.coverImage" />
 
-          <img
-            [src]="getMainImageUrl(publication)"
-            [alt]="publication.title"
-            loading="lazy"
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
 
-        
 
-          <span
-            class="absolute left-2 top-2 max-w-[calc(100%-16px)] truncate rounded-full bg-white px-3 py-1 text-[10px] font-medium text-gray-700 shadow-sm sm:text-xs"
-          >
-            {{ publication.condition }}
-          </span>
+        <span
+          class="absolute left-2 top-2 max-w-[calc(100%-16px)] truncate rounded-full bg-white px-3 py-1 text-[10px] font-medium text-gray-700 shadow-sm sm:text-xs">
+          {{ publication.item[0]?.condition }}
+        </span>
 
-        </div>
+      </div>
 
-        
-        <div class="min-w-0 pt-3">
 
-          <h3 class="truncate text-sm font-semibold text-gray-900 sm:text-base">
-            {{ publication.title }}
-          </h3>
+      <div class="min-w-0 pt-3">
 
-          <p class="mt-1 line-clamp-2 min-h-[36px] text-xs leading-[18px] text-gray-500">
-            {{ publication.description }}
-          </p>
+        <h3 class="truncate text-sm font-semibold text-gray-900 sm:text-base">
+          {{ publication.title }}
+        </h3>
 
-          <p class="mt-2 text-lg font-bold text-gray-900 sm:mt-3 sm:text-xl">
-            {{ publication.price | currency:'ARS':'symbol':'1.0-0' }}
-          </p>
+        <p class="mt-1 line-clamp-2 min-h-[36px] text-xs leading-[18px] text-gray-500">
+          {{ publication.description }}
+        </p>
 
-        </div>
+        <p class="mt-2 text-lg font-bold text-gray-900 sm:mt-3 sm:text-xl">
+          {{ publication.price | currency:'ARS':'symbol':'1.0-0' }}
+        </p>
 
-      </article>
+      </div>
+
+    </article>
 
     }
   </div>
 
   <div class="mt-4 flex justify-center sm:justify-start sm:mt-5">
 
-    <button
-      routerLink="/catalog"
+    <button routerLink="/catalog"
       class="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-100 sm:w-auto">
       <span>Descubrí más publicaciones</span>
       <span class="shrink-0">→</span>
     </button>
-  
+
   </div>
 
 </section>
--->

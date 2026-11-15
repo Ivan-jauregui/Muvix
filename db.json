@@ -2,74 +2,157 @@
   "storage": [
     {
       "userId": "1",
-      "title": "mesa",
-      "description": "mesamesamesa",
-      "categoryId": "mesa",
+      "title": "Sillón de dos cuerpos",
+      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
+      "categoryId": "Muebles",
       "condition": "LIKE_NEW",
       "status": "STORED",
       "images": [
-        "https://res.cloudinary.com/vhycikpc/image/upload/v1794588553/5349768c993a7afcff8dd6e988211b19.jpg"
+        "https://i.pinimg.com/736x/4f/66/dd/4f66dd7a17cb3b0525e9af2d52db8e34.jpg"
       ],
-      "createdAt": "2026-11-13T16:49:12.393Z",
-      "id": "I_4q-2fSwMA"
+      "createdAt": "2026-11-10T10:30:00.000Z",
+      "id": "item-001"
     },
     {
       "userId": "1",
-      "title": "dsadasdasd",
-      "description": "dasdasddassd",
-      "categoryId": "dasdasd",
-      "condition": "FAIR",
+      "title": "Mesa ratona de madera",
+      "description": "Mesa ratona de madera maciza, diseño minimalista, ideal para living.",
+      "categoryId": "Muebles",
+      "condition": "LIKE_NEW",
       "status": "STORED",
       "images": [
-        "https://res.cloudinary.com/vhycikpc/image/upload/v1794591091/descarga.jpg"
+        "https://i.pinimg.com/736x/a7/cf/e2/a7cfe279ee42571fc0aba0cad02d5b1a.jpg"
       ],
-      "createdAt": "2026-11-13T17:31:29.690Z",
-      "id": "5Gg6JbKLj9Y"
+      "createdAt": "2026-11-10T11:00:00.000Z",
+      "id": "item-002"
+    },
+    {
+      "userId": "1",
+      "title": "Lámpara de pie moderna",
+      "description": "Lámpara de pie de diseño moderno, estructura metálica negra y pantalla de tela beige.",
+      "categoryId": "Decoración",
+      "condition": "LIKE_NEW",
+      "status": "STORED",
+      "images": [
+        "https://i.pinimg.com/1200x/c9/4c/f3/c94cf3c695ccdd6e93bcd2e62895ef52.jpg"
+      ],
+      "createdAt": "2026-11-10T11:30:00.000Z",
+      "id": "item-003"
+    },
+    {
+      "userId": "1",
+      "title": "blablabla",
+      "description": "blured,gren",
+      "categoryId": "all colors",
+      "condition": "LIKE_NEW",
+      "status": "STORED",
+      "images": [
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1794747282/Linkdin_profile_photo.png"
+      ],
+      "createdAt": "2026-11-15T12:54:46.863Z",
+      "id": "9MxrBis646c"
     }
   ],
-  "publications": [],
-  "images": [
+  "publications": [
     {
-      "id": "1",
-      "url_images": "https://i.pinimg.com/736x/f0/93/12/f09312f59304e03f1d3e8d14da48950f.jpg",
-      "esPrincipal": true,
-      "publicationId": "1"
+      "id": "pub-001",
+      "userId": "1",
+      "title": "Sillón de dos cuerpos",
+      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
+      "price": 280000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-001"
+      ],
+      "createdAt": "2026-11-10T10:30:00.000Z"
     },
     {
-      "id": "2",
-      "url_images": "https://i.pinimg.com/736x/5a/7a/d6/5a7ad61df9a706ff2bacde4470d2f52d.jpg",
-      "esPrincipal": true,
-      "publicationId": "2"
+      "id": "pub-002",
+      "userId": "1",
+      "title": "Mesa ratona de madera",
+      "description": "Mesa ratona de madera maciza, diseño minimalista, ideal para living.",
+      "price": 95000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-002"
+      ],
+      "createdAt": "2026-11-10T11:00:00.000Z"
     },
     {
-      "id": "3",
-      "url_images": "https://i.pinimg.com/1200x/6c/d1/c8/6cd1c871cac9057387ff1f12b2992b95.jpg",
-      "esPrincipal": true,
-      "publicationId": "2"
+      "id": "pub-003",
+      "userId": "1",
+      "title": "Lámpara de pie moderna",
+      "description": "Lámpara de pie de diseño moderno, estructura metálica negra y pantalla de tela beige.",
+      "price": 65000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Decoración",
+      "itemIds": [
+        "item-003"
+      ],
+      "createdAt": "2026-11-10T11:30:00.000Z"
     },
     {
-      "id": "4",
-      "url_images": "https://i.pinimg.com/736x/83/d7/48/83d748fff80d2541fdf85d55ff2f93ed.jpg",
-      "esPrincipal": true,
-      "publicationId": "2"
+      "id": "pub-004",
+      "userId": "1",
+      "title": "Juego completo para living",
+      "description": "Conjunto de living compuesto por un sillón de dos cuerpos, una mesa ratona de madera y una lámpara de pie moderna. Ideal para renovar tu espacio con un estilo cálido y contemporáneo.",
+      "price": 390000,
+      "type": "BATCH",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-001",
+        "item-002",
+        "item-003"
+      ],
+      "createdAt": "2026-11-10T12:00:00.000Z"
     },
     {
-      "id": "5",
-      "url_images": "https://i.pinimg.com/736x/61/1e/e0/611ee0fc103510c108987efd46e53078.jpg",
-      "esPrincipal": true,
-      "publicationId": "3"
+      "userId": "1",
+      "title": "Sillón de dos cuerpos",
+      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
+      "price": 180000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-001"
+      ],
+      "createdAt": "2026-11-15T14:13:21.543Z",
+      "id": "zBYhiNuZ6Uc"
     },
     {
-      "id": "6",
-      "url_images": "https://i.pinimg.com/1200x/9a/6e/60/9a6e6006e6d3a9372f6ca9402b862fc0.jpg",
-      "esPrincipal": true,
-      "publicationId": "4"
+      "userId": "1",
+      "title": "Sillón de dos cuerpos",
+      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
+      "price": 120,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-001"
+      ],
+      "createdAt": "2026-11-15T14:13:39.655Z",
+      "id": "MWFfo_jtCZ0"
     },
     {
-      "id": "7",
-      "url_images": "https://acdn-us.mitiendanube.com/stores/794/840/products/a1d544b1-0741-4631-912d-2cc613fd0a62-cc6411a93ce0df388c17114791014928-1024-1024.webp?w=1024",
-      "esPrincipal": true,
-      "publicationId": "5"
+      "userId": "1",
+      "title": "Sillón de dos cuerpos",
+      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
+      "price": 180000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles",
+      "itemIds": [
+        "item-001"
+      ],
+      "createdAt": "2026-11-15T14:13:57.799Z",
+      "id": "eh44SPL_Sfg"
     }
   ],
   "users": [
@@ -85,6 +168,40 @@
       "state": "Buenos Aires",
       "city": "Mar del Plata",
       "address": "Av. Colón 1234"
+    },
+    {
+      "firstName": "Zoe",
+      "lastName": "Baiz",
+      "email": "baiz.zoe.luana@gmail.com",
+      "phoneNumber": "2236699559",
+      "password": "4321",
+      "id": "q4dB6CiLJS8"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "1",
+      "publicationId": "pub-003",
+      "userId": "1",
+      "price": 65000,
+      "pickup_date": null,
+      "pin": null
+    },
+    {
+      "id": "2",
+      "publicationId": "pub-002",
+      "userId": "q4dB6CiLJS8",
+      "price": 95000,
+      "pickup_date": null,
+      "pin": null
+    },
+    {
+      "publicationId": "eh44SPL_Sfg",
+      "userId": "q4dB6CiLJS8",
+      "price": 180000,
+      "pickup_date": null,
+      "pin": null,
+      "id": "tZ9YLRr-6k8"
     }
   ],
   "categories": [

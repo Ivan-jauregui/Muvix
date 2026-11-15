@@ -1,7 +1,6 @@
-<!--
 <aside class="w-full min-w-0 space-y-5 lg:sticky lg:top-6">
 
-  
+
   <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 
     <div class="flex items-center justify-between border-b border-gray-100 pb-4">
@@ -19,10 +18,7 @@
 
     <div class="flex gap-3 bg-gray-50 rounded-xl border border-gray-100 p-3 mt-4">
 
-      <img
-        [src]="getMainImageUrl(publication())"
-        [alt]="publication().title"
-        class="w-16 h-16 rounded-lg object-cover bg-gray-200">
+      <img [src]="publication().coverImage">
 
       <div class="min-w-0 flex-1">
 
@@ -46,7 +42,7 @@
 
     </div>
 
-   
+
     <div class="flex items-center justify-between gap-2 bg-gray-50 rounded-xl border border-gray-100 p-3 mt-4">
 
       <span class="text-xs font-semibold flex items-center gap-2">
@@ -60,7 +56,7 @@
 
     </div>
 
-   
+
     <div class="space-y-3 border-t border-gray-100 mt-4 pt-4">
 
       <div class="flex justify-between text-xs">
@@ -81,13 +77,11 @@
           {{ deliveryMethod() === 'pickup' ? 'Retiro en persona' : 'Costo de envío' }}
         </span>
 
-        <span
-          class="font-semibold"
-          [class.text-emerald-600]="deliveryCost() === 0">
+        <span class="font-semibold" [class.text-emerald-600]="deliveryCost() === 0">
 
           {{ deliveryCost() === 0
-            ? 'Gratis ($0)'
-            : '$' + deliveryCost().toLocaleString('es-AR') }}
+          ? 'Gratis ($0)'
+          : '$' + deliveryCost().toLocaleString('es-AR') }}
 
         </span>
 
@@ -107,7 +101,7 @@
 
     </div>
 
-    
+
     <div class="flex justify-between items-center border-t border-gray-100 mt-4 pt-4">
 
       <div>
@@ -154,9 +148,7 @@
     </div>
 
 
-    <button
-      type="button"
-      (click)="confirmCheckout()"
+    <button type="button" (click)="confirmCheckout()"
       class="w-full mt-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm rounded-xl py-4 transition flex items-center justify-center gap-2">
 
       <ng-icon name="heroLockClosed" size="18" />
@@ -165,7 +157,7 @@
 
     </button>
 
- 
+
     <div class="space-y-3 mt-5 text-[11px] text-gray-500">
 
       <p class="flex items-center gap-2">
@@ -190,56 +182,50 @@
 
   @if (seller(); as sellerUser) {
 
-    <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+  <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
 
-      <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3">
 
-        <div class="w-10 h-10 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
+      <div class="w-10 h-10 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
 
-          @if (sellerUser.photo) {
+        @if (sellerUser.photo) {
 
-            <img
-              [src]="sellerUser.photo"
-              [alt]="sellerUser.firstName"
-              class="w-full h-full object-cover">
+        <img [src]="sellerUser.photo" [alt]="sellerUser.firstName" class="w-full h-full object-cover">
 
-          } @else {
+        } @else {
 
-            <span class="font-bold text-gray-500">
-              {{ sellerUser.firstName.charAt(0) }}
-            </span>
-
-          }
-
-        </div>
-
-        <div class="flex-1 min-w-0">
-
-          <p class="text-xs font-bold truncate flex items-center gap-1">
-
-            {{ sellerUser.firstName }} {{ sellerUser.lastName }}
-
-            <ng-icon
-              name="heroCheckCircle"
-              size="15"
-              class="text-emerald-500 shrink-0" />
-
-          </p>
-
-          <p class="text-[11px] text-gray-400">
-            Vendedor de Muvix
-          </p>
-
-        </div>
-
-        <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2">
-          Verificado
+        <span class="font-bold text-gray-500">
+          {{ sellerUser.firstName.charAt(0) }}
         </span>
+
+        }
 
       </div>
 
-    </section>
+      <div class="flex-1 min-w-0">
+
+        <p class="text-xs font-bold truncate flex items-center gap-1">
+
+          {{ sellerUser.firstName }} {{ sellerUser.lastName }}
+
+          <ng-icon name="heroCheckCircle" size="15" class="text-emerald-500 shrink-0" />
+
+        </p>
+
+        <p class="text-[11px] text-gray-400">
+          Vendedor de Muvix
+        </p>
+
+      </div>
+
+      <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2">
+        Verificado
+      </span>
+
+    </div>
+
+  </section>
 
   }
 
-</aside>-->
+</aside>

@@ -5,6 +5,7 @@ import { PublicationService } from '../../../../core/services/publication/public
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../../core/models/user';
 import { Publication } from '../../../../core/models/publicacion';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'app-checkout-success',
@@ -12,12 +13,12 @@ import { Publication } from '../../../../core/models/publicacion';
   templateUrl: './checkout-success.component.html',
   styleUrl: './checkout-success.component.css'
 })
-export class CheckoutSuccessComponent implements OnInit {
+export class CheckoutSuccessComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   private  readonly publicationService = inject(PublicationService);
 
-  publication = signal<Publication|null>(null)
+  publication = signal<PublicationResponse|null>(null)
   seller = signal<User|null>(null)
 
   pinDigits: string[] = ['4', '8', '2', '9'];

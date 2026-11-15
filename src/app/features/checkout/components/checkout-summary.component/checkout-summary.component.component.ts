@@ -13,6 +13,7 @@ import { Publication } from '../../../../core/models/publicacion';
 import { User } from '../../../../core/models/user';
 import { DeliveryMethod } from '../delivery-method/delivery-method.component';
 import { Router } from '@angular/router';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'checkout-summary',
@@ -33,11 +34,8 @@ import { Router } from '@angular/router';
   }
 })
 export class CheckoutSummaryComponent{
-/*
-  private readonly router = inject(Router);
 
-  // DATOS RECIBIDOS DEL PADRE
-  publication = input.required<Publication>();
+  publication = input.required<PublicationResponse>();
 
   seller = input<User | null>(null);
 
@@ -49,26 +47,10 @@ export class CheckoutSummaryComponent{
 
   total = input.required<number>();
 
-  // EVENTO HACIA EL PADRE
   checkout = output<void>();
-
-  // IMAGEN PRINCIPAL
-  getMainImageUrl(publication: Publication): string {
-
-    const images = publication.images ?? [];
-
-    const mainImage = images.find(image => image.esPrincipal);
-
-    return mainImage?.url_images
-      ?? images[0]?.url_images
-      ?? 'assets/no-image.jpg';
-  }
 
   // CONFIRMAR COMPRA
   confirmCheckout(): void {
-    //COMENTADA PERO IMPOTANTE
-    //this.checkout.emit();
-     this.router.navigate(["/checkout/success",this.publication().id])
+    this.checkout.emit();
   }
-*/
 }

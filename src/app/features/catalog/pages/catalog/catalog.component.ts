@@ -1,33 +1,73 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { PublicationService } from '../../../../core/services/publication/publication-service';
 import { Publication } from '../../../../core/models/publicacion';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { PublicationImages } from '../../../../core/models/publication-images';
 import { PublicationFilterComponent } from '../../components/publication-filter/publication-filter.component';
+import { ItemCondition, StorageItem } from '../../../../core/models/storage-item';
+import { StorageService } from '../../../vendor-dashboard/pages/storage/service/storage.service';
+import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'app-catalog',
-  imports: [CommonModule, RouterLink,PublicationFilterComponent],
+  imports: [CommonModule, RouterLink, PublicationFilterComponent],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css'
 })
-export class CatalogComponent {
-  /*private router = inject(Router)
+export class CatalogComponent implements OnInit {
+  private router = inject(Router)
   private publicationService = inject(PublicationService);
+  private storageService = inject(StorageService);
 
-  public publications = signal<Publication[]>([]);
+  private publications = signal<PublicationResponse[]>([]);
+
+
+  ngOnInit(): void {
+    this.loadPublications();
+  }
+
+
+  private loadPublications(): void {
+    this.publicationService.getAll().subscribe({
+      next: (data) => {
+        this.publications.set(data);
+
+        console.log(this.publications())
+      },
+      error: (err) => {
+        console.error('Error al cargar las publicaciones:', err);
+      }
+    });
+  }
+
+  private mapPublications(publications: Publication[]): Observable<Publication[]> {
+    return forkJoin(
+      publications.map(pub =>
+        (pub.itemIds.length
+          ? forkJoin(pub.itemIds.map(id => this.storageService.getById(id)))
+          : of([])
+        ).pipe(
+          map(items => ({
+            ...pub,
+            item: items
+          }))
+        )
+      )
+    );
+  }
 
   // Filtros
   readonly search = signal('');
   readonly selectedCategory = signal('Todo');
   readonly condition = signal<string | null>(null);
-  readonly maxPrice = signal(195000);
   readonly sortBy = signal<'newest' | 'priceAsc' | 'priceDesc'>('newest');
+  readonly maxPrice = signal(500000);
   readonly minPriceLimit = 10000;
-  readonly maxPriceLimit = 195000;
+  readonly maxPriceLimit = 500000;
 
-   readonly categories = [
+  readonly categories = [
     'Todo',
     'Living & Estar',
     'Comedor & Sillas',
@@ -41,45 +81,7 @@ export class CatalogComponent {
     'A Estrenar'
   ];
 
-  ngOnInit(): void {
-    this.loadPublications();
-  }
-
-  private loadPublications(): void {
-    this.publicationService.getAll().subscribe({
-      next: (data) => {
-        this.publications.set(data);
-      },
-      error: (err) => {
-        console.error('Error al cargar las publicaciones:', err);
-      }
-    });
-  }
-
-  getMainImageUrl(publication: Publication): string {
-    const images = publication?.images;
-    if (!images || images.length === 0) return 'assets/no-image.jpg';
-
-    // Busca la principal, si no existe, agarra la primera del array
-    const principal = images.find((img: PublicationImages) => img.esPrincipal);
- 
-    return principal ? principal.url_images : images[0].url_images;
-  }
-
-
-  viewDetails(id: string) {
-    if (id) {
-      this.router.navigate(['/catalog', id]);
-    }
-  }
-
-
-  
- getCategoryName(publication: Publication): string {
-  return publication.category?.name ?? '';
-}
-
-   // PUBLICACIONES FILTRADAS
+  // PUBLICACIONES FILTRADAS
 
   readonly filtered = computed(() => {
 
@@ -99,19 +101,19 @@ export class CatalogComponent {
 
       const matchesCategory =
         selectedCategory === 'Todo' ||
-        this.getCategoryName(publication) === selectedCategory;
+        publication.category === selectedCategory;
 
       const matchesCondition =
         !selectedCondition ||
-        publication.condition === selectedCondition;
+        publication.item?.some(item => item.condition === selectedCondition);
 
       const matchesPrice =
         publication.price <= maxPrice;
 
       return matchesSearch &&
-             matchesCategory &&
-             matchesCondition &&
-             matchesPrice;
+        matchesCategory &&
+        matchesCondition &&
+        matchesPrice;
     });
 
     const sort = this.sortBy();
@@ -126,7 +128,7 @@ export class CatalogComponent {
       }
 
       return new Date(b.createdAt).getTime() -
-             new Date(a.createdAt).getTime();
+        new Date(a.createdAt).getTime();
     });
   });
 
@@ -138,27 +140,24 @@ export class CatalogComponent {
 
     return this.publications().filter(
       publication =>
-        this.getCategoryName(publication) === category
+        publication.category === category
     ).length;
   }
 
   conditionCount(condition: string): number {
-
-    return this.publications().filter(
-      publication => publication.condition === condition
+    return this.publications().filter(publication =>
+      publication.item?.some(storageItem => storageItem.condition === condition)
     ).length;
   }
 
-  // ACCIONES DE FILTROS
+
 
   clearFilters(): void {
-
     this.search.set('');
     this.selectedCategory.set('Todo');
     this.condition.set(null);
     this.maxPrice.set(this.maxPriceLimit);
     this.sortBy.set('newest');
-
   }
 
   onSort(event: Event): void {
@@ -200,5 +199,8 @@ export class CatalogComponent {
   selectCategory(category: string): void {
     this.selectedCategory.set(category);
   }
-*/
+
+  viewDetails(id: string): void {
+    this.router.navigate(['/catalog', id]);
+  }
 }

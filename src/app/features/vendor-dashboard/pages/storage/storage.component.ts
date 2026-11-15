@@ -30,15 +30,15 @@ export class StorageComponent {
   }
 
   private loadStorageItems(): void {
-    this.storageService.getAll().subscribe({
+    this.storageService.getItemsByUserId().subscribe({
       next: (data) => {
         this.storageItem.set(data);
       },
       error: (err) => {
-        console.error('Error al cargar las publicaciones:', err);
+        console.error('Error al cargar las items:', err);
       }
     });
   }
 
-
+  
 }

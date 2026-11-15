@@ -6,10 +6,9 @@ import { PublicationImages } from '../../../../core/models/publication-images';
 import { Router } from '@angular/router';
 import { heroFunnelMicro } from '@ng-icons/heroicons/micro';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { CategoryService } from '../../../../core/services/category/category.service';
-import { Category } from '../../../../core/models/category';
 import { FormsModule } from '@angular/forms';
 import { AdminPublicationCardComponent } from './components/admin-publication-card/admin-publication-card.component';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'app-listings',
@@ -23,30 +22,21 @@ import { AdminPublicationCardComponent } from './components/admin-publication-ca
   styleUrl: './listings.component.css'
 })
 export class ListingsComponent {
- /* private readonly publicationService = inject(PublicationService);
-  private readonly categoryService = inject(CategoryService);
-  publications = signal<Publication[]>([])
-  publication = model.required<Publication>();
-  categories = signal<Category[]>([])
+ private readonly publicationService = inject(PublicationService);
+  publications = signal<PublicationResponse[]>([])
+  publication = model.required<PublicationResponse>();
 
   private router = inject(Router)
 
   ngOnInit(): void {
     this.loadPublications("1")
-    this.loadCategories()
   }
 
   private loadPublications(userId: string): void {
 
-    this.publicationService.getAll().subscribe({
+    this.publicationService.getPublicationsByUserId().subscribe({
       next: (data) => {
-
-        const userPublications = data.filter(
-          publication => publication.userId === userId 
-          && publication.price > 0
-        );
-
-        this.publications.set(userPublications);
+        this.publications.set(data);
       },
 
       error: (err) => {
@@ -55,17 +45,6 @@ export class ListingsComponent {
     });
   }
 
-  loadCategories(){
-    this.categoryService.getAll().subscribe({
-      next: (data) => {
-        this.categories.set(data);
-      },
-
-      error: (err) => {
-        console.error('Error al cargar categoria:', err);
-      }
-    });
-  }
 
    // Filtros
   readonly search = signal('');
@@ -123,11 +102,11 @@ export class ListingsComponent {
 
       const matchesCategory =
         selectedCategory === 'Todo' ||
-        this.getCategoryName(publication) === selectedCategory;
+        publication.category === selectedCategory;
 
       const matchesCondition =
         !selectedCondition ||
-        publication.condition === selectedCondition;
+        publication.item?.some(item => item.condition === selectedCondition);
 
       const matchesPrice =
         publication.price <= maxPrice;
@@ -179,16 +158,16 @@ export class ListingsComponent {
 
     return this.publications().filter(
       publication =>
-        this.getCategoryName(publication) === category
+        publication.category === category
     ).length;
   }
-
+  
   conditionCount(condition: string): number {
-
-    return this.publications().filter(
-      publication => publication.condition === condition
+    return this.publications().filter(publication =>
+      publication.item?.some(storageItem => storageItem.condition === condition)
     ).length;
   }
+
 
   // ACCIONES DE FILTROS
 
@@ -244,18 +223,18 @@ export class ListingsComponent {
    toggleStatus() {
     this.publication.update(pub => ({
       ...pub,
-      active: !pub.active
+      active: !pub.status
     }));
   }
 
     activePublications = computed(() => 
-    this.publications().filter(p => p.active).length
+    this.publications().filter(p => p.status).length
   );
 
 
 
   // 4. Filtrar las pausadas/inactivas
   inactivePublications = computed(() => 
-    this.publications().filter(p => !p.active).length
-  );*/
+    this.publications().filter(p => !p.status).length
+  );
 }

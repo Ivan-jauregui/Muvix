@@ -22,6 +22,10 @@ export const DASHBOARD_ROUTES: Routes = [
     loadComponent: () => import('./pages/sell/sell.component').then(m => m.SellComponent) 
   },
   { 
+    path: 'sell/form/:id',
+    loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent) 
+  },
+  { 
     path: 'agenda', 
     loadComponent: () => import('./pages/agenda/agenda.component').then(m => m.AgendaComponent) 
   }
