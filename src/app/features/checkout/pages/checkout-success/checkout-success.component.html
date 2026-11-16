@@ -39,7 +39,6 @@
                 <span class="text-xs font-bold text-rose-600 tracking-wider uppercase">Punto de retiro</span>
                 <p class="text-xs text-gray-500">Palermo Soho, CABA</p>
                 <h2 class="text-lg font-bold text-gray-900 mt-0.5">{{seller()?.address}}B</h2>
-                <p class="text-xs text-gray-500 mt-0.5">Timbre Jáuregui • Edificio residencial</p>
               </div>
             </div>
             <button (click)="copyAddress()" class="flex items-center gap-2 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50 transition">
@@ -187,10 +186,10 @@
 
 
           <div class="flex items-center gap-4">
-            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=150&auto=format&fit=crop&q=80" alt="Estantería" class="w-16 h-16 rounded-xl object-cover border border-gray-100">
+            <img [src]="publication()?.coverImage" alt="Estantería" class="w-16 h-16 rounded-xl object-cover border border-gray-100">
             <div>
               <h4 class="font-bold text-gray-900 text-sm">{{publication()!.title}}</h4>
-              <p class="text-xs text-gray-500 mt-0.5">Lote #MVX-94820 • Liquidación Paler...</p>
+              <p class="text-xs text-gray-500 mt-0.5">{{ `${publication()?.id} -  ${seller()?.address}`}}</p>
               <p class="text-lg font-bold text-gray-900 mt-1">$30.000 ARS</p>
             </div>
           </div>

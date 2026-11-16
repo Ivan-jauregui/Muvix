@@ -4,6 +4,7 @@ import { ItemCondition, ItemStatus, StorageItem } from '../../../../core/models/
 import { StorageService } from '../storage/service/storage.service';
 import { CloudinaryService } from '../../../../core/services/cloudinary/cloudinary.service';
 import { of, switchMap } from 'rxjs';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-storage-item-form',
@@ -15,6 +16,7 @@ export class StorageItemFormComponent {
   private fb = inject(NonNullableFormBuilder);
   private storageService = inject(StorageService);
   private cloudinaryService = inject(CloudinaryService);
+  private authService = inject(AuthService);
 
   isSaving = signal(false);
   errorMessage = signal<string | null>(null);
@@ -89,10 +91,17 @@ export class StorageItemFormComponent {
     this.selectedImage.set(null);
   }
 
-
 onSubmit() {
   if (this.storageForm.invalid) {
     this.storageForm.markAllAsTouched();
+    return;
+  }
+
+  const currentUser = this.authService.currentUser();
+  const userId = currentUser?.id;
+
+  if (!userId) {
+    console.error('No hay un usuario autenticado');
     return;
   }
 
@@ -110,7 +119,7 @@ onSubmit() {
       const formValue = this.storageForm.getRawValue();
 
       const storageItem: StorageItem = {
-        userId: '1',
+        userId: userId,
         title: formValue.title,
         description: formValue.description,
         categoryId: formValue.categoryId,

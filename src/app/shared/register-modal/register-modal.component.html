@@ -1,0 +1,309 @@
+
+@if (open()) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 backdrop-blur-sm p-3 sm:p-5"
+    (click)="close()"
+  >
+    <div
+      class="relative w-full max-w-[600px] max-h-[94vh] overflow-y-auto bg-white rounded-[24px] shadow-2xl px-6 py-7 sm:px-8 sm:py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="register-title"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        type="button"
+        (click)="close()"
+        class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center rounded-xl border-2 border-rose-500 hover:bg-rose-50 transition"
+        aria-label="Cerrar"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="w-16 h-16 rounded-2xl bg-rose-50 flex items-center justify-center mb-5">
+        <span class="text-4xl font-black text-rose-600">M</span>
+      </div>
+
+      <h2
+        id="register-title"
+        class="text-2xl sm:text-[27px] font-extrabold tracking-tight text-gray-950 pr-10"
+      >
+        ¡Te damos la bienvenida a Muvix!
+      </h2>
+
+      <p class="text-sm text-gray-500 mt-2 mb-6">
+        Creá tu cuenta gratis y descubrí todo lo que Muvix tiene para vos.
+      </p>
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        class="space-y-3"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <input
+              type="text"
+              formControlName="firstName"
+              placeholder="Nombre"
+              autocomplete="given-name"
+              [class.border-red-400]="firstName?.touched && firstName?.invalid"
+              class="w-full h-[54px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+            />
+
+            @if (firstName?.touched && firstName?.errors) {
+              <p class="text-xs text-red-500 mt-1 ml-1">
+                @if (firstName?.hasError('required') || firstName?.hasError('whitespace')) {
+                  El nombre es obligatorio.
+                } @else if (firstName?.hasError('minlength')) {
+                  Ingresá al menos 2 caracteres.
+                }
+              </p>
+            }
+          </div>
+
+          <div>
+            <input
+              type="text"
+              formControlName="lastName"
+              placeholder="Apellido"
+              autocomplete="family-name"
+              [class.border-red-400]="lastName?.touched && lastName?.invalid"
+              class="w-full h-[54px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+            />
+
+            @if (lastName?.touched && lastName?.errors) {
+              <p class="text-xs text-red-500 mt-1 ml-1">
+                @if (lastName?.hasError('required') || lastName?.hasError('whitespace')) {
+                  El apellido es obligatorio.
+                } @else if (lastName?.hasError('minlength')) {
+                  Ingresá al menos 2 caracteres.
+                }
+              </p>
+            }
+          </div>
+        </div>
+
+        <div>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Correo electrónico"
+            autocomplete="email"
+            [class.border-red-400]="email?.touched && email?.invalid"
+            class="w-full h-[54px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+          />
+
+          @if (email?.touched && email?.errors) {
+            <p class="text-xs text-red-500 mt-1 ml-1">
+              @if (email?.hasError('required') || email?.hasError('whitespace')) {
+                El correo electrónico es obligatorio.
+              } @else if (email?.hasError('email')) {
+                Ingresá un correo electrónico válido.
+              }
+            </p>
+          }
+        </div>
+
+        <div>
+          <div class="relative">
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Creá una contraseña"
+              autocomplete="new-password"
+              [class.border-red-400]="password?.touched && password?.invalid"
+              class="w-full h-[54px] px-3 pr-12 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+            />
+
+            <button
+              type="button"
+              (click)="togglePassword()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-rose-600 transition"
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              @if (showPassword()) {
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8"/>
+                  <path d="M9.9 5.2A10.8 10.8 0 0112 5c5 0 9 5 9 7s-1.5 3.2-3.5 4.6M6.2 6.2C3.8 7.8 3 10 3 12s4 7 9 7c1.2 0 2.3-.3 3.3-.7"/>
+                </svg>
+              } @else {
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              }
+            </button>
+          </div>
+
+          <p class="text-[11px] text-gray-500 mt-1.5 ml-1">
+            Usá al menos 8 caracteres para tu contraseña.
+          </p>
+
+          @if (password?.touched && password?.errors) {
+            <p class="text-xs text-red-500 mt-1 ml-1">
+              @if (password?.hasError('required') || password?.hasError('whitespace')) {
+                La contraseña es obligatoria.
+              } @else if (password?.hasError('minlength')) {
+                La contraseña debe tener al menos 8 caracteres.
+              }
+            </p>
+          }
+        </div>
+
+        <div>
+          <input
+            type="tel"
+            formControlName="phoneNumber"
+            placeholder="Teléfono (+54...)"
+            autocomplete="tel"
+            [class.border-red-400]="phoneNumber?.touched && phoneNumber?.invalid"
+            class="w-full h-[54px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+          />
+
+          @if (phoneNumber?.touched && phoneNumber?.errors) {
+            <p class="text-xs text-red-500 mt-1 ml-1">
+              @if (phoneNumber?.hasError('required') || phoneNumber?.hasError('whitespace')) {
+                El teléfono es obligatorio.
+              } @else if (phoneNumber?.hasError('pattern')) {
+                Ingresá un teléfono válido.
+              }
+            </p>
+          }
+        </div>
+
+        <div class="pt-2">
+          <p class="text-xs font-bold text-gray-700 mb-3">
+            ¿Dónde vivís?
+          </p>
+
+          <div class="space-y-3">
+            <div>
+              <input
+                type="text"
+                formControlName="country"
+                placeholder="País"
+                autocomplete="country-name"
+                [class.border-red-400]="country?.touched && country?.invalid"
+                class="w-full h-[50px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+              />
+
+              @if (country?.touched && country?.invalid) {
+                <p class="text-xs text-red-500 mt-1 ml-1">
+                  El país es obligatorio.
+                </p>
+              }
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <input
+                  type="text"
+                  formControlName="state"
+                  placeholder="Provincia / Estado"
+                  autocomplete="address-level1"
+                  [class.border-red-400]="state?.touched && state?.invalid"
+                  class="w-full h-[50px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+                />
+
+                @if (state?.touched && state?.invalid) {
+                  <p class="text-xs text-red-500 mt-1 ml-1">
+                    La provincia es obligatoria.
+                  </p>
+                }
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  formControlName="city"
+                  placeholder="Ciudad"
+                  autocomplete="address-level2"
+                  [class.border-red-400]="city?.touched && city?.invalid"
+                  class="w-full h-[50px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+                />
+
+                @if (city?.touched && city?.invalid) {
+                  <p class="text-xs text-red-500 mt-1 ml-1">
+                    La ciudad es obligatoria.
+                  </p>
+                }
+              </div>
+            </div>
+
+            <div>
+              <input
+                type="text"
+                formControlName="address"
+                placeholder="Dirección"
+                autocomplete="street-address"
+                [class.border-red-400]="address?.touched && address?.invalid"
+                class="w-full h-[50px] px-3 rounded-xl border border-gray-300 outline-none text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition"
+              />
+
+              @if (address?.touched && address?.errors) {
+                <p class="text-xs text-red-500 mt-1 ml-1">
+                  @if (address?.hasError('required') || address?.hasError('whitespace')) {
+                    La dirección es obligatoria.
+                  } @else if (address?.hasError('minlength')) {
+                    Ingresá una dirección de al menos 5 caracteres.
+                  }
+                </p>
+              }
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="w-full h-[52px] rounded-xl bg-rose-600 text-white font-bold text-sm hover:bg-rose-700 transition disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+        >
+          Crear cuenta
+        </button>
+      </form>
+
+      <div class="flex items-center gap-3 my-4">
+        <div class="h-px flex-1 bg-gray-200"></div>
+        <span class="text-xs text-gray-400">o</span>
+        <div class="h-px flex-1 bg-gray-200"></div>
+      </div>
+
+      <button
+        type="button"
+        (click)="onGoogleRegister()"
+        class="w-full h-[50px] border border-gray-300 rounded-xl flex items-center justify-center gap-3 text-sm font-semibold hover:bg-gray-50 transition"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.04 13.22l7.98 6.19C12.01 13.72 17.48 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.72 7.18l7.73 6C44.45 37.9 46.98 31.83 46.98 24.55z"/>
+          <path fill="#FBBC05" d="M10.02 28.59A14.4 14.4 0 019.25 24c0-1.59.27-3.13.77-4.59l-7.98-6.19A23.9 23.9 0 000 24c0 3.87.93 7.52 2.04 10.78l7.98-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.47 0 11.91-2.13 15.88-5.8l-7.73-6c-2.15 1.45-4.91 2.3-8.15 2.3-6.52 0-11.99-4.22-13.98-10.09l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+
+        Continuar con Google
+      </button>
+
+      <p class="text-sm text-center mt-6 text-gray-600">
+        ¿Ya tenés una cuenta?
+
+        <button
+          type="button"
+          (click)="onLogin()"
+          class="font-semibold text-gray-900 underline hover:text-rose-600 transition"
+        >
+          Iniciar sesión
+        </button>
+      </p>
+
+      <p class="text-[10px] text-gray-400 leading-relaxed mt-5">
+        Si continuás, aceptás los
+        <a href="/terminos" class="underline">Términos del servicio</a>
+        y confirmás que leíste nuestra
+        <a href="/privacidad" class="underline">Política de privacidad</a>.
+      </p>
+    </div>
+  </div>
+}

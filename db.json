@@ -1,156 +1,70 @@
 {
   "storage": [
     {
-      "userId": "1",
-      "title": "Sillón de dos cuerpos",
-      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
-      "categoryId": "Muebles",
-      "condition": "LIKE_NEW",
-      "status": "STORED",
-      "images": [
-        "https://i.pinimg.com/736x/4f/66/dd/4f66dd7a17cb3b0525e9af2d52db8e34.jpg"
-      ],
-      "createdAt": "2026-11-10T10:30:00.000Z",
-      "id": "item-001"
-    },
-    {
-      "userId": "1",
-      "title": "Mesa ratona de madera",
-      "description": "Mesa ratona de madera maciza, diseño minimalista, ideal para living.",
-      "categoryId": "Muebles",
-      "condition": "LIKE_NEW",
-      "status": "STORED",
-      "images": [
-        "https://i.pinimg.com/736x/a7/cf/e2/a7cfe279ee42571fc0aba0cad02d5b1a.jpg"
-      ],
-      "createdAt": "2026-11-10T11:00:00.000Z",
-      "id": "item-002"
-    },
-    {
-      "userId": "1",
-      "title": "Lámpara de pie moderna",
-      "description": "Lámpara de pie de diseño moderno, estructura metálica negra y pantalla de tela beige.",
-      "categoryId": "Decoración",
-      "condition": "LIKE_NEW",
-      "status": "STORED",
-      "images": [
-        "https://i.pinimg.com/1200x/c9/4c/f3/c94cf3c695ccdd6e93bcd2e62895ef52.jpg"
-      ],
-      "createdAt": "2026-11-10T11:30:00.000Z",
-      "id": "item-003"
-    },
-    {
-      "userId": "1",
-      "title": "blablabla",
-      "description": "blured,gren",
-      "categoryId": "all colors",
-      "condition": "LIKE_NEW",
+      "userId": "OTtRMjYkbhU",
+      "title": "fsdfsd",
+      "description": "fsdfsdfdfds",
+      "categoryId": "fsdfsdfs",
+      "condition": "GOOD",
       "status": "STORED",
       "images": [
         "https://res.cloudinary.com/vhycikpc/image/upload/v1794747282/Linkdin_profile_photo.png"
       ],
-      "createdAt": "2026-11-15T12:54:46.863Z",
-      "id": "9MxrBis646c"
+      "createdAt": "2026-11-16T20:29:24.953Z",
+      "id": "xDgvapRhXbI"
+    },
+    {
+      "userId": "OTtRMjYkbhU",
+      "title": "fsdfsdfsd",
+      "description": "dfsdfdsffd",
+      "categoryId": "fsdfsdfds",
+      "condition": "NEW",
+      "status": "STORED",
+      "images": [
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1794860583/logo_muvix.jpg"
+      ],
+      "createdAt": "2026-11-16T20:35:02.283Z",
+      "id": "jZrGswjJxTE"
     }
   ],
   "publications": [
     {
-      "id": "pub-001",
-      "userId": "1",
-      "title": "Sillón de dos cuerpos",
-      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
-      "price": 280000,
+      "userId": "OTtRMjYkbhU",
+      "title": "fsdfsd",
+      "description": "fsdfsdfdfds",
+      "price": 45353,
       "type": "INDIVIDUAL",
       "status": "ACTIVE",
-      "category": "Muebles",
+      "category": "fsdfsdfs",
       "itemIds": [
-        "item-001"
+        "xDgvapRhXbI"
       ],
-      "createdAt": "2026-11-10T10:30:00.000Z"
-    },
-    {
-      "id": "pub-002",
-      "userId": "1",
-      "title": "Mesa ratona de madera",
-      "description": "Mesa ratona de madera maciza, diseño minimalista, ideal para living.",
-      "price": 95000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Muebles",
-      "itemIds": [
-        "item-002"
-      ],
-      "createdAt": "2026-11-10T11:00:00.000Z"
-    },
-    {
-      "id": "pub-003",
-      "userId": "1",
-      "title": "Lámpara de pie moderna",
-      "description": "Lámpara de pie de diseño moderno, estructura metálica negra y pantalla de tela beige.",
-      "price": 65000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Decoración",
-      "itemIds": [
-        "item-003"
-      ],
-      "createdAt": "2026-11-10T11:30:00.000Z"
-    },
-    {
-      "userId": "1",
-      "title": "hgfh",
-      "description": "hgfhf",
-      "price": 1,
-      "type": "BATCH",
-      "status": "ACTIVE",
-      "category": "hgfhf",
-      "itemIds": [
-        "item-002",
-        "item-001"
-      ],
-      "createdAt": "2026-11-16T12:52:55.913Z",
-      "id": "7XwyTPF2gNY"
+      "createdAt": "2026-11-16T20:30:10.582Z",
+      "id": "W_-22gcAeno"
     }
   ],
   "users": [
     {
-      "id": "1",
-      "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-      "firstName": "Ivan",
-      "lastName": "Jauregui",
-      "email": "ivanjauregui22@gmail.com",
+      "firstName": "ivan",
+      "lastName": "jauregui",
+      "email": "ivanjauregui79@gmail.com",
+      "password": "12345678",
       "phoneNumber": "2233009292",
-      "password": "1234",
       "country": "Argentina",
-      "state": "Buenos Aires",
-      "city": "Mar del Plata",
-      "address": "Av. Colón 1234"
-    },
-    {
-      "firstName": "Zoe",
-      "lastName": "Baiz",
-      "email": "baiz.zoe.luana@gmail.com",
-      "phoneNumber": "2236699559",
-      "password": "4321",
-      "id": "q4dB6CiLJS8"
+      "state": "Buenos aires",
+      "city": "Mar del plata",
+      "address": "Beltrami 3020",
+      "id": "OTtRMjYkbhU"
     }
   ],
   "reservations": [
     {
-      "publicationId": "pub-003",
-      "userId": "1",
-      "price": 65000,
+      "publicationId": "W_-22gcAeno",
+      "userId": "OTtRMjYkbhU",
+      "price": 45353,
       "pickup_date": null,
-      "pin": null,
-      "id": "_flEperGRe0"
-    },
-    {
-      "publicationId": "pub-002",
-      "userId": "1",
-      "price": 95000,
-      "pickup_date": null,
-      "pin": "8UCSQ",
-      "id": "1COkeov_ZaQ"
+      "pin": "EKYJv",
+      "id": "jNTo3I2VC4g"
     }
   ],
   "categories": [

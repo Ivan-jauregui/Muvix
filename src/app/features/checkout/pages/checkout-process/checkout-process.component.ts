@@ -154,29 +154,33 @@ export class CheckoutProcessComponent {
 
 
   private loadPublication(id: string): void {
+  this.publicationService.getById(id).subscribe({
+    next: data => {
+      console.log('PUBLICACIÓN COMPLETA:', data);
+      console.log('USER ID:', data.userId);
 
-    this.publicationService.getById(id).subscribe({
-      next: data => {
-        this.publication.set(data);
+      this.publication.set(data);
 
-        // CARGAR VENDEDOR
-        if (data.userId) {
-          this.loadSeller(data.userId);
-        }
-      },
-
-      error: error => {
-        console.error('Error al cargar publicación:', error);
+      if (data.userId) {
+        this.loadSeller(data.userId);
+      } else {
+        console.error('La publicación no tiene userId:', data);
       }
-    });
-  }
+    },
+    error: error => {
+      console.error('Error al cargar publicación:', error);
+    }
+  });
+}
 
 
   private loadSeller(userId: string): void {
 
     this.userService.getById(userId).subscribe({
-      next: user => this.seller.set(user),
-
+      next: (user)=> {
+        this.seller.set(user)
+        console.log(this.seller)
+      },
       error: error => {
         console.error('Error al cargar vendedor:', error);
       }
@@ -243,7 +247,7 @@ confirmCheckout(): void {
       console.log('Reserva creada:', reservation);
 
       this.router.navigate([
-        '/success',
+        '/checkout/success',
         publication.id
       ]);
 
