@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroCalendarDays, heroMagnifyingGlass, heroPlus } from '@ng-icons/heroicons/outline';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar', 
@@ -21,5 +22,5 @@ import { heroCalendarDays, heroMagnifyingGlass, heroPlus } from '@ng-icons/heroi
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-
+  public authService = inject(AuthService);  
 }

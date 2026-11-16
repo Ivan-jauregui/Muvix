@@ -22,7 +22,11 @@ export const DASHBOARD_ROUTES: Routes = [
     loadComponent: () => import('./pages/sell/sell.component').then(m => m.SellComponent) 
   },
   { 
-    path: 'sell/form/:id',
+    path: 'sell/form/publication/batch',
+    loadComponent: () => import('./pages/batch-form/batch-form.component').then(m => m.BatchFormComponent) 
+  },
+  { 
+    path: 'sell/form/publication/individual/:id',
     loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent) 
   },
   { 

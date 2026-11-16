@@ -97,62 +97,19 @@
       "createdAt": "2026-11-10T11:30:00.000Z"
     },
     {
-      "id": "pub-004",
       "userId": "1",
-      "title": "Juego completo para living",
-      "description": "Conjunto de living compuesto por un sillón de dos cuerpos, una mesa ratona de madera y una lámpara de pie moderna. Ideal para renovar tu espacio con un estilo cálido y contemporáneo.",
-      "price": 390000,
+      "title": "hgfh",
+      "description": "hgfhf",
+      "price": 1,
       "type": "BATCH",
       "status": "ACTIVE",
-      "category": "Muebles",
+      "category": "hgfhf",
       "itemIds": [
-        "item-001",
         "item-002",
-        "item-003"
-      ],
-      "createdAt": "2026-11-10T12:00:00.000Z"
-    },
-    {
-      "userId": "1",
-      "title": "Sillón de dos cuerpos",
-      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
-      "price": 180000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Muebles",
-      "itemIds": [
         "item-001"
       ],
-      "createdAt": "2026-11-15T14:13:21.543Z",
-      "id": "zBYhiNuZ6Uc"
-    },
-    {
-      "userId": "1",
-      "title": "Sillón de dos cuerpos",
-      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
-      "price": 120,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Muebles",
-      "itemIds": [
-        "item-001"
-      ],
-      "createdAt": "2026-11-15T14:13:39.655Z",
-      "id": "MWFfo_jtCZ0"
-    },
-    {
-      "userId": "1",
-      "title": "Sillón de dos cuerpos",
-      "description": "Sillón moderno de dos cuerpos, tapizado en tela gris, muy cómodo y en excelente estado.",
-      "price": 180000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Muebles",
-      "itemIds": [
-        "item-001"
-      ],
-      "createdAt": "2026-11-15T14:13:57.799Z",
-      "id": "eh44SPL_Sfg"
+      "createdAt": "2026-11-16T12:52:55.913Z",
+      "id": "7XwyTPF2gNY"
     }
   ],
   "users": [
@@ -180,28 +137,20 @@
   ],
   "reservations": [
     {
-      "id": "1",
       "publicationId": "pub-003",
       "userId": "1",
       "price": 65000,
       "pickup_date": null,
-      "pin": null
+      "pin": null,
+      "id": "_flEperGRe0"
     },
     {
-      "id": "2",
       "publicationId": "pub-002",
-      "userId": "q4dB6CiLJS8",
+      "userId": "1",
       "price": 95000,
       "pickup_date": null,
-      "pin": null
-    },
-    {
-      "publicationId": "eh44SPL_Sfg",
-      "userId": "q4dB6CiLJS8",
-      "price": 180000,
-      "pickup_date": null,
-      "pin": null,
-      "id": "tZ9YLRr-6k8"
+      "pin": "8UCSQ",
+      "id": "1COkeov_ZaQ"
     }
   ],
   "categories": [

@@ -46,19 +46,17 @@
 
     </div>
 
-
     <div class="ml-auto flex shrink-0 items-center gap-2">
-
+      @if (authService.currentUser()){
    
       <a
-        routerLink="/auth/login"
+        routerLink="/my-reservations"
         class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-[#A31533]"
       >
         <ng-icon name="heroCalendarDays" class="text-lg" />
         <span class="hidden xl:inline">Mis reservas</span>
       </a>
 
-      <!-- Crear liquidación -->
       <a
         routerLink="/dashboard"
         class="inline-flex items-center gap-2 rounded-full bg-[#A31533] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#821028]"
@@ -67,7 +65,18 @@
         <span class="whitespace-nowrap">Crear liquidación</span>
       </a>
 
+       } @else {
+         <a
+        routerLink="/auth/login"
+        class="inline-flex items-center gap-2 rounded-sm bg-[#A31533] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#821028]"
+      >
+        <span class="whitespace-nowrap">Iniciar Sesion</span>
+      </a>
+
+        }
+
     </div>
+
 
   </nav>
 
