@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPauseCircleMicro,heroPencilMicro } from '@ng-icons/heroicons/micro';
+import { PublicationResponse } from '../../../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'admin-publication-card',
@@ -20,18 +21,8 @@ import { heroPauseCircleMicro,heroPencilMicro } from '@ng-icons/heroicons/micro'
 })
 export class AdminPublicationCardComponent {
   router = inject(Router)
-  publication = input<Publication>();
-  statusChanged = output<Publication>()
-
-
-  getMainImageUrl(publication: Publication): string {
-    const images = publication?.images;
-    if (!images || images.length === 0) return 'assets/no-image.jpg';
-
-    const principal = images.find((img: PublicationImages) => img.esPrincipal);
-
-    return principal ? principal.url_images : images[0].url_images;
-  }
+  publication = input<PublicationResponse>();
+  statusChanged = output<PublicationResponse>()
 
   viewDetails(id: string) {
     if (id) {
@@ -43,9 +34,9 @@ export class AdminPublicationCardComponent {
     const currentPub = this.publication();
     if (!currentPub) return;
 
-    const updatedPublication: Publication = {
+    const updatedPublication: PublicationResponse = {
       ...currentPub,
-      active: !currentPub.active
+      status: "ACTIVE"
     };
 
     this.statusChanged.emit(updatedPublication);

@@ -39,7 +39,7 @@
             (click)="viewDetails(item.id!)">
 
             <figure class="relative aspect-[14/10] w-full bg-gray-100 overflow-hidden">
-              <img [src]="getMainImageUrl(item)" class="w-full h-full object-cover">
+              <img [src]="item.coverImage" class="w-full h-full object-cover">
             </figure>
 
             <div class="p-4 flex flex-col flex-grow">
@@ -51,7 +51,7 @@
                 </h2>
                 <span
                   class="bg-gray-100 text-gray-500 text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap border border-gray-200/50">
-                  {{ item.condition }}
+                  {{ item.status }}
                 </span>
               </div>
 

@@ -4,6 +4,7 @@ import { Publication } from '../../../../core/models/publicacion';
 import { CommonModule } from '@angular/common';
 import { PublicationImages } from '../../../../core/models/publication-images';
 import { RouterLink } from '@angular/router';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 
 @Component({
@@ -13,28 +14,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './express-carousel.component.css'
 })
 export class ExpressCarouselComponent {
-    private publicationService = inject(PublicationService);
-
-  publications = signal<Publication[]>([]);
-
-  ngOnInit(): void {
-    this.publicationService.getAll().subscribe({
-      next: (publications) => {
-        this.publications.set(publications);
-      },
-      error: (error) => {
-        console.error('Error al obtener publicaciones:', error);
-      }
-    });
-  }
-
-  getMainImageUrl(publication: Publication): string {
-      const images = publication?.images;
-      if (!images || images.length === 0) return 'assets/no-image.jpg';
+   private publicationService = inject(PublicationService);
   
-      // Busca la principal, si no existe, agarra la primera del array
-      const principal = images.find((img: PublicationImages) => img.esPrincipal);
-   
-      return principal ? principal.url_images : images[0].url_images;
+    publications = signal<PublicationResponse[]>([]);
+  
+    ngOnInit(): void {
+      this.publicationService.getAll().subscribe({
+        next: (publications) => {
+          this.publications.set(publications);
+        },
+        error: (error) => {
+          console.error('Error al obtener publicaciones:', error);
+        }
+      });
     }
 }

@@ -10,12 +10,24 @@ export const DASHBOARD_ROUTES: Routes = [
     loadComponent: () => import('./pages/storage/storage.component').then(m => m.StorageComponent) 
   },
   { 
+    path: 'storage/form', 
+    loadComponent: () => import('./pages/storage-item-form/storage-item-form.component').then(m => m.StorageItemFormComponent) 
+  },
+  { 
     path: 'listings', 
     loadComponent: () => import('./pages/listings/listings.component').then(m => m.ListingsComponent) 
   },
   { 
     path: 'sell', 
     loadComponent: () => import('./pages/sell/sell.component').then(m => m.SellComponent) 
+  },
+  { 
+    path: 'sell/form/publication/batch',
+    loadComponent: () => import('./pages/batch-form/batch-form.component').then(m => m.BatchFormComponent) 
+  },
+  { 
+    path: 'sell/form/publication/individual/:id',
+    loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent) 
   },
   { 
     path: 'agenda', 

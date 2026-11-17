@@ -21,15 +21,11 @@
       <div class="lg:col-span-2 space-y-6">
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
 
-          <!-- Etiquetas superiores superiores -->
+    
           <div class="flex items-center gap-2 mb-4 text-[11px] font-bold uppercase tracking-wider text-gray-400">
             <span>Colección Coordinada</span>
             <span>•</span>
-            <span class="text-gray-600">{{ publication()?.category?.name }}</span>
-            @if (publication()?.type === 'LOTE') {
-            <span
-              class="ml-auto bg-rose-50 text-rose-600 px-2 py-0.5 rounded text-[10px] font-extrabold">Verificado</span>
-            }
+            <span class="text-gray-600">{{ publication()?.category }}</span>
           </div>
 
 
@@ -40,16 +36,16 @@
 
           <div
             class="aspect-[10/10] w-full overflow-hidden rounded-xl bg-gray-100 border border-gray-100 flex items-center justify-center relative">
-            <img [src]="selectedImage() || defaultImg()" [alt]="publication()?.title"
+            <img [src]="publication()?.coverImage" [alt]="publication()?.title"
               class="w-full h-full object-cover" />
           </div>
 
-          <!-- Listado Dinámico de Miniaturas inferiores (Soporta múltiples imágenes) -->
-          @if (publication()?.images && publication()!.images!.length > 1) {
+          <!--
+          @if (publication()?.coverImage && /*publication()!.images!.length > 1*/) {
           <div class="grid grid-cols-4 sm:grid-cols-6 gap-3 w-full">
 
             @for (img of publication()?.images; track img.id) {
-            <!-- Cambiado a aspect-square (más cuadrado) y el borde dinámico ahora es border-slate-800 (más oscuro y sobrio) -->
+          
             <div class="aspect-square rounded-lg overflow-hidden border-2 cursor-pointer transition-all duration-200"
               (click)="selectImage(img.url_images)" [class.border-slate-800]="img.url_images === selectedImage()"
               [class.border-transparent]="img.url_images !== selectedImage()">
@@ -59,7 +55,7 @@
             }
 
           </div>
-          }
+          } -->
 
           <div class="mt-8 pt-6 border-t border-gray-100 space-y-3">
             <h2 class="text-xs font-bold text-gray-900 tracking-wider uppercase">Descripción del artículo</h2>
@@ -79,9 +75,6 @@
           <div>
             <div class="flex items-center justify-between mb-1">
               <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Precio del set completo</span>
-              @if (publication()?.type === 'LOTE') {
-              <span class="bg-rose-100 text-rose-700 font-extrabold text-[10px] px-2 py-0.5 rounded">-45% Combo</span>
-              }
             </div>
             <div class="flex items-baseline gap-1.5">
               <span class="text-3xl font-black text-gray-900 tracking-tight">
@@ -102,7 +95,7 @@
             </button>
           </div>
 
-          <!-- Sección de Usuario / Vendedor -->
+
           <seller-card [user]="user()"></seller-card>
 
         </div>
@@ -110,10 +103,10 @@
     </div>
 
 
-    @if (publication()?.type === 'LOTE' && associatedPublications().length > 0) {
+    @if (publication()?.type === 'BATCH' ) {
     <div class="mt-12 pt-8 border-t border-gray-200">
 
-      <!-- Títulos de Desglose -->
+
       <div class="mb-6">
         <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block mb-1">Desglose de piezas</span>
         <h2 class="text-2xl font-black text-gray-900 tracking-tight">Contenido detallado del lote</h2>

@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 font-sans">
   <div class="max-w-7xl mx-auto space-y-6">
     
-    <!-- Top Banner -->
+
     <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div class="space-y-2">
         <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
@@ -12,11 +12,7 @@
         </p>
       </div>
       <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 px-4 py-3 rounded-xl shrink-0">
-        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-          </svg>
-        </div>
+  
         <div>
           <p class="text-xs text-emerald-700 font-medium uppercase tracking-wider">Custodia segura</p>
           <p class="text-lg font-bold text-emerald-800">$30.000 ARS</p>
@@ -24,13 +20,12 @@
       </div>
     </div>
 
-    <!-- Main Grid Content -->
+
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- Left Column: Pickup & Seller Info (7 cols) -->
+
       <div class="lg:col-span-7 space-y-6">
-        
-        <!-- Pickup Address Card -->
+
         <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
           <div class="flex items-start justify-between">
             <div class="flex items-start gap-4">
@@ -44,7 +39,6 @@
                 <span class="text-xs font-bold text-rose-600 tracking-wider uppercase">Punto de retiro</span>
                 <p class="text-xs text-gray-500">Palermo Soho, CABA</p>
                 <h2 class="text-lg font-bold text-gray-900 mt-0.5">{{seller()?.address}}B</h2>
-                <p class="text-xs text-gray-500 mt-0.5">Timbre Jáuregui • Edificio residencial</p>
               </div>
             </div>
             <button (click)="copyAddress()" class="flex items-center gap-2 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50 transition">
@@ -55,7 +49,7 @@
             </button>
           </div>
 
-          <!-- Schedule Badge -->
+          
           <div class="flex items-center gap-2 bg-gray-50 px-4 py-3 rounded-xl text-xs text-gray-700">
             <svg class="w-4 h-4 text-gray-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -66,15 +60,14 @@
             <span>Mañana: <strong class="text-gray-900">10:00 a 19:00 hs</strong></span>
           </div>
 
-          <!-- Map Mockup Container -->
+
           <div class="relative rounded-xl overflow-hidden border border-gray-200 h-64 bg-slate-100 flex items-center justify-center">
-            <!-- Simulated map background gradient/elements -->
+
             <div class="absolute inset-0 bg-gradient-to-tr from-sky-100 via-emerald-50 to-amber-50 opacity-80"></div>
             <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px]"></div>
             
        
 
-            <!-- Map Footer details -->
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-gray-600 font-medium bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
               <span>Palermo Soho • Subte D (Estación Plaza Italia a 600m)</span>
               <div class="flex gap-2">
@@ -89,7 +82,6 @@
             </div>
           </div>
 
-          <!-- Seller Info Row -->
           <div class="flex items-center justify-between pt-2">
             <div class="flex items-center gap-3">
               <div class="relative">
@@ -115,7 +107,7 @@
           </div>
         </div>
 
-        <!-- Authorized Person Card -->
+
         <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center justify-between">
           <div class="flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 shrink-0">
@@ -139,10 +131,9 @@
 
       </div>
 
-      <!-- Right Column: Security PIN & Article Details (5 cols) -->
       <div class="lg:col-span-5 space-y-6">
         
-        <!-- Custody Pin Box (Dark Theme) -->
+    
         <div class="bg-gradient-to-b from-gray-900 to-gray-950 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden border border-gray-800">
           <div class="flex items-center justify-between mb-4">
             <span class="bg-rose-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-md tracking-wider">
@@ -155,7 +146,7 @@
 
           <p class="text-xs text-gray-400 font-medium mb-3 uppercase tracking-wider">Pin de entrega y liberación</p>
           
-          <!-- PIN Numbers Grid -->
+
           <div class="grid grid-cols-4 gap-2 mb-4">
             <div *ngFor="let digit of pinDigits" class="bg-gray-800/80 border border-gray-700 rounded-xl h-14 flex items-center justify-center text-2xl font-bold tracking-wider text-white shadow-inner">
               {{ digit }}
@@ -167,7 +158,7 @@
             </button>
           </div>
 
-          <!-- Warning Notice Box -->
+
           <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl flex items-start gap-3">
             <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
@@ -178,7 +169,7 @@
           </div>
         </div>
 
-        <!-- Article Detail Card -->
+
         <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
           <div class="flex items-center justify-between border-b border-gray-100 pb-3">
             <div class="flex items-center gap-2 text-xs font-bold text-gray-800 uppercase tracking-wider">
@@ -193,17 +184,17 @@
             </span>
           </div>
 
-          <!-- Product Item Preview -->
+
           <div class="flex items-center gap-4">
-            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=150&auto=format&fit=crop&q=80" alt="Estantería" class="w-16 h-16 rounded-xl object-cover border border-gray-100">
+            <img [src]="publication()?.coverImage" alt="Estantería" class="w-16 h-16 rounded-xl object-cover border border-gray-100">
             <div>
               <h4 class="font-bold text-gray-900 text-sm">{{publication()!.title}}</h4>
-              <p class="text-xs text-gray-500 mt-0.5">Lote #MVX-94820 • Liquidación Paler...</p>
+              <p class="text-xs text-gray-500 mt-0.5">{{ `${publication()?.id} -  ${seller()?.address}`}}</p>
               <p class="text-lg font-bold text-gray-900 mt-1">$30.000 ARS</p>
             </div>
           </div>
 
-          <!-- Price Summary List -->
+
           <div class="bg-gray-50 rounded-xl p-4 space-y-2.5 text-xs text-gray-600">
             <div class="flex justify-between">
               <span>Subtotal del lote</span>
@@ -219,7 +210,7 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
+
           <div class="space-y-2 pt-1">
             <button (click)="viewDigitalReceipt()" class="w-full border border-gray-200 hover:bg-gray-50 text-gray-800 text-xs font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
               <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +227,7 @@
           </div>
         </div>
 
-        <!-- Help / Dispute Notice -->
+
         <div class="bg-rose-50/50 border border-rose-100 rounded-2xl p-4 flex items-start gap-3.5">
           <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 shrink-0 mt-0.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,42 +1,44 @@
 import { Component, inject, signal } from '@angular/core';
-import { PublicationImages } from '../../../../core/models/publication-images';
-import { Publication } from '../../../../core/models/publicacion';
-import { PublicationService } from '../../../../core/services/publication/publication-service';
-import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { StorageService } from './service/storage.service';
+import { StorageItem } from '../../../../core/models/storage-item';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  heroPlus,
+  heroArrowUpRight
+} from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-storage',
-  imports: [],
+  imports: [RouterLink, NgIcon],
+  providers: [
+    provideIcons({
+      heroPlus,
+      heroArrowUpRight
+    })
+  ],
   templateUrl: './storage.component.html',
   styleUrl: './storage.component.css'
 })
 export class StorageComponent {
-  private readonly publicationService = inject(PublicationService);
-  public publications = signal<Publication[]>([]);
+  private readonly storageService = inject(StorageService);
+  public storageItem = signal<StorageItem[]>([]);
 
  
  ngOnInit(): void {
-    this.loadPublications();
+    this.loadStorageItems();
   }
 
-  private loadPublications(): void {
-    this.publicationService.getAll().subscribe({
+  private loadStorageItems(): void {
+    this.storageService.getItemsByUserId().subscribe({
       next: (data) => {
-        this.publications.set(data.filter(p=>p.price===0));
+        this.storageItem.set(data);
       },
       error: (err) => {
-        console.error('Error al cargar las publicaciones:', err);
+        console.error('Error al cargar las items:', err);
       }
     });
   }
 
-  getMainImageUrl(publication: Publication): string {
-    const images = publication?.images;
-    if (!images || images.length === 0) return 'assets/no-image.jpg';
-
-
-    const principal = images.find((img: PublicationImages) => img.esPrincipal);
- 
-    return principal ? principal.url_images : images[0].url_images;
-  }
+  
 }

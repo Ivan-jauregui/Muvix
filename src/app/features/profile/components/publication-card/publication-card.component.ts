@@ -11,7 +11,7 @@ import { PublicationImages } from '../../../../core/models/publication-images';
   styleUrl: './publication-card.component.css'
 })
 export class PublicationCardComponent {
-  publication = input.required<Publication>();
+  /*publication = input.required<Publication>();
 
   router = inject(Router);
 
@@ -53,5 +53,5 @@ export class PublicationCardComponent {
     }
 
   }
-
+*/
 }
