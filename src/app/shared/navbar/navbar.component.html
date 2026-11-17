@@ -1,86 +1,130 @@
 <header class="sticky top-0 z-50 border-b border-gray-100 bg-white">
-  <nav class="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
+  <nav class="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-stretch gap-4 px-4 sm:px-6 lg:px-8">
 
+    <div class="flex min-w-0 items-center gap-4">
+      <a routerLink="/" class="shrink-0 text-2xl font-extrabold tracking-tight text-[#212121]">
+        Muvi<span class="text-[#E11D48]">x</span>
+      </a>
 
-    <a routerLink="/" class="shrink-0 text-2xl font-extrabold tracking-tight text-[#212121]">
-      MUVI<span class="text-[#A31533]">X</span>
-    </a>
+      <div class="relative hidden min-w-0 max-w-xs flex-1 md:block">
+        <ng-icon name="heroMagnifyingGlass"
+          class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-400" />
+        <input type="text" placeholder="Buscar en Muvix..."
+          class="w-full rounded-full bg-[#EEF1F8] py-2.5 pl-11 pr-4 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:bg-white focus:ring-2 focus:ring-[#E11D48]/20" />
+      </div>
+    </div>
 
-    <ul class="hidden shrink-0 items-center gap-5 text-sm font-medium text-gray-600 lg:flex">
+    <ul class="hidden h-full items-stretch gap-2 md:flex">
 
-      <li>
-        <a routerLink="/how-it-works" routerLinkActive="!text-[#A31533]"
-          class="whitespace-nowrap transition-colors hover:text-[#A31533]">
-          Cómo funciona
+      <li class="h-full">
+        <a routerLink="/home" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+          class="nav-link" aria-label="Inicio" title="Inicio">
+          <span class="nav-pill">
+            <ng-icon name="heroHome" class="ico-off text-[28px]" />
+            <ng-icon name="heroHomeSolid" class="ico-on text-[28px]" />
+          </span>
         </a>
       </li>
 
-      <li>
-        <a routerLink="/catalog" routerLinkActive="!text-[#A31533]"
-          class="whitespace-nowrap transition-colors hover:text-[#A31533]">
-          Explorar
-        </a>
-      </li>
+      @if (authService.currentUser()) {
+        <li class="h-full">
+          <a routerLink="/catalog" routerLinkActive="active"
+            class="nav-link" aria-label="Explorar" title="Explorar">
+            <span class="nav-pill relative">
+              <ng-icon name="heroFilm" class="ico-off text-[28px]" />
+              <ng-icon name="heroFilmSolid" class="ico-on text-[28px]" />
+            </span>
+          </a>
+        </li>
 
+        <li class="h-full">
+          <a routerLink="/dashboard" routerLinkActive="active"
+            class="nav-link" aria-label="Perfil" title="Perfil">
+            <span class="nav-pill">
+              <ng-icon name="heroUserCircle" class="ico-off text-[28px]" />
+              <ng-icon name="heroUserCircleSolid" class="ico-on text-[28px]" />
+            </span>
+          </a>
+        </li>
+
+      } @else {
+        <li class="h-full">
+          <a routerLink="/how-it-works" routerLinkActive="active"
+            class="nav-link" aria-label="Cómo funciona" title="Cómo funciona">
+            <span class="nav-pill gap-2">
+              <ng-icon name="heroQuestionMarkCircle" class="ico-off text-[26px]" />
+              <ng-icon name="heroQuestionMarkCircleSolid" class="ico-on text-[26px]" />
+              <span class="hidden whitespace-nowrap text-sm font-semibold lg:inline">Cómo funciona</span>
+            </span>
+          </a>
+        </li>
+
+        <li class="h-full">
+          <a routerLink="/catalog" routerLinkActive="active"
+            class="nav-link" aria-label="Explorar" title="Explorar">
+            <span class="nav-pill gap-2">
+              <ng-icon name="heroFilm" class="ico-off text-[26px]" />
+              <ng-icon name="heroFilmSolid" class="ico-on text-[26px]" />
+              <span class="hidden whitespace-nowrap text-sm font-semibold lg:inline">Explorar</span>
+            </span>
+          </a>
+        </li>
+      }
     </ul>
 
+    <div class="flex items-center justify-end gap-2">
+      @if (authService.currentUser()) {
 
-    <div class="relative mx-auto hidden min-w-0 max-w-md flex-1 md:block">
+        <a routerLink="/my-reservations" aria-label="Mis reservas"
+          class="relative flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200">
+          <ng-icon name="heroTicket" class="text-xl" />
+        </a>
 
-      <ng-icon name="heroMagnifyingGlass" class="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-400" />
+        <button type="button" aria-label="Boxes"
+          class="hidden h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 sm:flex">
+          <ng-icon name="heroSquares2x2" class="text-xl" />
+        </button>
 
-      <input type="text" placeholder="Buscar muebles o publicaciones..."
-        class="w-full rounded-full border border-gray-200 bg-gray-50 py-2.5 pl-11 pr-4 text-sm outline-none transition focus:border-[#A31533] focus:bg-white focus:ring-2 focus:ring-[#A31533]/10" />
+        <button type="button" aria-label="Notificaciones"
+          class="relative flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200">
+          <ng-icon name="heroBell" class="text-xl" />
+        </button>
 
-    </div>
+        <span class="mx-1 hidden h-7 w-px bg-gray-200 sm:block"></span>
 
-    <div class="ml-auto flex shrink-0 items-center gap-2">
-      @if (authService.currentUser()){
+        <button type="button" aria-label="Cuenta"
+          class="flex items-center gap-1 rounded-full py-1 pl-1 pr-2.5 transition hover:bg-gray-100">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#0F172A] text-white">
+            <ng-icon name="heroUserSolid" class="text-lg" />
+          </span>
+          <ng-icon name="heroChevronDown" class="text-sm text-gray-500" />
+        </button>
 
-      <a routerLink="/my-reservations"
-        class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-[#A31533]">
-        <ng-icon name="heroCalendarDays" class="text-lg" />
-        <span class="hidden xl:inline">Mis reservas</span>
-      </a>
-
-      <a routerLink="/dashboard"
-        class="inline-flex items-center gap-2 rounded-full bg-[#A31533] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#821028]">
-        <ng-icon name="heroPlus" class="text-lg" />
-        <span class="whitespace-nowrap">Crear liquidación</span>
-      </a>
-      
       } @else {
-      <button type="button" (click)="openLogin()"
-      class="inline-flex items-center gap-2 rounded-md bg-rose-600 px-4 py-3 text-sm font-bold text-white transition
-      hover:bg-rose-700 ">
-        Iniciar sesión
-      </button>
+        <button type="button" (click)="openLogin()"
+          class="inline-flex items-center rounded-full bg-[#E11D48] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#BE123C]">
+          Iniciar sesión
+        </button>
 
-      <button type="button" (click)="openRegister()" 
-        class="inline-flex items-center gap-2 rounded-md bg-gray-200 px-4 py-3 text-sm font-semibold transition hover:bg-gray-300 ">
-        Registrarse
-      </button>
+        <button type="button" (click)="openRegister()"
+          class="hidden items-center rounded-full bg-[#EEF1F8] px-5 py-2.5 text-sm font-semibold text-gray-800 transition hover:bg-gray-200 sm:inline-flex">
+          Registrarse
+        </button>
       }
-
     </div>
-
 
   </nav>
 
-  <!-- Buscador mobile -->
   <div class="border-t border-gray-100 px-4 py-3 md:hidden">
     <div class="relative">
-
-      <ng-icon name="heroMagnifyingGlass" class="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-400" />
-
-      <input type="text" placeholder="Buscar muebles o publicaciones..."
-        class="w-full rounded-full border border-gray-200 bg-gray-50 py-2.5 pl-11 pr-4 text-sm outline-none focus:border-[#A31533] focus:ring-2 focus:ring-[#A31533]/10" />
-
+      <ng-icon name="heroMagnifyingGlass"
+        class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-400" />
+      <input type="text" placeholder="Buscar en Muvix..."
+        class="w-full rounded-full bg-[#EEF1F8] py-2.5 pl-11 pr-4 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-[#E11D48]/20" />
     </div>
   </div>
-
 </header>
-
 
 <app-login-modal
   [open]="showLogin()"

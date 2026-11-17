@@ -17,7 +17,7 @@ export class ReservationService {
   private apiUrl = 'http://localhost:3000/reservations';
 
   private publicationService = inject(PublicationService);
-    private authService = inject(AuthService)
+  private authService = inject(AuthService)
   private userService = inject(UserService);
 
   save(req: Reservation): Observable<Reservation> {
@@ -29,10 +29,10 @@ export class ReservationService {
       switchMap(reservations =>
         reservations.length
           ? forkJoin(
-              reservations.map(reservation =>
-                this.mapReservation(reservation) 
-              )
+            reservations.map(reservation =>
+              this.mapReservation(reservation)
             )
+          )
           : of([])
       )
     );
@@ -64,10 +64,20 @@ export class ReservationService {
   }
 
   getReservationsByUser(): Observable<ReservationResponse[]> {
-  return this.getAll().pipe(
-    map((reservations: ReservationResponse[]) => {
-      return reservations.filter(res => res.user.id === this.authService.currentUser()?.id); 
+    return this.getAll().pipe(
+      map((reservations: ReservationResponse[]) => {
+        return reservations.filter(res => res.user.id === this.authService.currentUser()?.id);
+      })
+    );
+  }
+
+
+  validatePin(id: string, pin: string): Observable<boolean> {
+  return this.getById(id).pipe(
+    map((reservation: ReservationResponse) => {
+      return reservation.pin === pin;
     })
   );
 }
+
 }

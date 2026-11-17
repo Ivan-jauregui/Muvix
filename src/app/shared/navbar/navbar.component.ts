@@ -1,11 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroCalendarDays, heroMagnifyingGlass, heroPlus } from '@ng-icons/heroicons/outline';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { LoginCredentials, LoginModalComponent } from '../login-modal/login-modal.component';
 import { User } from '../../core/models/user';
 import { RegisterModalComponent } from '../register-modal/register-modal.component';
+
+import {
+  heroHome, heroFilm, heroUserCircle, heroTicket, heroSquares2x2,
+  heroBell, heroChevronDown, heroMagnifyingGlass,heroQuestionMarkCircle 
+} from '@ng-icons/heroicons/outline';
+import {
+  heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid,heroQuestionMarkCircleSolid 
+} from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-navbar',
@@ -16,13 +23,11 @@ import { RegisterModalComponent } from '../register-modal/register-modal.compone
     LoginModalComponent,
     RegisterModalComponent
 ],
-  providers: [
-    provideIcons({
-      heroMagnifyingGlass,
-      heroCalendarDays,
-      heroPlus
-    })
-  ],
+providers: [provideIcons({
+  heroHome, heroFilm, heroUserCircle, heroTicket, heroSquares2x2, heroBell,
+  heroChevronDown, heroMagnifyingGlass,heroQuestionMarkCircle,
+  heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid,heroQuestionMarkCircleSolid
+})],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
