@@ -1,7 +1,4 @@
 
-import { PublicationImages } from "./publication-images";
-
-
 export interface Publication{
     id?:string
     userId?:string;
@@ -9,7 +6,7 @@ export interface Publication{
     description:string;
     price:number;
     type: 'INDIVIDUAL' | 'BATCH';
-    status: 'ACTIVE' | 'PAUSED' | 'RESERVERD' | 'SOLD'
+    status: 'ACTIVE' | 'PAUSED' | 'RESERVED' | 'SOLD'
     category:string;
     itemIds: string[];
     createdAt:string;

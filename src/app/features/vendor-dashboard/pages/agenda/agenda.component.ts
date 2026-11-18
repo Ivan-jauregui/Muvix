@@ -32,7 +32,7 @@ export class AgendaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.reservationService.getReservationsByUser().subscribe({
+    this.reservationService.getReceivedReservations().subscribe({
       next: (data) => {
         this.reservations.set(data);
         this.loading.set(false);

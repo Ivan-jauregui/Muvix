@@ -1,36 +1,40 @@
 import { Routes } from '@angular/router';
 
 export const DASHBOARD_ROUTES: Routes = [
-  { 
-    path: '', 
-    loadComponent: () => import('./pages/dashboard-overview/dashboard-overview.component').then(m => m.DashboardOverviewComponent) 
+  {
+    path: '',
+    loadComponent: () => import('./pages/dashboard-overview/dashboard-overview.component').then(m => m.DashboardOverviewComponent)
   },
-  { 
-    path: 'storage', 
-    loadComponent: () => import('./pages/storage/storage.component').then(m => m.StorageComponent) 
+  {
+    path: 'storage',
+    loadComponent: () => import('./pages/storage/storage.component').then(m => m.StorageComponent)
   },
-  { 
-    path: 'storage/form', 
-    loadComponent: () => import('./pages/storage-item-form/storage-item-form.component').then(m => m.StorageItemFormComponent) 
+  {
+    path: 'storage/form',
+    loadComponent: () => import('./pages/storage-item-form/storage-item-form.component').then(m => m.StorageItemFormComponent)
   },
-  { 
-    path: 'listings', 
-    loadComponent: () => import('./pages/listings/listings.component').then(m => m.ListingsComponent) 
+  {
+    path: 'listings',
+    loadComponent: () => import('./pages/listings/listings.component').then(m => m.ListingsComponent)
   },
-  { 
-    path: 'sell', 
-    loadComponent: () => import('./pages/sell/sell.component').then(m => m.SellComponent) 
+  {
+    path: 'sell',
+    loadComponent: () => import('./pages/sell/sell.component').then(m => m.SellComponent)
   },
-  { 
+  {
     path: 'sell/form/publication/batch',
-    loadComponent: () => import('./pages/batch-form/batch-form.component').then(m => m.BatchFormComponent) 
+    loadComponent: () => import('./pages/batch-form/batch-form.component').then(m => m.BatchFormComponent)
   },
-  { 
+  {
+    path: 'sell/form/publication/individual/edit/:publicationId',
+    loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent)
+  },
+  {
     path: 'sell/form/publication/individual/:id',
-    loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent) 
+    loadComponent: () => import('./pages/sell-form/sell-form.component').then(m => m.SellFormComponent)
   },
-  { 
-    path: 'agenda', 
-    loadComponent: () => import('./pages/agenda/agenda.component').then(m => m.AgendaComponent) 
+  {
+    path: 'agenda',
+    loadComponent: () => import('./pages/agenda/agenda.component').then(m => m.AgendaComponent)
   }
 ];

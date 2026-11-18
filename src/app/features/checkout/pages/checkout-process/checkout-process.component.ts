@@ -193,7 +193,7 @@ export class CheckoutProcessComponent {
     this.deliveryMethod.set(method);
   }
 
-  // MÉTODO DE PAGO
+
   selectPayment(method: PaymentMethod): void {
   this.paymentMethod.set(method);
 }
@@ -256,6 +256,7 @@ confirmCheckout(): void {
       console.error('Error al guardar la reserva:', err);
     }
   });
+  
 
   console.log('Método de entrega:', this.deliveryMethod());
   console.log('Método de pago:', this.paymentMethod());

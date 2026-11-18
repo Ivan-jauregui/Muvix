@@ -63,21 +63,40 @@ export class ReservationService {
     );
   }
 
-  getReservationsByUser(): Observable<ReservationResponse[]> {
+  // Reservas que yo hice como comprador
+  getMyPurchases(): Observable<ReservationResponse[]> {
+    const currentUserId = this.authService.currentUser()?.id;
+
     return this.getAll().pipe(
-      map((reservations: ReservationResponse[]) => {
-        return reservations.filter(res => res.user.id === this.authService.currentUser()?.id);
-      })
+      map(reservations =>
+        currentUserId
+          ? reservations.filter(res => res.user.id === currentUserId)
+          : []
+      )
+    );
+  }
+
+  // Reservas que le hicieron a mis productos
+  getReceivedReservations(): Observable<ReservationResponse[]> {
+    const currentUserId = this.authService.currentUser()?.id;
+
+    return this.getAll().pipe(
+      map(reservations =>
+        currentUserId
+          ? reservations.filter(res => res.publication?.userId === currentUserId)
+          : []
+      )
     );
   }
 
 
+
   validatePin(id: string, pin: string): Observable<boolean> {
-  return this.getById(id).pipe(
-    map((reservation: ReservationResponse) => {
-      return reservation.pin === pin;
-    })
-  );
-}
+    return this.getById(id).pipe(
+      map((reservation: ReservationResponse) => {
+        return reservation.pin === pin;
+      })
+    );
+  }
 
 }

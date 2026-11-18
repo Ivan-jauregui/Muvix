@@ -49,13 +49,13 @@
 
     <div class="lg:col-span-6 relative flex justify-center items-center min-h-[460px] py-6">
 
-      <!-- Glow ambiental -->
+
       <div class="absolute w-80 h-80 bg-slate-800/50 rounded-full blur-3xl -z-10"></div>
 
       <div class="relative w-full max-w-md h-[380px] flex items-center justify-center">
 
         @for (item of testimonials; track item.id; let i = $index) {
-        <!-- Contenedor con perspectiva 3D y posicionamiento en cascada -->
+
         <div
           class="absolute w-[290px] h-[370px] rounded-2xl cursor-pointer group [perspective:1000px] transition-all duration-300 hover:z-40"
           [ngClass]="{
@@ -64,17 +64,17 @@
               'translate-x-12 rotate-6 scale-95 opacity-80 z-20 hover:opacity-100': i === 2
             }">
 
-          <!-- Elemento de rotación 3D -->
+       
           <div
             class="relative w-full h-full duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-2xl rounded-2xl">
 
-            <!-- FRENTE DE LA CARD: Foto del mueble -->
+     
             <div
               class="absolute inset-0 w-full h-full rounded-2xl overflow-hidden [backface-visibility:hidden] border border-white/20 bg-slate-900 shadow-xl flex flex-col justify-between">
 
               <img [src]="item.productImage" [alt]="item.productTitle" class="w-full h-full object-cover rounded-2xl" />
 
-              <!-- Degradado inferior para resaltar texto sobre la foto -->
+        
               <div
                 class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-5">
                 <div class="flex items-center justify-between mb-1">
@@ -100,7 +100,7 @@
 
               <div class="space-y-4">
 
-                <!-- Header estilo Google Review refinado -->
+                
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                   <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
                     <div

@@ -1,6 +1,6 @@
 <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 
-  <!-- HEADER -->
+
   <div class="flex items-center justify-between mb-5">
 
     <div class="flex items-center gap-3">
@@ -21,7 +21,6 @@
 
   </div>
 
-  <!-- OPCIONES DE PAGO -->
   <div class="grid grid-cols-3 gap-2 bg-gray-100 rounded-xl p-1 mb-6">
 
     <button
@@ -59,7 +58,7 @@
 
   </div>
 
-  <!-- PAGO CON TARJETA -->
+
   @if (paymentMethod() === 'card') {
 
     <div [formGroup]="cardForm()" class="space-y-4">
@@ -120,7 +119,7 @@
 
   } @else if (paymentMethod() === 'transfer') {
 
-    <!-- TRANSFERENCIA -->
+
     <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
 
       <div class="flex items-center gap-2">
@@ -142,7 +141,7 @@
 
   } @else {
 
-    <!-- MERCADO PAGO -->
+    
     <div class="rounded-xl bg-blue-50 border border-blue-100 p-4">
 
       <div class="flex items-center gap-2">

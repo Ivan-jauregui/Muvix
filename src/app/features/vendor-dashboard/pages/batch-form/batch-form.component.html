@@ -14,7 +14,6 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()"
     class="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
 
-    <!-- TÍTULO -->
     <div>
       <label class="mb-2 block text-sm font-semibold text-gray-700">
         Título de la publicación
@@ -34,7 +33,7 @@
       }
     </div>
 
-    <!-- DESCRIPCIÓN -->
+
     <div>
       <label class="mb-2 block text-sm font-semibold text-gray-700">
         Descripción
@@ -54,7 +53,7 @@
       }
     </div>
 
-    <!-- PRECIO -->
+    
     <div>
       <label class="mb-2 block text-sm font-semibold text-gray-700">
         Precio del lote
@@ -75,7 +74,7 @@
       }
     </div>
 
-    <!-- CATEGORÍA -->
+    
     <div>
       <label class="mb-2 block text-sm font-semibold text-gray-700">
         Categoría
@@ -95,7 +94,6 @@
       }
     </div>
 
-    <!-- SELECCIÓN DE ITEMS -->
     <div class="border-t border-gray-100 pt-6">
 
       <div class="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
@@ -120,7 +118,7 @@
 
       </div>
 
-      <!-- ITEMS SELECCIONADOS -->
+      
       @if (selectedItems().length > 0) {
       
       <div class="space-y-3">
@@ -128,7 +126,7 @@
         @for (item of selectedItems(); track getItemId(item)) {
       
         <div class="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 ">
-          <!-- IMAGEN -->
+
           <div class="h-25 w-25 shrink-0 overflow-hidden rounded-xl bg-gray-100">
       
             @if (item.images?.length) {
@@ -190,7 +188,7 @@
 
     </div>
 
-    <!-- ENVIAR -->
+
     <div class="border-t border-gray-100 pt-6">
 
       <button
@@ -206,7 +204,7 @@
 </div>
 
 
-<!-- MODAL DE SELECCIÓN DE ITEMS -->
+
 @if (modalOpen()) {
   <app-item-selection-modal
     [items]="items()"

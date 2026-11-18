@@ -1,17 +1,16 @@
 
-<!-- OVERLAY -->
 <div
   class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
   (click)="closeModal()"
 >
 
-  <!-- MODAL -->
+  
   <div
     class="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
     (click)="$event.stopPropagation()"
   >
 
-    <!-- HEADER -->
+
     <div class="flex items-center justify-between border-b border-gray-100 p-5 sm:p-6">
 
       <div>
@@ -34,7 +33,7 @@
 
     </div>
 
-    <!-- BUSCADOR -->
+
     <div class="border-b border-gray-100 p-5">
 
       <input
@@ -59,7 +58,7 @@
 
     </div>
 
-    <!-- LISTA DE ITEMS -->
+
     <div class="min-h-0 flex-1 overflow-y-auto p-5">
 
       @if (loading()) {
@@ -87,7 +86,7 @@
               [class.border-gray-200]="!isSelected(item)"
             >
 
-              <!-- CHECKBOX -->
+    
               <input
                 type="checkbox"
                 [checked]="isSelected(item)"
@@ -95,7 +94,7 @@
                 class="h-5 w-5 shrink-0 accent-rose-600"
               />
 
-              <!-- IMAGEN -->
+
               <div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-gray-100">
 
                 @if (item.images?.length) {
@@ -113,7 +112,7 @@
 
               </div>
 
-              <!-- INFORMACIÓN -->
+
               <div class="min-w-0 flex-1">
 
                 <h3 class="truncate font-semibold text-gray-900">
@@ -158,7 +157,7 @@
 
     </div>
 
-    <!-- FOOTER -->
+    
     <div class="flex flex-col-reverse justify-between gap-3 border-t border-gray-100 p-5 sm:flex-row sm:items-center">
 
       <p class="text-sm text-gray-500">

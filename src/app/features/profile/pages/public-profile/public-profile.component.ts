@@ -1,20 +1,22 @@
-
 import {
   Component,
+  OnInit,
   computed,
-  effect,
   inject,
   input,
   signal
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../service/user.service';
 import { User } from '../../../../core/models/user';
-import { Publication } from '../../../../core/models/publicacion';
+import { Category } from '../../../../core/models/category';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
+
 import { PublicationService } from '../../../../core/services/publication/publication-service';
-import { Router } from '@angular/router';
-import { PublicationImages } from '../../../../core/models/publication-images';
-import { DatePipe } from '@angular/common';
+import { CategoryService } from '../../../../core/services/category/category.service';
+
 import { PublicationCardComponent } from '../../components/publication-card/publication-card.component';
 import { ProfileInfoSectionComponent } from '../../components/profile-info-section/profile-info-section.component';
 import { PublicationFiltersComponent } from '../../components/publication-filters/publication-filters.component';
@@ -23,127 +25,63 @@ import { PublicationFiltersComponent } from '../../components/publication-filter
   selector: 'app-public-profile',
   standalone: true,
   imports: [
-    PublicationCardComponent
-    ,ProfileInfoSectionComponent
-    ,PublicationFiltersComponent
-    ,DatePipe],
+    CommonModule,
+    PublicationCardComponent,
+    ProfileInfoSectionComponent,
+    PublicationFiltersComponent
+  ],
   templateUrl: './public-profile.component.html',
   styleUrl: './public-profile.component.css'
 })
-export class PublicProfileComponent {
-/*
+export class PublicProfileComponent implements OnInit {
+
+  // SERVICIOS
   private readonly userService = inject(UserService);
   private readonly publicationService = inject(PublicationService);
+  private readonly categoryService = inject(CategoryService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
-  // Usuario del perfil
+  // Solo se completa si el router tiene withComponentInputBinding()
   readonly userId = input<string>();
 
+  // ESTADO
   readonly user = signal<User | null>(null);
+  readonly publications = signal<PublicationResponse[]>([]);
+  readonly categories = signal<Category[]>([]);
+  readonly showFilters = signal(false);
 
-  // Publicaciones obtenidas desde el servicio
-  readonly publications = signal<Publication[]>([]);
+  // Nombres de categorías para el componente de filtros (espera string[])
+  readonly categoryNames = computed(() =>
+    this.categories().map(c => c.name)
+  );
 
-  // Filtros
+  readonly totalCount = computed(() => this.publications().length);
+
+  // FILTROS
   readonly search = signal('');
-
   readonly selectedCategory = signal('Todo');
-
   readonly condition = signal<string | null>(null);
-
-  readonly maxPrice = signal(195000);
-
   readonly sortBy = signal<'newest' | 'priceAsc' | 'priceDesc'>('newest');
-
+  readonly maxPrice = signal(500000);
   readonly minPriceLimit = 10000;
-  readonly maxPriceLimit = 195000;
-
-  readonly categories = [
-    'Todo',
-    'Living & Estar',
-    'Comedor & Sillas',
-    'Cocina & Bazar',
-    'Iluminación & Deco'
-  ];
+  readonly maxPriceLimit = 500000;
 
   readonly conditions = [
+    'Nuevo',
     'Como nuevo',
-    'Muy Bueno',
-    'A Estrenar'
+    'Buen estado',
+    'Regular',
   ];
 
-  constructor() {
-    effect(() => {
-      const id = this.userId();
-
-      if (id) {
-        this.fetchUser(id);
-        this.loadPublications(id);
-      }
-    });
-  }
-
-  private fetchUser(id: string): void {
-    this.userService.getById(id).subscribe({
-      next: (data) => {
-        this.user.set(data);
-      },
-      error: (err) => {
-        console.error('Error al obtener usuario:', err);
-      }
-    });
-  }
-
-  private loadPublications(userId: string): void {
-
-    this.publicationService.getAll().subscribe({
-      next: (data: Publication[]) => {
-
-        // Mostramos solamente las publicaciones del usuario del perfil
-        const userPublications = data.filter(
-          publication => publication.userId === userId
-        );
-
-        this.publications.set(userPublications);
-      },
-
-      error: (err) => {
-        console.error('Error al cargar publicaciones:', err);
-      }
-    });
-  }
-
-  // OBTENER CATEGORIA
-
-  getCategoryName(publication: Publication): string {
-
-    const category = publication.category as unknown as {
-      name?: string;
-      nombre?: string;
-      title?: string;
-    };
-
-    return category?.name ??
-           category?.nombre ??
-           category?.title ??
-           '';
-  }
-
-
   // PUBLICACIONES FILTRADAS
-
   readonly filtered = computed(() => {
-
     const query = this.search().trim().toLowerCase();
-
     const selectedCategory = this.selectedCategory();
-
     const selectedCondition = this.condition();
-
     const maxPrice = this.maxPrice();
 
     const list = this.publications().filter(publication => {
-
       const matchesSearch =
         !query ||
         publication.title.toLowerCase().includes(query) ||
@@ -151,124 +89,119 @@ export class PublicProfileComponent {
 
       const matchesCategory =
         selectedCategory === 'Todo' ||
-        this.getCategoryName(publication) === selectedCategory;
+        publication.category === selectedCategory;
 
       const matchesCondition =
         !selectedCondition ||
-        publication.condition === selectedCondition;
+        publication.item?.some(item => item.condition === selectedCondition);
 
-      const matchesPrice =
-        publication.price <= maxPrice;
+      const matchesPrice = publication.price <= maxPrice;
 
-      return matchesSearch &&
-             matchesCategory &&
-             matchesCondition &&
-             matchesPrice;
+      return matchesSearch && matchesCategory && matchesCondition && matchesPrice;
     });
 
     const sort = this.sortBy();
 
     return [...list].sort((a, b) => {
-
-      if (sort === 'priceAsc') {
-        return a.price - b.price;
-      }
-
-      if (sort === 'priceDesc') {
-        return b.price - a.price;
-      }
+      if (sort === 'priceAsc') return a.price - b.price;
+      if (sort === 'priceDesc') return b.price - a.price;
 
       return new Date(b.createdAt).getTime() -
-             new Date(a.createdAt).getTime();
+        new Date(a.createdAt).getTime();
     });
   });
 
+  // CARGA DE DATOS
+  ngOnInit(): void {
+    this.loadCategories();
+
+    // Si navegás de un perfil a otro, el componente se reutiliza
+    // y paramMap emite de nuevo, así que se recarga solo.
+    this.route.paramMap.subscribe(params => {
+      const id =
+        this.userId() ??
+        params.get('id') ??
+        params.get('userId');
+
+      if (!id) {
+        console.error('No se encontró el id del usuario en la ruta');
+        return;
+      }
+
+      this.user.set(null);
+      this.publications.set([]);
+      this.loadUser(id);
+      this.loadPublications(id);
+    });
+  }
+
+  private loadUser(id: string): void {
+    this.userService.getById(id).subscribe({
+      next: user => this.user.set(user),
+      error: err => console.error('Error al cargar el usuario:', err)
+    });
+  }
+
+  private loadPublications(id: string): void {
+    this.publicationService.getPublicationsByUserId(id).subscribe({
+      next: data => this.publications.set(data),
+      error: err => console.error('Error al cargar las publicaciones:', err)
+    });
+  }
+
+  private loadCategories(): void {
+    this.categoryService.getAll().subscribe({
+      next: data => this.categories.set(data),
+      error: err => console.error('Error al obtener las categorías:', err)
+    });
+  }
 
   // CONTADORES
-
-  readonly totalCount = computed(
-    () => this.publications().length
-  );
-
-  readonly priceProgress = computed(() => {
-
-    return (
-      (this.maxPrice() - this.minPriceLimit) /
-      (this.maxPriceLimit - this.minPriceLimit)
-    ) * 100;
-
-  });
-
   categoryCount(category: string): number {
-
     if (category === 'Todo') {
       return this.publications().length;
     }
 
     return this.publications().filter(
-      publication =>
-        this.getCategoryName(publication) === category
+      publication => publication.category === category
     ).length;
   }
 
   conditionCount(condition: string): number {
-
-    return this.publications().filter(
-      publication => publication.condition === condition
+    return this.publications().filter(publication =>
+      publication.item?.some(storageItem => storageItem.condition === condition)
     ).length;
   }
 
-  // ACCIONES DE FILTROS
-
+  // ACCIONES
   clearFilters(): void {
-
     this.search.set('');
     this.selectedCategory.set('Todo');
     this.condition.set(null);
     this.maxPrice.set(this.maxPriceLimit);
     this.sortBy.set('newest');
-
   }
 
   onSort(event: Event): void {
-
     const value = (event.target as HTMLSelectElement).value;
-
-    this.sortBy.set(
-      value as 'newest' | 'priceAsc' | 'priceDesc'
-    );
-
+    this.sortBy.set(value as 'newest' | 'priceAsc' | 'priceDesc');
   }
 
-  onPrice(event: Event): void {
-
-    this.maxPrice.set(
-      +(event.target as HTMLInputElement).value
-    );
-
-  }
-
-  onSearch(event: Event): void {
-
-    this.search.set(
-      (event.target as HTMLInputElement).value
-    );
-
+  toggleFilters(): void {
+    this.showFilters.update(v => !v);
   }
 
   toggleCondition(condition: string): void {
-
     this.condition.set(
-      this.condition() === condition
-        ? null
-        : condition
+      this.condition() === condition ? null : condition
     );
-
   }
 
   selectCategory(category: string): void {
     this.selectedCategory.set(category);
   }
-*/
 
+  viewDetails(id: string): void {
+    this.router.navigate(['/catalog', id]);
+  }
 }

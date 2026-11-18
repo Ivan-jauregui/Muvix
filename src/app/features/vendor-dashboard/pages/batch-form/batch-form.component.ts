@@ -9,19 +9,7 @@ import { StorageItem } from '../../../../core/models/storage-item';
 import { PublicationService } from '../../../../core/services/publication/publication-service';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ItemSelectionModalComponent } from './components/item-selection-modal/item-selection-modal.component';
-
-export interface PublicationRequest {
-  id?: string;
-  userId?: string;
-  title: string;
-  description: string;
-  price: number;
-  type: 'INDIVIDUAL' | 'BATCH';
-  status: 'ACTIVE' | 'PAUSED' | 'RESERVERD' | 'SOLD';
-  category: string;
-  itemIds: string[];
-  createdAt: string;
-}
+import { Publication } from '../../../../core/models/publicacion';
 
 @Component({
   selector: 'app-batch-form',
@@ -130,7 +118,7 @@ export class BatchFormComponent {
 
     const formValue = this.form.getRawValue();
 
-    const publication: PublicationRequest = {
+    const publication: Publication = {
       userId: this.authService.currentUser()?.id,
       title: formValue.title,
       description: formValue.description,

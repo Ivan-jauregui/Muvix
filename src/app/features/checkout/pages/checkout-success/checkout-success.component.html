@@ -188,7 +188,7 @@
           <div class="flex items-center gap-4">
             <img [src]="publication()?.coverImage" alt="Estantería" class="w-16 h-16 rounded-xl object-cover border border-gray-100">
             <div>
-              <h4 class="font-bold text-gray-900 text-sm">{{publication()!.title}}</h4>
+              <h4 class="font-bold text-gray-900 text-sm">{{ publication()?.title }}</h4>
               <p class="text-xs text-gray-500 mt-0.5">{{ `${publication()?.id} -  ${seller()?.address}`}}</p>
               <p class="text-lg font-bold text-gray-900 mt-1">$30.000 ARS</p>
             </div>

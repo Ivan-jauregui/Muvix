@@ -1,128 +1,131 @@
-<main class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto">
+<main class="min-h-screen bg-white lg:flex lg:h-screen lg:overflow-hidden">
 
-
-    <div class="mb-6">
-      <button
-        class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-rose-600 transition-colors duration-200 group"
-        routerLink="/catalog">
-        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-200" fill="none"
-          stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Volver al catálogo
-      </button>
-    </div>
-
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-
-
-      <div class="lg:col-span-2 space-y-6">
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-
-    
-          <div class="flex items-center gap-2 mb-4 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-            <span>Colección Coordinada</span>
-            <span>•</span>
-            <span class="text-gray-600">{{ publication()?.category }}</span>
-          </div>
-
-
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mb-6">
-            {{ publication()?.title }}
-          </h1>
-
-
-          <div
-            class="aspect-[10/10] w-full overflow-hidden rounded-xl bg-gray-100 border border-gray-100 flex items-center justify-center relative">
-            <img [src]="publication()?.coverImage" [alt]="publication()?.title"
-              class="w-full h-full object-cover" />
-          </div>
-
-          <!--
-          @if (publication()?.coverImage && /*publication()!.images!.length > 1*/) {
-          <div class="grid grid-cols-4 sm:grid-cols-6 gap-3 w-full">
-
-            @for (img of publication()?.images; track img.id) {
-          
-            <div class="aspect-square rounded-lg overflow-hidden border-2 cursor-pointer transition-all duration-200"
-              (click)="selectImage(img.url_images)" [class.border-slate-800]="img.url_images === selectedImage()"
-              [class.border-transparent]="img.url_images !== selectedImage()">
-
-              <img [src]="img.url_images" class="w-full h-full object-cover">
-            </div>
-            }
-
-          </div>
-          } -->
-
-          <div class="mt-8 pt-6 border-t border-gray-100 space-y-3">
-            <h2 class="text-xs font-bold text-gray-900 tracking-wider uppercase">Descripción del artículo</h2>
-            <p class="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-              {{ publication()?.description }}
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-
-
-      <div class="space-y-6 lg:sticky lg:top-6">
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-6">
-
-          <div>
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Precio del set completo</span>
-            </div>
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-3xl font-black text-gray-900 tracking-tight">
-                {{ publication()?.price | currency:'ARS':'symbol-narrow':'1.0-0' }}
-              </span>
-              <span class="text-xs font-bold text-gray-400">ARS</span>
-            </div>
-          </div>
-
-          <div class="space-y-2">
-          <a [routerLink]="['/checkout', publication()?.id]"
-            class="block w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-sm transition-all duration-200 text-center text-sm tracking-wide">
-            Comprar ahora
-          </a>
-            <button
-              class="w-full bg-white hover:bg-gray-50 text-gray-700 font-bold py-3 px-4 border border-gray-200 rounded-xl transition-colors duration-200 text-center text-sm">
-              Hacer una oferta
-            </button>
-          </div>
-
-
-          <seller-card [user]="user()"></seller-card>
-
-        </div>
-      </div>
-    </div>
-
-
-    @if (publication()?.type === 'BATCH' ) {
-    <div class="mt-12 pt-8 border-t border-gray-200">
-
-
-      <div class="mb-6">
-        <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block mb-1">Desglose de piezas</span>
-        <h2 class="text-2xl font-black text-gray-900 tracking-tight">Contenido detallado del lote</h2>
-      </div>
-
-
-      <div class="flex flex-col gap-4 w-full">
-        @for (associated_publication of associatedPublications(); track associated_publication.id) {
-        <associated-publication-card (onSelect)="viewDetails($event)" [associated_publication]="associated_publication"
-          [index]="$index" [total]="associatedPublications().length">
-        </associated-publication-card>
-        }
-      </div>
-
-    </div>
+  <section class="relative flex-1 bg-gray-900 flex items-center justify-center overflow-hidden min-h-[60vh] lg:min-h-0">
+>
+    @if (currentImage()) {
+      <img [src]="currentImage()" alt=""
+        class="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-50 pointer-events-none" />
     }
 
-  </div>
+    <button routerLink="/catalog" aria-label="Volver al catálogo"
+      class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <img [src]="currentImage()" [alt]="publication()?.title"
+      class="relative z-10 max-h-[85vh] w-auto max-w-full object-contain shadow-2xl" />
+
+    @if (images().length > 1) {
+      <button (click)="prevImage()" aria-label="Anterior"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button (click)="nextImage()" aria-label="Siguiente"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-2 bg-black/40 p-1.5 rounded-lg">
+        @for (img of images(); track img; let i = $index) {
+          <button (click)="selectedIndex.set(i)"
+            class="w-12 h-12 rounded-md overflow-hidden border-2 transition-all"
+            [class.border-white]="i === selectedIndex()"
+            [class.border-transparent]="i !== selectedIndex()"
+            [class.opacity-60]="i !== selectedIndex()">
+            <img [src]="img" class="w-full h-full object-cover" alt="" />
+          </button>
+        }
+      </div>
+    }
+  </section>
+
+  <aside class="w-full lg:w-[420px] lg:shrink-0 bg-white lg:border-l border-gray-200 lg:overflow-y-auto">
+    <div class="p-5 space-y-5">
+
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900 leading-tight">
+          {{ publication()?.title }}
+        </h1>
+        <p class="mt-1 text-base font-semibold text-gray-900">
+          {{ publication()?.price | currency:'ARS':'symbol-narrow':'1.0-0' }}
+        </p>
+        <p class="mt-1 text-xs text-gray-500">
+          Publicado el {{ publication()?.createdAt | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+
+      <div class="flex gap-2">
+        <a [routerLink]="['/checkout', publication()?.id]"
+          class="flex-1 inline-flex items-center justify-center bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-2.5 rounded-lg transition-colors">
+          Comprar ahora
+        </a>
+        <button
+          class="flex-1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold text-sm py-2.5 rounded-lg transition-colors">
+          Hacer una oferta
+        </button>
+        <button aria-label="Guardar"
+          class="w-11 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z" />
+          </svg>
+        </button>
+      </div>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-gray-900">Detalles</h2>
+
+        <dl class="text-sm space-y-2">
+          <div class="flex">
+            <dt class="w-36 font-semibold text-gray-900">Categoría</dt>
+            <dd class="text-gray-700">{{ publication()?.category }}</dd>
+          </div>
+          <div class="flex">
+            <dt class="w-36 font-semibold text-gray-900">Tipo</dt>
+            <dd class="text-gray-700">
+              {{ publication()?.type === 'BATCH' ? 'Lote / Set completo' : 'Artículo individual' }}
+            </dd>
+          </div>
+          <div class="flex">
+            <dt class="w-36 font-semibold text-gray-900">Estado</dt>
+            <dd class="text-gray-700">{{ conditionLabel() }}</dd>
+          </div>
+        </dl>
+
+        <p class="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
+          {{ publication()?.description }}
+        </p>
+      </section>
+
+
+      <section class="space-y-3 pt-4 border-t border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900">Información del vendedor</h2>
+        <seller-card [user]="user()"></seller-card>
+      </section>
+
+
+      @if (publication()?.type === 'BATCH') {
+        <section class="space-y-3 pt-4 border-t border-gray-200">
+          <h2 class="text-lg font-bold text-gray-900">Contenido detallado del lote</h2>
+          <div class="flex flex-col gap-3">
+            @for (associated_publication of associatedPublications(); track associated_publication.id) {
+              <associated-publication-card
+                (onSelect)="viewDetails($event)"
+                [associated_publication]="associated_publication"
+                [index]="$index"
+                [total]="associatedPublications().length">
+              </associated-publication-card>
+            }
+          </div>
+        </section>
+      }
+
+    </div>
+  </aside>
 </main>

@@ -16,7 +16,7 @@
     class="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 space-y-6"
   >
 
-    <!-- TÍTULO -->
+
     <fieldset class="space-y-2">
       <legend class="text-sm font-semibold text-gray-800 mb-2">
         Nombre del artículo *
@@ -38,7 +38,7 @@
 
     <div class="border-t border-gray-100"></div>
 
-    <!-- DESCRIPCIÓN -->
+
     <fieldset class="space-y-2">
       <legend class="text-sm font-semibold text-gray-800 mb-2">
         Descripción *
@@ -60,29 +60,8 @@
 
     <div class="border-t border-gray-100"></div>
 
-    <!-- CATEGORÍA -->
-    <fieldset class="space-y-2">
-      <legend class="text-sm font-semibold text-gray-800 mb-2">
-        Categoría *
-      </legend>
 
-      <input
-        type="text"
-        formControlName="categoryId"
-        placeholder="Identificador de categoría"
-        class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-rose-400"
-      />
 
-      @if (storageForm.get('categoryId')?.touched && storageForm.get('categoryId')?.invalid) {
-        <p class="text-xs text-red-500">
-          La categoría es obligatoria.
-        </p>
-      }
-    </fieldset>
-
-    <div class="border-t border-gray-100"></div>
-
-    <!-- CONDICIÓN -->
     <fieldset class="space-y-2">
       <legend class="text-sm font-semibold text-gray-800 mb-2">
         Condición del artículo
@@ -102,7 +81,7 @@
 
     <div class="border-t border-gray-100"></div>
 
-    <!-- IMÁGENES -->
+
     <fieldset class="space-y-3">
         <legend class="text-sm font-semibold text-gray-800">Imagen del artículo</legend>
 
@@ -139,7 +118,7 @@
     
             <button type="button" (click)="removeImage($event)"
                 class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-red-500 transition-colors">
-                &times;
+            
             </button>
         </div>
         }
@@ -152,7 +131,6 @@
     </p>
     }
     
-    <!-- GUARDAR -->
     <div class="flex justify-end pt-2">
         <button type="submit" [disabled]="isSaving()"
             class="w-full sm:w-auto px-8 py-3 rounded-xl bg-rose-500 text-white font-semibold text-sm hover:bg-rose-600 transition-colors disabled:opacity-50">

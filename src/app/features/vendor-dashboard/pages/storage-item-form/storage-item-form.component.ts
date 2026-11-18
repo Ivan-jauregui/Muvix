@@ -22,10 +22,10 @@ export class StorageItemFormComponent {
   errorMessage = signal<string | null>(null);
 
   conditions: { value: ItemCondition; label: string }[] = [
-    { value: 'NEW', label: 'Nuevo' },
-    { value: 'LIKE_NEW', label: 'Como nuevo' },
-    { value: 'GOOD', label: 'Buen estado' },
-    { value: 'FAIR', label: 'Estado regular' }
+    { value: 'Nuevo', label: 'Nuevo' },
+    { value: 'Como nuevo', label: 'Como nuevo' },
+    { value: 'Buen estado', label: 'Buen estado' },
+    { value: 'Regular', label: 'Estado regular' }
   ];
 
   statuses: { value: ItemStatus; label: string }[] = [
@@ -42,7 +42,6 @@ export class StorageItemFormComponent {
     this.storageForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      categoryId: ['', [Validators.required]],
       condition: ['NEW' as ItemCondition, [Validators.required]],
       images: ['']
     });
@@ -122,7 +121,6 @@ onSubmit() {
         userId: userId,
         title: formValue.title,
         description: formValue.description,
-        categoryId: formValue.categoryId,
         condition: formValue.condition,
         status: 'STORED',
         images: imageUrl ? [imageUrl] : [],
@@ -146,8 +144,7 @@ onSubmit() {
       this.storageForm.reset({
         title: '',
         description: '',
-        categoryId: '',
-        condition: 'NEW',
+        condition: 'Nuevo',
         images: ''
       });
     },

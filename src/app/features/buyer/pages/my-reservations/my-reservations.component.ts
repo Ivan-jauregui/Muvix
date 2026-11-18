@@ -35,7 +35,7 @@ export class MyReservationsComponent implements OnInit {
   error = signal(false);
 
   ngOnInit(): void {
-    this.reservationService.getReservationsByUser().subscribe({
+    this.reservationService.getMyPurchases().subscribe({
       next: (data) => {
         this.reservations.set(data);
         this.loading.set(false);

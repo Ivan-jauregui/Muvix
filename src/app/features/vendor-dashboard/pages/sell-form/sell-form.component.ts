@@ -1,6 +1,6 @@
 
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -11,6 +11,9 @@ import {
 import { StorageService } from '../storage/service/storage.service';
 import { StorageItem } from '../../../../core/models/storage-item';
 import { PublicationService } from '../../../../core/services/publication/publication-service';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
+import { CategoryService } from '../../../../core/services/category/category.service';
+import { Category } from '../../../../core/models/category';
 
 export interface PublicationRequest {
   id?: string;
@@ -19,7 +22,7 @@ export interface PublicationRequest {
   description: string;
   price: number;
   type: 'INDIVIDUAL' | 'BATCH';
-  status: 'ACTIVE' | 'PAUSED' | 'RESERVERD' | 'SOLD';
+  status: 'ACTIVE' | 'PAUSED' | 'RESERVED' | 'SOLD';
   category: string;
   itemIds: string[];
   createdAt: string;
@@ -33,13 +36,18 @@ export interface PublicationRequest {
 })
 export class SellFormComponent implements OnInit {
 
-  private router = inject(Router)
+  private router = inject(Router);
   private route = inject(ActivatedRoute);
-  private publicationService = inject(PublicationService)
+  private publicationService = inject(PublicationService);
   private storageService = inject(StorageService);
+  private categoryService = inject(CategoryService) 
   private fb = inject(FormBuilder);
 
   storageItem = signal<StorageItem | null>(null);
+  publication = signal<PublicationResponse | null>(null);
+  categories = signal<Category[]>([]);
+
+  isEditing = signal(false);
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -47,17 +55,25 @@ export class SellFormComponent implements OnInit {
     price: [0, [Validators.required, Validators.min(1)]],
     category: ['', Validators.required]
   });
-  
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.loadCategories()
 
-    if (id) {
-      this.loadStorageItem(id);
+    const itemId = this.route.snapshot.paramMap.get('id');
+    const publicationId = this.route.snapshot.paramMap.get('publicationId');
+
+    if (publicationId) {
+      this.isEditing.set(true);
+      this.loadPublication(publicationId);
+      return;
+    }
+
+    if (itemId) {
+      this.loadStorageItem(itemId);
     }
   }
 
-  loadStorageItem(id: string): void {
+  loadStorageItem(id: string){
     this.storageService.getById(id).subscribe({
       next: (item) => {
         this.storageItem.set(item);
@@ -65,7 +81,6 @@ export class SellFormComponent implements OnInit {
         this.form.patchValue({
           title: item.title,
           description: item.description,
-          category: item.categoryId
         });
       },
       error: (error) => {
@@ -74,15 +89,72 @@ export class SellFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    const item = this.storageItem();
+  loadPublication(id: string){
+    this.publicationService.getById(id).subscribe({
+      next: (publication) => {
+        this.publication.set(publication);
 
-    if (!item || !item.id || this.form.invalid) {
+        this.form.patchValue({
+          title: publication.title,
+          description: publication.description,
+          price: publication.price,
+          category: publication.category
+        });
+      },
+      error: (error) => {
+        console.error('Error al obtener la publicación:', error);
+      }
+    });
+  }
+
+  loadCategories() {
+    this.categoryService.getAll().subscribe({
+      next: (data) => {
+        this.categories.set(data);
+      },
+      error: (error) => {
+        console.error('Error al obtener las categorias:', error);
+      }
+    });
+  }
+
+
+  onSubmit(): void {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
     const formValue = this.form.getRawValue();
+
+    if (this.isEditing()) {
+      const currentPublication = this.publication();
+
+      if (!currentPublication?.id) return;
+
+      const updatedPublication: PublicationResponse = {
+        ...currentPublication,
+        title: formValue.title!,
+        description: formValue.description!,
+        price: Number(formValue.price),
+        category: formValue.category!
+      };
+
+      this.publicationService.update(updatedPublication,updatedPublication.id ).subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard/listings']);
+        },
+        error: (err) => {
+          console.error('Error al actualizar la publicación:', err);
+        }
+      });
+
+      return;
+    }
+
+    const item = this.storageItem();
+
+    if (!item?.id) return;
 
     const publication: PublicationRequest = {
       userId: item.userId,
@@ -96,14 +168,13 @@ export class SellFormComponent implements OnInit {
       createdAt: new Date().toISOString()
     };
 
-
     this.publicationService.save(publication).subscribe({
       next: (data) => {
-        console.log("publicacion creada: " + data.price)
-        this.router.navigate(["/dashboard/sell"])
+        console.log('Publicación creada:', data.price);
+        this.router.navigate(['/dashboard/listings']);
       },
       error: (err) => {
-        console.error('Error al cargar las items:', err);
+        console.error('Error al crear la publicación:', err);
       }
     });
   }

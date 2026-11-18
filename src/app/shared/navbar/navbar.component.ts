@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { LoginCredentials, LoginModalComponent } from '../login-modal/login-modal.component';
 import { User } from '../../core/models/user';
@@ -8,10 +8,10 @@ import { RegisterModalComponent } from '../register-modal/register-modal.compone
 
 import {
   heroHome, heroFilm, heroUserCircle, heroTicket, heroSquares2x2,
-  heroBell, heroChevronDown, heroMagnifyingGlass,heroQuestionMarkCircle 
+  heroBell, heroChevronDown, heroMagnifyingGlass, heroQuestionMarkCircle, heroInboxStack
 } from '@ng-icons/heroicons/outline';
 import {
-  heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid,heroQuestionMarkCircleSolid 
+  heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid, heroQuestionMarkCircleSolid
 } from '@ng-icons/heroicons/solid';
 
 @Component({
@@ -19,29 +19,31 @@ import {
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgIconComponent,
+    NgIcon,
     LoginModalComponent,
     RegisterModalComponent
-],
-providers: [provideIcons({
-  heroHome, heroFilm, heroUserCircle, heroTicket, heroSquares2x2, heroBell,
-  heroChevronDown, heroMagnifyingGlass,heroQuestionMarkCircle,
-  heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid,heroQuestionMarkCircleSolid
-})],
+  ],
+  providers: [provideIcons({
+    heroHome, heroFilm, heroUserCircle, heroTicket, heroSquares2x2, heroBell,
+    heroChevronDown, heroMagnifyingGlass, heroQuestionMarkCircle, heroInboxStack,
+    heroHomeSolid, heroFilmSolid, heroUserCircleSolid, heroUserSolid, heroQuestionMarkCircleSolid
+  })],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-googleRegister() {
-throw new Error('Method not implemented.');
-}
+  googleRegister() {
+    throw new Error('Method not implemented.');
+  }
   public authService = inject(AuthService);
   private router = inject(Router);
 
 
+  showAccountMenu = signal(false);
   showLogin = signal(false);
   showRegister = signal(false);
   loading = signal(false);
+  
 
 
   openRegister(): void {
@@ -64,8 +66,8 @@ throw new Error('Method not implemented.');
     this.authService.register(user).subscribe({
       next: (data) => {
         this.loading.set(false);
-          this.closeRegister();
-          this.router.navigate(['/']);
+        this.closeRegister();
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.loading.set(false);
@@ -99,6 +101,11 @@ throw new Error('Method not implemented.');
         window.alert('Ocurrió un error al iniciar sesión.');
       }
     });
+  }
+
+
+  toggleAccountMenu(): void {
+    this.showAccountMenu.update(value => !value);
   }
 
   recoverPassword(email: string): void {

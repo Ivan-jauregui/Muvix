@@ -12,7 +12,7 @@ import { PublicationResponse } from '../../../../core/models/dto/response/public
 
 @Component({
   selector: 'app-publication-detail',
-  imports: [CommonModule, RouterLink, AssociatedPublicationCard,SellerCard],
+  imports: [CommonModule, RouterLink, AssociatedPublicationCard, SellerCard],
   templateUrl: './publication-detail.component.html',
   styleUrl: './publication-detail.component.css'
 })
@@ -38,7 +38,7 @@ export class PublicationDetailComponent {
       const idParam = params.get('id');
       if (idParam) {
         this.selectedImage.set(null);
-        this.loadPublication(idParam); 
+        this.loadPublication(idParam);
       }
     });
   }
@@ -58,7 +58,7 @@ export class PublicationDetailComponent {
     });
   }
 
-  loadAllPublications(){
+  loadAllPublications() {
     this.publicationService.getAll().subscribe({
       next: (data) => {
         this.allPublications.set(data);
@@ -69,7 +69,7 @@ export class PublicationDetailComponent {
     });
   }
 
-  loadUser(id: string){
+  loadUser(id: string) {
     this.userService.getById(id).subscribe({
       next: (data) => {
         this.user.set(data);
@@ -83,31 +83,32 @@ export class PublicationDetailComponent {
   readonly associatedPublications = computed(() => {
     const current = this.publication();
     const all = this.allPublications();
-    
 
-    if (!current || !current.item || current.item.length === 0) {
+    if (!current || !current.item?.length) {
       return [];
     }
 
+    const currentItemIds = new Set(
+      current.item.map(item => item.id).filter(Boolean)
+    );
 
-    const currentItemIds = new Set(current.item.map(i => i.id).filter(Boolean));
     if (currentItemIds.size === 0) return [];
 
-
     return all.filter(pub => {
-
       if (pub.id === current.id) return false;
-
 
       if (pub.status !== 'ACTIVE') return false;
 
-      // 3. Que comparta al menos un ítem con la publicación actual
-      return pub.item?.some(item => item.id && currentItemIds.has(item.id));
+      if (pub.type === 'BATCH') return false;
+
+      return pub.item?.some(item =>
+        item.id && currentItemIds.has(item.id)
+      );
     });
   });
 
 
-  selectImage(img:string){
+  selectImage(img: string) {
     this.selectedImage.set(img)
   }
 
@@ -116,5 +117,41 @@ export class PublicationDetailComponent {
       this.router.navigate(['/catalog', id]);
     }
   }
+selectedIndex = signal(0);
+
+// Portada primero, después el resto de imágenes sin duplicar
+images = computed(() => {
+  const p = this.publication();
+  if (!p) return [];
+  const extra = (p.item ?? []).map(i => i.images[0]); // ← ajustá al campo real de StorageItem
+  return [p.coverImage, ...extra.filter(u => u !== p.coverImage)].filter(Boolean);
+});
+
+currentImage = computed(() => this.images()[this.selectedIndex()]);
+
+nextImage() {
+  this.selectedIndex.update(i => (i + 1) % this.images().length);
+}
+
+prevImage() {
+  this.selectedIndex.update(i => (i - 1 + this.images().length) % this.images().length);
+}
+
+private conditionMap = {
+  'Nuevo': { label: 'Nuevo', css: 'text-emerald-600' },
+  'Como nuevo': { label: 'Como nuevo', css: 'text-green-600' },
+  'Buen estado': { label: 'Buen estado', css: 'text-amber-600' },
+  'Regular': { label: 'Regular', css: 'text-gray-500' }
+};
+
+conditionLabel = computed(() => {
+  const condition = this.publication()?.item?.[0]?.condition ?? 'Nuevo';
+  return this.conditionMap[condition].label;
+});
+
+conditionClass = computed(() => {
+  const condition = this.publication()?.item?.[0]?.condition ?? 'Nuevo';
+  return this.conditionMap[condition].css;
+});
 
 }

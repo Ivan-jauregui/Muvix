@@ -9,32 +9,39 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { FormsModule } from '@angular/forms';
 import { AdminPublicationCardComponent } from './components/admin-publication-card/admin-publication-card.component';
 import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-listings',
-  imports: [CommonModule,NgIcon,FormsModule,AdminPublicationCardComponent],
-    providers: [
-      provideIcons({ 
+  imports: [CommonModule, NgIcon, FormsModule, AdminPublicationCardComponent],
+  providers: [
+    provideIcons({
       heroFunnelMicro,
-      })
-    ],
+    })
+  ],
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.css'
 })
-export class ListingsComponent {
- private readonly publicationService = inject(PublicationService);
-  publications = signal<PublicationResponse[]>([])
-  publication = model.required<PublicationResponse>();
-
+export class ListingsComponent implements OnInit {
+  private readonly publicationService = inject(PublicationService);
+  private authService = inject(AuthService)
   private router = inject(Router)
 
+  publications = signal<PublicationResponse[]>([])  
+  viewMode = signal<'grid' | 'list'>('grid');
+  sectionOpen = signal(true);
+
   ngOnInit(): void {
-    this.loadPublications("1")
+    //Futura implementacion con guard para que no entre a dashboard sin haberse autenticado
+    const user = this.authService.currentUser();
+    if (!user) return;
+
+    this.loadPublications(user.id!);
   }
 
   private loadPublications(userId: string): void {
 
-    this.publicationService.getPublicationsByUserId().subscribe({
+    this.publicationService.getMyPublications().subscribe({
       next: (data) => {
         this.publications.set(data);
       },
@@ -46,16 +53,24 @@ export class ListingsComponent {
   }
 
 
-   // Filtros
+
   readonly search = signal('');
 
   readonly selectedCategory = signal('Todo');
+
+  readonly statusFilter = signal<'ACTIVE' | 'PAUSED' | 'RESERVED'>('ACTIVE');
 
   readonly condition = signal<string | null>(null);
 
   readonly maxPrice = signal(195000);
 
   readonly sortBy = signal<'newest' | 'priceAsc' | 'priceDesc'>('newest');
+
+  readonly categories = computed(() => [
+    'Todo',
+    ...new Set(this.publications().map(p => p.category).filter(Boolean))
+  ]);
+
 
   readonly minPriceLimit = 10000;
   readonly maxPriceLimit = 195000;
@@ -75,23 +90,20 @@ export class ListingsComponent {
     };
 
     return category?.name ??
-           category?.nombre ??
-           category?.title ??
-           '';
+      category?.nombre ??
+      category?.title ??
+      '';
   }
 
 
   // PUBLICACIONES FILTRADAS
 
   readonly filtered = computed(() => {
-
     const query = this.search().trim().toLowerCase();
-
-    const selectedCategory = this.selectedCategory();
-
-    const selectedCondition = this.condition();
-
+    const category = this.selectedCategory();
+    const condition = this.condition();
     const maxPrice = this.maxPrice();
+    const status = this.statusFilter();
 
     const list = this.publications().filter(publication => {
 
@@ -101,44 +113,50 @@ export class ListingsComponent {
         publication.description.toLowerCase().includes(query);
 
       const matchesCategory =
-        selectedCategory === 'Todo' ||
-        publication.category === selectedCategory;
+        category === 'Todo' ||
+        publication.category === category;
 
       const matchesCondition =
-        !selectedCondition ||
-        publication.item?.some(item => item.condition === selectedCondition);
+        !condition ||
+        publication.item?.some(item => item.condition === condition);
 
-      const matchesPrice =
-        publication.price <= maxPrice;
+      const matchesPrice = publication.price <= maxPrice;
+
+      const matchesStatus = publication.status === status;
 
       return matchesSearch &&
-             matchesCategory &&
-             matchesCondition &&
-             matchesPrice;
+        matchesCategory &&
+        matchesCondition &&
+        matchesPrice &&
+        matchesStatus;
     });
 
-    const sort = this.sortBy();
-
     return [...list].sort((a, b) => {
-
-      if (sort === 'priceAsc') {
+      if (this.sortBy() === 'priceAsc') {
         return a.price - b.price;
       }
 
-      if (sort === 'priceDesc') {
+      if (this.sortBy() === 'priceDesc') {
         return b.price - a.price;
       }
 
       return new Date(b.createdAt).getTime() -
-             new Date(a.createdAt).getTime();
+        new Date(a.createdAt).getTime();
     });
   });
 
+  readonly totalCount = computed(() => this.publications().length);
 
-  // CONTADORES
+  activePublications = computed(() =>
+    this.publications().filter(p => p.status === 'ACTIVE')
+  );
 
-  readonly totalCount = computed(
-    () => this.publications().length
+  reservedPublications = computed(() =>
+    this.publications().filter(p => p.status === 'RESERVED')
+  );
+
+  inactivePublications = computed(() =>
+    this.publications().filter(p => p.status === 'PAUSED')
   );
 
   readonly priceProgress = computed(() => {
@@ -161,7 +179,7 @@ export class ListingsComponent {
         publication.category === category
     ).length;
   }
-  
+
   conditionCount(condition: string): number {
     return this.publications().filter(publication =>
       publication.item?.some(storageItem => storageItem.condition === condition)
@@ -169,7 +187,6 @@ export class ListingsComponent {
   }
 
 
-  // ACCIONES DE FILTROS
 
   clearFilters(): void {
 
@@ -178,7 +195,7 @@ export class ListingsComponent {
     this.condition.set(null);
     this.maxPrice.set(this.maxPriceLimit);
     this.sortBy.set('newest');
-
+    this.statusFilter.set('ACTIVE');
   }
 
   onSort(event: Event): void {
@@ -197,6 +214,10 @@ export class ListingsComponent {
       +(event.target as HTMLInputElement).value
     );
 
+  }
+
+  setStatusFilter(status: 'ACTIVE' | 'PAUSED' | 'RESERVED') {
+    this.statusFilter.set(status);
   }
 
   onSearch(event: Event): void {
@@ -220,21 +241,21 @@ export class ListingsComponent {
     this.selectedCategory.set(category);
   }
 
-   toggleStatus() {
-    this.publication.update(pub => ({
-      ...pub,
-      active: !pub.status
-    }));
+  toggleStatus(updatedPublication: PublicationResponse) {
+    this.publicationService.update(updatedPublication, updatedPublication.id).subscribe({
+      next: (updated) => {
+        this.publications.update(pubs =>
+          pubs.map(pub =>
+            pub.id === updated.id
+              ? { ...pub, status: updated.status }
+              : pub
+          )
+        );
+      },
+      error: (err) => {
+        console.error('Error al actualizar publicación:', err);
+      }
+    });
   }
 
-    activePublications = computed(() => 
-    this.publications().filter(p => p.status).length
-  );
-
-
-
-  // 4. Filtrar las pausadas/inactivas
-  inactivePublications = computed(() => 
-    this.publications().filter(p => !p.status).length
-  );
 }

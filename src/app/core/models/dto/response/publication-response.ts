@@ -8,7 +8,7 @@ export interface PublicationResponse{
     price:number;
     category:string;
     type: 'INDIVIDUAL' | 'BATCH';
-    status: 'ACTIVE' | 'PAUSED' | 'RESERVERD' | 'SOLD'
+    status: 'ACTIVE' | 'PAUSED' | 'RESERVED' | 'SOLD'
     coverImage:string;
     item:StorageItem[];
     createdAt:string;

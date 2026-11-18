@@ -13,4 +13,8 @@ export class UserService {
   getById(id:string):Observable<User>{
     return this.http.get<User>(this.apiUrl+"/"+id)
   }
+
+  update(id:string,user:User){
+    return this.http.patch<User>(`${this.apiUrl}/${id}`,user)
+  }
 }

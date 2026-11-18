@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { Publication } from '../../models/publicacion';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { PublicationResponse } from '../../models/dto/response/publication-response';
 import { StorageService } from '../../../features/vendor-dashboard/pages/storage/service/storage.service';
 import { AuthService } from '../auth/auth.service';
@@ -23,11 +23,42 @@ export class PublicationService {
 
   getAll(): Observable<PublicationResponse[]> {
     return this.http.get<Publication[]>(this.apiUrl).pipe(
+      map(publications => {
+        const currentUserId = this.authService.currentUser()?.id;
+        return publications.filter(p => p.userId !== currentUserId);
+      }),
+      switchMap(publications => {
+        if (publications.length === 0) {
+          return of([]);
+        }
+        return forkJoin(publications.map(pub => this.mapPublication(pub)));
+      })
+    );
+  }
+
+  // Mis publicaciones
+  getMyPublications(): Observable<PublicationResponse[]> {
+    const currentUserId = this.authService.currentUser()?.id;
+
+    if (!currentUserId) {
+      return of([]);
+    }
+
+    return this.getPublicationsByUserId(currentUserId);
+  }
+
+  // Publicaciones de cualquier usuario
+  getPublicationsByUserId(userId: string): Observable<PublicationResponse[]> {
+    return this.http.get<Publication[]>(this.apiUrl).pipe(
+      map(publications => publications.filter(p => p.userId === userId)),
       switchMap(publications =>
-        forkJoin(publications.map(pub => this.mapPublication(pub)))
+        publications.length === 0
+          ? of([])
+          : forkJoin(publications.map(pub => this.mapPublication(pub)))
       )
     );
   }
+
 
   getById(id: string): Observable<PublicationResponse> {
     return this.http.get<Publication>(`${this.apiUrl}/${id}`).pipe(
@@ -35,16 +66,25 @@ export class PublicationService {
     );
   }
 
+  update(response: PublicationResponse, id: string) {
+    const publication = this.mapResponseToPublication(response);
+
+    return this.http.put<Publication>(
+      `${this.apiUrl}/${id}`,
+      publication
+    );
+  }
+
+  updateStatus(id: string, status: PublicationResponse['status']) {
+    return this.http.patch<Publication>(`${this.apiUrl}/${id}`, { status });
+  }
+
   getPublicationsByUser(userId: string): Observable<Publication[]> {
     const params = new HttpParams().set('userId', userId);
     return this.http.get<Publication[]>(this.apiUrl, { params });
   }
 
-  getPublicationsByUserId(): Observable<PublicationResponse[]> {
-    return this.getAll().pipe(
-      map((data: PublicationResponse[]) => data.filter(p => p.userId === this.authService.currentUser()?.id))
-    );
-  }
+
 
 
 
@@ -64,5 +104,24 @@ export class PublicationService {
         coverImage: items[0]?.images?.[0] ?? ''
       }))
     );
+  }
+
+  private mapResponseToPublication(
+    response: PublicationResponse
+  ): Publication {
+    return {
+      id: response.id,
+      userId: response.userId,
+      title: response.title,
+      description: response.description,
+      price: response.price,
+      type: response.type,
+      status: response.status,
+      category: response.category,
+      itemIds: response.item.flatMap(item =>
+        item.id ? [item.id] : []
+      ),
+      createdAt: response.createdAt
+    };
   }
 }

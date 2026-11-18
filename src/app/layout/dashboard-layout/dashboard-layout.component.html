@@ -1,51 +1,43 @@
-<div class="flex h-screen w-screen overflow-hidden bg-gray-50 text-slate-800">
- 
-    <dashboard-aside></dashboard-aside>
-  
-  
-    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-      
+<div class="flex h-screen w-full overflow-hidden bg-gray-50 text-slate-800">
 
-      <header class="h-16 bg-white border-b border-gray-200 px-8 flex items-center justify-between shrink-0 z-10 shadow-sm">
-        <div class="flex items-center gap-4">
-          <h2 class="text-sm font-medium text-slate-500">Panel de Control / <span class="text-slate-800 font-semibold">Muvix</span></h2>
+  <dashboard-aside></dashboard-aside>
+
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+    <header
+      class="h-16 bg-white border-b border-gray-200 pl-16 pr-4 md:px-8 flex items-center justify-between gap-3 shrink-0 z-10 shadow-sm">
+
+      <div class="flex items-center gap-4 min-w-0">
+        <h2 class="text-sm font-medium text-slate-500 truncate">
+          <span class="hidden sm:inline">Panel de Control / </span>
+          <span class="text-slate-800 font-semibold">Muvix</span>
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-3 md:gap-5 shrink-0">
+
+        <a routerLink="/dashboard/sell/form/publication/batch"
+           class="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 text-xs font-semibold text-white bg-rose-500 hover:bg-rose-600 rounded-full shadow-sm transition whitespace-nowrap">
+          <span class="text-sm leading-none">+</span> Nuevo Lote
+        </a>
+
+        <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+
+        <div class="flex items-center gap-3 cursor-pointer select-none group">
+          <img [src]="authService.currentUser()?.photo" alt="Foto de perfil"
+               routerLink="/profile/me"
+               class="h-9 w-9 md:h-10 md:w-10 rounded-full object-cover bg-gray-200" />
         </div>
-  
-    
-        <div class="flex items-center gap-5">
-          
-         
-          <a routerLink="/dashboard/sell/form/publication/batch" 
-             class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-rose-500 hover:bg-rose-600 rounded-full shadow-sm transition">
-            <span class="text-sm leading-none">+</span> Nuevo Lote
-          </a>
-  
-     
-          <div class="h-8 w-px bg-gray-200"></div>
-  
-       
-          <div class="flex items-center gap-3 cursor-pointer select-none group">
-            <div class="w-9 h-9 rounded-full bg-slate-900 text-white font-bold flex items-center justify-center text-xs shadow-inner">
-              IJ
-            </div>
-            <div class="flex flex-col text-left leading-tight">
-              <span class="text-xs font-bold text-slate-800">{{ `${user()?.firstName} ${user()?.lastName}` }}</span>
-            
-            </div>
-            <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </div>
-  
-        </div>
-      </header>
-  
-      <main class="flex-1 overflow-y-auto p-8 bg-gray-50/50">
-        <div class="max-w-7xl mx-auto">
-          <router-outlet></router-outlet>
-        </div>
-      </main>
-  
-    </div>
-  
+
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-gray-50/50">
+      <div class="max-w-7xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
   </div>
+
+</div>

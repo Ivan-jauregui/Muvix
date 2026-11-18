@@ -9,23 +9,42 @@ import { ItemCondition, StorageItem } from '../../../../core/models/storage-item
 import { StorageService } from '../../../vendor-dashboard/pages/storage/service/storage.service';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
+import { Category } from '../../../../core/models/category';
+import { CategoryService } from '../../../../core/services/category/category.service';
+
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { 
+  heroHeart,
+  heroChatBubbleLeftRight,
+  heroAdjustmentsHorizontal  } from '@ng-icons/heroicons/outline';
+
 
 @Component({
   selector: 'app-catalog',
-  imports: [CommonModule, RouterLink, PublicationFilterComponent],
+  imports: [CommonModule,NgIcon,  RouterLink, PublicationFilterComponent],
+    providers: [
+      provideIcons({
+        heroHeart,
+        heroChatBubbleLeftRight,
+        heroAdjustmentsHorizontal
+      })
+    ],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent implements OnInit {
   private router = inject(Router)
   private publicationService = inject(PublicationService);
-  private storageService = inject(StorageService);
+  private categoryService = inject(CategoryService) 
 
-  private publications = signal<PublicationResponse[]>([]);
+  readonly showFilters = signal(false);
+  publications = signal<PublicationResponse[]>([]);
+  categories = signal<Category[]>([]);
 
 
   ngOnInit(): void {
     this.loadPublications();
+    this.loadCategories();
   }
 
 
@@ -42,23 +61,20 @@ export class CatalogComponent implements OnInit {
     });
   }
 
-  private mapPublications(publications: Publication[]): Observable<Publication[]> {
-    return forkJoin(
-      publications.map(pub =>
-        (pub.itemIds.length
-          ? forkJoin(pub.itemIds.map(id => this.storageService.getById(id)))
-          : of([])
-        ).pipe(
-          map(items => ({
-            ...pub,
-            item: items
-          }))
-        )
-      )
-    );
+  loadCategories() {
+    this.categoryService.getAll().subscribe({
+      next: (data) => {
+        this.categories.set(data);
+      },
+      error: (error) => {
+        console.error('Error al obtener las categorias:', error);
+      }
+    });
   }
 
-  // Filtros
+
+
+
   readonly search = signal('');
   readonly selectedCategory = signal('Todo');
   readonly condition = signal<string | null>(null);
@@ -67,18 +83,13 @@ export class CatalogComponent implements OnInit {
   readonly minPriceLimit = 10000;
   readonly maxPriceLimit = 500000;
 
-  readonly categories = [
-    'Todo',
-    'Living & Estar',
-    'Comedor & Sillas',
-    'Cocina & Bazar',
-    'Iluminación & Deco'
-  ];
+ 
 
   readonly conditions = [
+    'Nuevo',
     'Como nuevo',
-    'Muy Bueno',
-    'A Estrenar'
+    'Buen estado',
+    'Regular',
   ];
 
   // PUBLICACIONES FILTRADAS
@@ -185,6 +196,11 @@ export class CatalogComponent implements OnInit {
     );
 
   }
+
+
+toggleFilters(): void {
+  this.showFilters.update(v => !v);
+}
 
   toggleCondition(condition: string): void {
 

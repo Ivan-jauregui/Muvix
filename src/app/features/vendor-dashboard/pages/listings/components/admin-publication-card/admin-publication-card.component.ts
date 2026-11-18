@@ -1,7 +1,7 @@
 import { Component, inject, input, output } from '@angular/core';
 import { Publication } from '../../../../../../core/models/publicacion';
 import { PublicationImages } from '../../../../../../core/models/publication-images';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPauseCircleMicro,heroPencilMicro } from '@ng-icons/heroicons/micro';
@@ -9,7 +9,7 @@ import { PublicationResponse } from '../../../../../../core/models/dto/response/
 
 @Component({
   selector: 'admin-publication-card',
-  imports: [CommonModule,NgIcon],
+  imports: [CommonModule, NgIcon, RouterLink],
    providers: [
         provideIcons({ 
         heroPauseCircleMicro,
@@ -22,7 +22,7 @@ import { PublicationResponse } from '../../../../../../core/models/dto/response/
 export class AdminPublicationCardComponent {
   router = inject(Router)
   publication = input<PublicationResponse>();
-  statusChanged = output<PublicationResponse>()
+  statusChanged = output<PublicationResponse>();
 
   viewDetails(id: string) {
     if (id) {
@@ -30,13 +30,13 @@ export class AdminPublicationCardComponent {
     }
   }
 
-  toggleStatus(){
-    const currentPub = this.publication();
-    if (!currentPub) return;
+  toggleStatus() {
+    const pub = this.publication();
+    if (!pub) return;
 
     const updatedPublication: PublicationResponse = {
-      ...currentPub,
-      status: "ACTIVE"
+      ...pub,
+      status: pub.status === 'ACTIVE' ? 'PAUSED' : 'ACTIVE'
     };
 
     this.statusChanged.emit(updatedPublication);

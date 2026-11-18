@@ -1,181 +1,193 @@
-
 <section class="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">
 
   <div class="mx-auto max-w-3xl">
 
     <div class="mb-8">
       <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-        Publicar producto
+        {{ isEditing() ? 'Editar publicación' : 'Publicar producto' }}
       </h1>
 
       <p class="mt-2 text-sm text-gray-500">
-        Completá los datos necesarios para publicar tu artículo en Muvix.
+        {{ isEditing()
+        ? 'Modificá los datos de tu publicación en Muvix.'
+        : 'Completá los datos necesarios para publicar tu artículo en Muvix.'
+        }}
       </p>
     </div>
 
-    @if (storageItem(); as item) {
+    @if (isEditing() ? publication() : storageItem()) {
 
-      <form
-        [formGroup]="form"
-        (ngSubmit)="onSubmit()"
-        class="space-y-6"
-      >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
 
-        <!-- INFORMACIÓN DEL PRODUCTO -->
-        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7">
 
-          <div class="mb-6">
-            <h2 class="text-lg font-bold text-gray-900">
-              Información del producto
-            </h2>
+      <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7">
 
-            <p class="mt-1 text-sm text-gray-500">
-              Estos datos se recuperaron de tu inventario.
-            </p>
-          </div>
+        <div class="mb-6">
+          <h2 class="text-lg font-bold text-gray-900">
+            Información del producto
+          </h2>
 
-          <div class="space-y-5">
-
-            <!-- TÍTULO -->
-            <div>
-              <label class="mb-2 block text-sm font-semibold text-gray-700">
-                Título
-              </label>
-
-              <input
-                type="text"
-                formControlName="title"
-                class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
-              />
-            </div>
-
-            <!-- DESCRIPCIÓN -->
-            <div>
-              <label class="mb-2 block text-sm font-semibold text-gray-700">
-                Descripción
-              </label>
-
-              <textarea
-                formControlName="description"
-                rows="4"
-                class="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
-              ></textarea>
-            </div>
-
-            <!-- CATEGORÍA -->
-            <div>
-              <label class="mb-2 block text-sm font-semibold text-gray-700">
-                Categoría
-              </label>
-
-              <input
-                type="text"
-                formControlName="category"
-                class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
-              />
-            </div>
-
-            <!-- CONDICIÓN -->
-            <div>
-              <label class="mb-2 block text-sm font-semibold text-gray-700">
-                Estado del artículo
-              </label>
-
-              <input
-                type="text"
-                [value]="item.condition"
-                readonly
-                class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500"
-              />
-            </div>
-
-            <!-- IMÁGENES -->
-            <div>
-              <label class="mb-3 block text-sm font-semibold text-gray-700">
-                Imágenes del artículo
-              </label>
-
-              <div class="flex flex-wrap gap-3">
-                @for (image of item.images; track image) {
-                  <img
-                    [src]="image"
-                    alt="Imagen del producto"
-                    class="h-24 w-24 rounded-xl border border-gray-200 object-cover"
-                  />
-                }
-              </div>
-            </div>
-
-          </div>
+          <p class="mt-1 text-sm text-gray-500">
+            {{ isEditing()
+            ? 'Editá la información de tu publicación.'
+            : 'Estos datos se recuperaron de tu inventario.'
+            }}
+          </p>
         </div>
 
-        <!-- INFORMACIÓN DE PUBLICACIÓN -->
-        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7">
+        <div class="space-y-5">
 
-          <div class="mb-6">
-            <h2 class="text-lg font-bold text-gray-900">
-              Información de publicación
-            </h2>
 
-            <p class="mt-1 text-sm text-gray-500">
-              Definí el precio y la modalidad de venta.
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Título
+            </label>
+
+            <input type="text" formControlName="title" placeholder="Nombre del producto"
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100" />
+
+            @if (form.controls.title.touched && form.controls.title.invalid) {
+            <p class="mt-2 text-xs text-red-500">
+              El título es obligatorio.
             </p>
+            }
           </div>
 
-          <div class="space-y-5">
 
-            <!-- PRECIO -->
-            <div>
-              <label class="mb-2 block text-sm font-semibold text-gray-700">
-                Precio de venta
-              </label>
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Descripción
+            </label>
 
-              <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-                  $
-                </span>
+            <textarea formControlName="description" rows="4"
+              placeholder="Describí las características de tu producto..."
+              class="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100"></textarea>
 
-                <input
-                  type="number"
-                  formControlName="price"
-                  min="1"
-                  placeholder="0"
-                  class="w-full rounded-xl border border-gray-200 py-3 pl-9 pr-4 text-sm outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
-                />
-              </div>
+            @if (form.controls.description.touched && form.controls.description.invalid) {
+            <p class="mt-2 text-xs text-red-500">
+              La descripción es obligatoria.
+            </p>
+            }
+          </div>
 
-              @if (form.controls.price.touched && form.controls.price.invalid) {
-                <p class="mt-2 text-xs text-red-500">
-                  Ingresá un precio válido mayor a cero.
-                </p>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Categoría
+            </label>
+
+            <select formControlName="category"
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100">
+              <option value="" disabled>Seleccioná una categoría</option>
+
+              @for (category of categories(); track category.id) {
+              <option [value]="category.name">
+                {{ category.name }}
+              </option>
+              }
+            </select>
+
+            @if (form.controls.category.touched && form.controls.category.invalid) {
+            <p class="mt-2 text-xs text-red-500">
+              Seleccioná una categoría.
+            </p>
+            }
+          </div>
+
+          @if (!isEditing()) {
+
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Estado del artículo
+            </label>
+
+            <input type="text" [value]="storageItem()?.condition" readonly
+              class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500" />
+          </div>
+
+
+          <div>
+            <label class="mb-3 block text-sm font-semibold text-gray-700">
+              Imágenes del artículo
+            </label>
+
+            <div class="flex flex-wrap gap-3">
+              @for (image of storageItem()?.images ?? []; track image) {
+              <img [src]="image" alt="Imagen del producto"
+                class="h-24 w-24 rounded-xl border border-gray-200 object-cover" />
               }
             </div>
-
           </div>
-        </div>
 
-        <!-- ACCIONES -->
-        <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-
-          <button
-            type="submit"
-            [disabled]="form.invalid"
-            class="rounded-xl bg-rose-500 px-7 py-3 font-semibold text-white transition hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Publicar producto
-          </button>
+          }
 
         </div>
+      </div>
 
-      </form>
+      <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7">
+
+        <div class="mb-6">
+          <h2 class="text-lg font-bold text-gray-900">
+            Información de publicación
+          </h2>
+
+          <p class="mt-1 text-sm text-gray-500">
+            Definí el precio y la modalidad de venta.
+          </p>
+        </div>
+
+        <div class="space-y-5">
+
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-gray-700">
+              Precio de venta
+            </label>
+
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+                $
+              </span>
+              <input type="number" formControlName="price" min="1" placeholder="0"
+                class="w-full rounded-xl border border-gray-200 bg-white py-3 pl-9 pr-4 text-sm outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-100" />
+            </div>
+
+            @if (form.controls.price.touched && form.controls.price.invalid) {
+            <p class="mt-2 text-xs text-red-500">
+              Ingresá un precio válido mayor a cero.
+            </p>
+            }
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+
+        <button type="button" routerLink="/dashboard/sell"
+          class="rounded-xl border border-gray-200 bg-white px-7 py-3 font-semibold text-gray-700 transition hover:bg-gray-100">
+          Cancelar
+        </button>
+
+        <button type="submit" [disabled]="form.invalid"
+          class="rounded-xl bg-rose-500 px-7 py-3 font-semibold text-white transition hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-50">
+          {{ isEditing() ? 'Guardar cambios' : 'Publicar producto' }}
+        </button>
+
+      </div>
+
+    </form>
 
     } @else {
 
-      <div class="rounded-2xl border border-gray-200 bg-white p-10 text-center">
-        <p class="text-sm text-gray-500">
-          Cargando información del artículo...
-        </p>
-      </div>
+    <div class="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+      <div class="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-rose-500"></div>
+
+      <p class="text-sm text-gray-500">
+        Cargando información...
+      </p>
+    </div>
 
     }
 

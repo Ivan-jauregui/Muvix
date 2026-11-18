@@ -10,12 +10,6 @@
          [class.grayscale]="!publication()?.status"
          alt="Publicación">
 
-
-    <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold shadow-sm backdrop-blur-md transition-all duration-200"
-          [class]="publication()?.status ? 'bg-emerald-500/90 text-white' : 'bg-amber-500/90 text-white'">
-        {{ publication()?.status ? 'Activo' : 'Pausado' }}
-    </span>
-
     <div class="absolute top-3 right-3 flex items-center gap-1.5">
         
 
@@ -31,8 +25,11 @@
 
 
         <button 
+                (click)="$event.stopPropagation()"
                 type="button"
                 title="Editar publicación"
+                [routerLink]="['/dashboard/sell/form/publication/individual/edit', publication()?.id]"
+                [queryParams]="{ publicationId: publication()?.id }"
                 class="inline-flex items-center justify-center p-2 rounded-full bg-black/40 hover:bg-rose-600/90 text-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-90">
             <ng-icon name="heroPencilMicro" size="1.1rem" />
         </button>

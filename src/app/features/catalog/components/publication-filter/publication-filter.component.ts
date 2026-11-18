@@ -1,4 +1,5 @@
 import { Component, input, output } from '@angular/core';
+import { Category } from '../../../../core/models/category';
 
 @Component({
   selector: 'publication-filter',
@@ -8,7 +9,7 @@ import { Component, input, output } from '@angular/core';
 })
 export class PublicationFilterComponent {
     // Datos recibidos del padre
-  categories = input.required<string[]>();
+  categories = input.required<Category[]>();
   conditions = input.required<string[]>();
 
   selectedCategory = input.required<string>();

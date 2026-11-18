@@ -1,4 +1,4 @@
-export type ItemCondition = 'NEW' | 'LIKE_NEW' | 'GOOD' | 'FAIR';
+export type ItemCondition = 'Nuevo' | 'Como nuevo' | 'Buen estado' | 'Regular';
 export type ItemStatus = 'STORED' | 'LISTED' | 'SOLD';
 
 export interface StorageItem {
@@ -6,7 +6,6 @@ export interface StorageItem {
   userId: string;
   title: string;
   description: string;  
-  categoryId: string;
   condition: ItemCondition;
   status: ItemStatus;       
   images: string[];        

@@ -138,6 +138,7 @@ export class RegisterModalComponent {
     const values = this.form.getRawValue();
 
     const user: User = {
+      photo:'',
       firstName: values.firstName.trim(),
       lastName: values.lastName.trim(),
       email: values.email.trim(),

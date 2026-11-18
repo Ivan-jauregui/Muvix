@@ -16,39 +16,40 @@ import { PublicationResponse } from '../../../../core/models/dto/response/public
 export class CheckoutSuccessComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
-  private  readonly publicationService = inject(PublicationService);
+  private readonly publicationService = inject(PublicationService);
 
-  publication = signal<PublicationResponse|null>(null)
-  seller = signal<User|null>(null)
+  publication = signal<PublicationResponse | null>(null)
+  seller = signal<User | null>(null)
 
   pinDigits: string[] = ['4', '8', '2', '9'];
 
-  id = input<string>(); 
+  id = input<string>();
 
   ngOnInit(): void {
-       const prodId = this.id();
+    const prodId = this.id();
 
-      if (prodId ) {
-        this.loadData(prodId);
-      }
+    if (prodId) {
+      this.loadPublication(prodId);
+    }
   }
 
 
 
-  loadData(publicationId: string): void {
-     this.publicationService.getById(publicationId).subscribe({
-      next: data => this.publication.set(data), 
-      error: err => console.error('Error al cargar la publicación', err)
+  loadPublication(id: string): void {
+    this.publicationService.getById(id).subscribe({
+      next: pub => {
+        this.publication.set(pub);
+        if (pub.userId) this.loadUser(pub.userId);
+      },
+      error: err => console.error(err)
     });
-    
-    const sellerId = this.publication()?.userId
-    
-    this.userService.getById(sellerId!).subscribe({
-      next: user => this.seller.set(user), 
+  }
+  
+  loadUser(id: string): void {
+    this.userService.getById(id).subscribe({
+      next: user => this.seller.set(user),
       error: err => console.error('Error al cargar el usuario', err)
     });
-
-   
   }
 
   copyAddress(): void {

@@ -1,68 +1,55 @@
-<aside
-  class="w-[300px] bg-white rounded-2xl border border-gray-100 shadow-sm
+<aside class="w-[350px] bg-white rounded-2xl border border-gray-100 shadow-sm
          p-5 h-[720px] min-h-[720px] max-h-[720px]
          flex flex-col overflow-hidden">
 
-
+f
   <div class="flex items-center justify-between pb-3 border-b border-gray-100 shrink-0">
     <span class="text-sm font-bold">☰ FILTROS</span>
 
-    <button
-      type="button"
-      (click)="clear.emit()"
-      class="text-xs text-gray-400 underline hover:text-gray-700">
+    <button type="button" (click)="clear.emit()" class="text-xs text-gray-400 underline hover:text-gray-700">
       Limpiar
     </button>
   </div>
 
 
-  <div class="flex-1 min-h-0 overflow-y-auto space-y-6 pt-4 pr-1">
+  <div class="flex-1 min-h-0 overflow-y-auto space-y-6 pt-4 pr-1">f
 
-    
+
     <div class="space-y-2">
       <p class="text-[11px] font-bold text-gray-400 tracking-wider uppercase">
         Buscar publicación
       </p>
 
-      <input
-        type="text"
-        placeholder="Buscar artículo..."
-        [value]="search()"
-        (input)="searchChange.emit($any($event.target).value)"
-        class="w-full text-sm bg-gray-50 border border-gray-100 rounded-full
+      <input type="text" placeholder="Buscar artículo..." [value]="search()"
+        (input)="searchChange.emit($any($event.target).value)" class="w-full text-sm bg-gray-50 border border-gray-100 rounded-full
                px-4 py-2 focus:outline-none focus:ring-2 focus:ring-rose-200">
     </div>
 
 
     <div class="space-y-2">
-      <p class="text-[11px] font-bold text-gray-400 tracking-wider uppercase">
+      <p class="text-[11px] font-bold text-gray-400 uppercase">
         Categorías
       </p>
 
-      @for (c of categories(); track c) {
-        <button
-          type="button"
-          (click)="categoryChange.emit(c)"
-          class="w-full flex justify-between items-center px-3 py-2
-                 rounded-xl text-sm transition"
-          [class]="selectedCategory() === c
-            ? 'bg-gray-900 text-white font-semibold'
-            : 'text-gray-600 hover:bg-gray-50'">
+      @for (c of categories(); track c.id ?? c.name) {
+      <button type="button" (click)="categoryChange.emit(c.name)"
+        class="w-full flex justify-between items-center gap-2 px-3 py-2 rounded-xl text-sm text-left transition"
+        [class]="selectedCategory() === c.name
+        ? 'bg-gray-900 text-white font-semibold'
+        : 'text-gray-600 hover:bg-gray-50'">
 
-          <span>{{ c }}</span>
+        <span class="leading-snug">{{ c.name }}</span>
 
-          <span
-            class="text-xs px-2 py-0.5 rounded-full"
-            [class]="selectedCategory() === c
-              ? 'bg-white/20'
-              : 'bg-gray-100'">
-            {{ categoryCount()(c) }}
-          </span>
-        </button>
+        <span class="shrink-0 text-xs px-2 py-0.5 rounded-full" [class]="selectedCategory() === c.name
+          ? 'bg-white/20 text-white'
+          : 'bg-gray-100 text-gray-600'">
+          {{ categoryCount()(c.name) }}
+        </span>
+      </button>
       }
     </div>
 
-    
+
     <div class="space-y-2 pt-4 border-t border-gray-100">
       <p class="text-[11px] font-bold text-gray-400 tracking-wider uppercase">
         Estado
@@ -70,17 +57,13 @@
 
       <div class="flex flex-wrap gap-2">
         @for (c of conditions(); track c) {
-          <button
-            type="button"
-            (click)="conditionChange.emit(c)"
-            class="text-xs font-medium px-3 py-1.5 rounded-full
-                   border transition"
-            [class]="selectedCondition() === c
+        <button type="button" (click)="conditionChange.emit(c)" class="text-xs font-medium px-3 py-1.5 rounded-full
+                   border transition" [class]="selectedCondition() === c
               ? 'bg-emerald-50 border-emerald-300 text-emerald-700'
               : 'bg-gray-50 border-gray-100 text-gray-600 hover:bg-gray-100'">
 
-            {{ c }} ({{ conditionCount()(c) }})
-          </button>
+          {{ c }} ({{ conditionCount()(c) }})
+        </button>
         }
       </div>
     </div>
@@ -95,14 +78,8 @@
         </span>
       </div>
 
-      <input
-        type="range"
-        [min]="minPriceLimit()"
-        [max]="maxPriceLimit()"
-        step="1000"
-        [value]="maxPrice()"
-        (input)="priceChange.emit(+$any($event.target).value)"
-        class="w-full accent-rose-600 cursor-pointer">
+      <input type="range" [min]="minPriceLimit()" [max]="maxPriceLimit()" step="1000" [value]="maxPrice()"
+        (input)="priceChange.emit(+$any($event.target).value)" class="w-full accent-rose-600 cursor-pointer">
 
       <div class="flex justify-between text-[11px] text-gray-400">
         <span>${{ minPriceLimit().toLocaleString('es-AR') }}</span>

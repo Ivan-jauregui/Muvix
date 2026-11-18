@@ -3,6 +3,7 @@ import { Publication } from '../../../../core/models/publicacion';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { PublicationImages } from '../../../../core/models/publication-images';
+import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({
   selector: 'publication-card',
@@ -11,26 +12,9 @@ import { PublicationImages } from '../../../../core/models/publication-images';
   styleUrl: './publication-card.component.css'
 })
 export class PublicationCardComponent {
-  /*publication = input.required<Publication>();
+  publication = input.required<PublicationResponse>();
 
   router = inject(Router);
-
-  getMainImageUrl(publication: Publication): string {
-
-    const images = publication.images;
-
-    if (!images || images.length === 0) {
-      return 'assets/no-image.jpg';
-    }
-
-    const principal = images.find(
-      (img: PublicationImages) => img.esPrincipal
-    );
-
-    return principal
-      ? principal.url_images
-      : images[0].url_images;
-  }
 
   getCategoryName(publication: Publication): string {
 
@@ -53,5 +37,4 @@ export class PublicationCardComponent {
     }
 
   }
-*/
 }

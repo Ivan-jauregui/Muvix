@@ -50,6 +50,10 @@ export const routes: Routes = [
       { 
         path: 'profile/me', 
         loadComponent: () => import('./features/profile/pages/my-profile/my-profile.component').then(m=>m.MyProfileComponent)
+      },
+      { 
+        path: 'profile/me/edit', 
+        loadComponent: () => import('./features/profile/pages//edit-profile/edit-profile.component').then(m=>m.EditProfileComponent)
       }
     ]
   },

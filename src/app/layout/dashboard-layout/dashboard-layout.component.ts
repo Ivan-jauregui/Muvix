@@ -13,7 +13,7 @@ import { PublicationService } from '../../core/services/publication/publication-
   styleUrl: './dashboard-layout.component.css'
 })
 export class DashboardLayoutComponent implements OnInit{
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   user = signal<User | null>(null)
 
   ngOnInit(): void {

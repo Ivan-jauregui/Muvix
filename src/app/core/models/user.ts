@@ -1,6 +1,6 @@
 export interface User{
     id?:string;
-    photo?:string;
+    photo:string;
     firstName:string;
     lastName:string;
     email:string;
