@@ -1,6 +1,5 @@
 import { Component, inject, input, output } from '@angular/core';
 import { Publication } from '../../../../../../core/models/publicacion';
-import { PublicationImages } from '../../../../../../core/models/publication-images';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';

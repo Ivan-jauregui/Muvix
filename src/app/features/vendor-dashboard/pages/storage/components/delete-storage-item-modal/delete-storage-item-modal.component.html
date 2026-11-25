@@ -1,0 +1,96 @@
+@if (item(); as target) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4"
+    (click)="onClose()"
+  >
+    <div
+      class="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl border border-slate-200"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="flex items-start gap-3">
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+          [class.bg-amber-100]="cannotDelete()"
+          [class.text-amber-600]="cannotDelete()"
+          [class.bg-red-100]="!cannotDelete()"
+          [class.text-red-600]="!cannotDelete()"
+        >
+          <ng-icon name="heroExclamationTriangle" size="22" />
+        </div>
+
+        <div class="flex-1">
+          <h3 class="text-base font-bold text-slate-900">
+            @if (cannotDelete()) {
+              No podés eliminar este ítem
+            } @else {
+              Eliminar ítem
+            }
+          </h3>
+
+          <p class="mt-1 text-sm text-slate-600">
+            @if (isInBatch()) {
+              <span class="font-semibold text-slate-800">{{ target.title }}</span>
+              está incluido en uno o más lotes y no puede eliminarse mientras forme parte de ellos.
+            } @else if (cannotDelete()) {
+              <span class="font-semibold text-slate-800">{{ target.title ?? 'Este ítem' }}</span>
+              está asociado a publicaciones y no puede eliminarse.
+            } @else {
+              ¿Seguro que querés eliminar
+              <span class="font-semibold text-slate-800">{{ target.title ?? 'este ítem' }}</span>?
+              Esta acción no se puede deshacer.
+            }
+          </p>
+
+          @if (linkedPublications().length > 0) {
+            <div class="mt-4 rounded-xl bg-slate-50 border border-slate-200 p-3">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                Publicaciones donde está incluido
+              </p>
+
+              <ul class="space-y-1.5 max-h-40 overflow-y-auto">
+                @for (pub of linkedPublications(); track pub.id) {
+                  <li class="flex items-center justify-between gap-2 text-sm text-slate-800 bg-white px-2.5 py-1.5 rounded-lg border border-slate-100">
+                    <span class="truncate font-medium">{{ pub.title }}</span>
+                    <span
+                      class="shrink-0 text-[10px] font-bold uppercase px-2 py-0.5 rounded-full"
+                      [class.bg-indigo-100]="pub.type === 'BATCH'"
+                      [class.text-indigo-700]="pub.type === 'BATCH'"
+                      [class.bg-slate-100]="pub.type !== 'BATCH'"
+                      [class.text-slate-600]="pub.type !== 'BATCH'"
+                    >
+                      {{ pub.type === 'BATCH' ? 'Lote' : 'Individual' }}
+                    </span>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-end gap-2.5">
+        <button
+          type="button"
+          (click)="onClose()"
+          [disabled]="isDeleting()"
+          class="px-4 py-2 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition disabled:opacity-50"
+        >
+          {{ cannotDelete() ? 'Entendido' : 'Cancelar' }}
+        </button>
+
+        @if (!cannotDelete()) {
+          <button
+            type="button"
+            (click)="onConfirm()"
+            [disabled]="isDeleting() || cannotDelete()"
+            class="px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl transition disabled:bg-slate-300 disabled:cursor-not-allowed"
+          >
+            {{ isDeleting() ? 'Eliminando...' : 'Eliminar' }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+}

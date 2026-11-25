@@ -30,4 +30,8 @@ export class StorageService {
       map((data: StorageItem[]) => data.filter(item => item.userId === this.authService.currentUser()?.id))
     );
   }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

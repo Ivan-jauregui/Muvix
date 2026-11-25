@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import {
   heroMapPin,
@@ -7,13 +7,17 @@ import {
   heroUser,
   heroLockClosed,
   heroPencil,
-  heroCamera 
+  heroCamera,
 } from '@ng-icons/heroicons/outline';
+import { heroShareMini } from '@ng-icons/heroicons/mini';
 import { CommonModule } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { RouterLink } from '@angular/router';
 import { CloudinaryService } from '../../../../core/services/cloudinary/cloudinary.service';
 import { UserService } from '../service/user.service';
+
+import { Box } from '../../../../core/models/box';
+import { BoxService } from '../../../../core/services/box.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -30,70 +34,93 @@ import { UserService } from '../service/user.service';
       heroUser,
       heroCamera,
       heroLockClosed,
-      heroPencil
-
+      heroPencil,
+      heroShareMini
     })
   ],
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.css'
 })
-export class MyProfileComponent {
+export class MyProfileComponent implements OnInit {
   private authService = inject(AuthService);
-  private cloudinaryService = inject(CloudinaryService);  
-  private userService = inject(UserService);  
+  private cloudinaryService = inject(CloudinaryService);
+  private boxService = inject(BoxService);
+  private userService = inject(UserService);
+  
 
   currentUser = this.authService.currentUser;
-uploadingPhoto = false;
+  boxes = signal<Box[]>([]);
+  loadingBoxes = signal(false);
+  uploadingPhoto = false;
 
-onPhotoSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const file = input.files?.[0];
-
-  if (!file) return;
-
-  if (!file.type.startsWith('image/')) {
-    console.error('El archivo debe ser una imagen.');
-    input.value = '';
-    return;
+  ngOnInit(): void {
+    this.getAllBoxes();
   }
 
-  if (file.size > 5 * 1024 * 1024) {
-    console.error('La imagen no puede superar los 5 MB.');
-    input.value = '';
-    return;
+  getAllBoxes(): void {
+    this.loadingBoxes.set(true);
+
+    this.boxService.getPublicationsByUserId(this.authService.currentUser()?.id!).subscribe({
+      next: (data) => {
+        this.boxes.set(data);
+        this.loadingBoxes.set(false);
+      },
+      error: (err) => {
+        console.error('Error al obtener las boxes:', err);
+        this.loadingBoxes.set(false);
+      }
+    });
   }
 
-  const user = this.currentUser();
+  onPhotoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
 
-  if (!user?.id) return;
+    if (!file) return;
 
-  this.uploadingPhoto = true;
-
-  this.cloudinaryService.uploadImage(file).subscribe({
-    next: (imageUrl) => {
-      const updatedUser = {
-        ...user,
-        photo: imageUrl
-      };
-
-      this.userService.update(user.id!, updatedUser).subscribe({
-        next: (data) => {
-          this.currentUser.set(data);
-          this.uploadingPhoto = false;
-          input.value = '';
-        },
-        error: (err) => {
-          console.error('Error al actualizar el perfil:', err);
-          this.uploadingPhoto = false;
-          input.value = '';
-        }
-      });
-    },
-    error: (error) => {
-      console.error('Error al subir la imagen:', error);
-      this.uploadingPhoto = false;
+    if (!file.type.startsWith('image/')) {
+      console.error('El archivo debe ser una imagen.');
       input.value = '';
+      return;
     }
-  });
-}
+
+    if (file.size > 5 * 1024 * 1024) {
+      console.error('La imagen no puede superar los 5 MB.');
+      input.value = '';
+      return;
+    }
+
+    const user = this.currentUser();
+
+    if (!user?.id) return;
+
+    this.uploadingPhoto = true;
+
+    this.cloudinaryService.uploadImage(file).subscribe({
+      next: (imageUrl) => {
+        const updatedUser = {
+          ...user,
+          photo: imageUrl
+        };
+
+        this.userService.update(user.id!, updatedUser).subscribe({
+          next: (data) => {
+            this.currentUser.set(data);
+            this.uploadingPhoto = false;
+            input.value = '';
+          },
+          error: (err) => {
+            console.error('Error al actualizar el perfil:', err);
+            this.uploadingPhoto = false;
+            input.value = '';
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al subir la imagen:', error);
+        this.uploadingPhoto = false;
+        input.value = '';
+      }
+    });
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, computed, inject, model, signal } from '@angular/cor
 import { PublicationService } from '../../../../core/services/publication/publication-service';
 import { Publication } from '../../../../core/models/publicacion';
 import { CommonModule } from '@angular/common';
-import { PublicationImages } from '../../../../core/models/publication-images';
 import { Router } from '@angular/router';
 import { heroFunnelMicro } from '@ng-icons/heroicons/micro';
 import { NgIcon, provideIcons } from '@ng-icons/core';

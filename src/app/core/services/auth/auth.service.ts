@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../../models/user';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { map, Observable, tap } from 'rxjs';
 export class AuthService {
 
   private http = inject(HttpClient);
-  private apiUrl = "http://localhost:3000/users";
+  private apiUrl = 'http://localhost:3000/users';
 
   currentUser = signal<User | null>(null);
 
@@ -18,7 +18,46 @@ export class AuthService {
   }
 
   register(req: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, req);
+    const cleanEmail = req.email.trim().toLowerCase();
+    const cleanPhone = this.normalizePhone(req.phoneNumber);
+
+    return this.getAll().pipe(
+      switchMap(users => {
+        const emailExists = users.some(
+          user => user.email?.trim().toLowerCase() === cleanEmail
+        );
+        const phoneExists = users.some(
+          user => this.normalizePhone(user.phoneNumber ?? '') === cleanPhone
+        );
+
+        if (emailExists && phoneExists) {
+          return throwError(() => ({
+            status: 409,
+            message: 'Ya existe un usuario registrado con ese email y teléfono.'
+          }));
+        }
+
+        if (emailExists) {
+          return throwError(() => ({
+            status: 409,
+            message: 'Ya existe un usuario registrado con ese email.'
+          }));
+        }
+
+        if (phoneExists) {
+          return throwError(() => ({
+            status: 409,
+            message: 'Ya existe un usuario registrado con ese phone.'
+          }));
+        }
+
+        return this.http.post<User>(this.apiUrl, {
+          ...req,
+          email: cleanEmail,
+          phoneNumber: cleanPhone
+        });
+      })
+    );
   }
 
   login(email: string, password: string): Observable<boolean> {
@@ -35,5 +74,33 @@ export class AuthService {
       tap(user => this.currentUser.set(user)),
       map(user => user !== null)
     );
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail) return of(false);
+
+    return this.getAll().pipe(
+      map(users =>
+        users.some(user => user.email?.trim().toLowerCase() === normalizedEmail)
+      ),
+      catchError(() => of(false))
+    );
+  }
+
+  checkPhoneExists(phoneNumber: string): Observable<boolean> {
+    const normalizedPhone = this.normalizePhone(phoneNumber);
+    if (!normalizedPhone) return of(false);
+
+    return this.getAll().pipe(
+      map(users =>
+        users.some(user => this.normalizePhone(user.phoneNumber ?? '') === normalizedPhone)
+      ),
+      catchError(() => of(false))
+    );
+  }
+
+  private normalizePhone(phone: string): string {
+    return phone.replace(/[\s()-]/g, '').trim();
   }
 }

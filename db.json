@@ -1,246 +1,106 @@
 {
   "storage": [
     {
-      "id": "ST001",
       "userId": "ndymGpBYjCc",
-      "title": "Mesa ratona de madera",
-      "description": "Mesa ratona de madera natural, ideal para living. Diseño minimalista, muy resistente y en excelentes condiciones.",
+      "title": "Silla",
+      "description": "SillaSilla",
       "condition": "Como nuevo",
-      "status": "LISTED",
+      "status": "STORED",
       "images": [
-        "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900"
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1795631283/silita.jpg"
       ],
-      "createdAt": "2026-11-18T10:00:00.000Z"
+      "createdAt": "2026-11-25T22:03:22.427Z",
+      "id": "7qhHFbuZd5w"
     },
     {
-      "id": "ST002",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Lámpara de escritorio moderna",
-      "description": "Lámpara de escritorio con diseño moderno y luz regulable. Perfecta para espacios de estudio o trabajo.",
+      "userId": "ndymGpBYjCc",
+      "title": "Mesa",
+      "description": "MesaMesaMesa",
       "condition": "Nuevo",
-      "status": "LISTED",
+      "status": "STORED",
       "images": [
-        "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900"
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1795631340/3be71d799187d445a6845fd17c545a27.jpg"
       ],
-      "createdAt": "2026-11-17T15:30:00.000Z"
+      "createdAt": "2026-11-25T22:03:36.780Z",
+      "id": "jreHOPhhwKI"
     },
     {
-      "id": "ST003",
       "userId": "ndymGpBYjCc",
-      "title": "Licuadora de acero inoxidable",
-      "description": "Licuadora de alta potencia con jarra resistente. Ideal para preparar licuados, jugos y otras recetas.",
+      "title": "Lamapara",
+      "description": "LamparaLampara",
       "condition": "Buen estado",
-      "status": "LISTED",
+      "status": "STORED",
       "images": [
-        "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=900"
+        "https://res.cloudinary.com/vhycikpc/image/upload/v1795631371/d1db551e7de167f8f6b001b6efdf2cb1.jpg"
       ],
-      "createdAt": "2026-11-16T12:00:00.000Z"
-    },
-    {
-      "id": "ST004",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Set de vajilla cerámica",
-      "description": "Juego de vajilla de cerámica compuesto por platos playos, hondos y de postre. Estilo artesanal.",
-      "condition": "Como nuevo",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=900"
-      ],
-      "createdAt": "2026-11-15T09:20:00.000Z"
-    },
-    {
-      "id": "ST005",
-      "userId": "ndymGpBYjCc",
-      "title": "Juego de sábanas blancas",
-      "description": "Juego de sábanas de algodón para cama de dos plazas. Suaves, cómodas y en excelente estado.",
-      "condition": "Como nuevo",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900"
-      ],
-      "createdAt": "2026-11-14T18:00:00.000Z"
-    },
-    {
-      "id": "ST006",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Estantería organizadora",
-      "description": "Estantería de varios niveles para organizar libros, objetos decorativos y accesorios del hogar.",
-      "condition": "Buen estado",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=900"
-      ],
-      "createdAt": "2026-11-13T11:45:00.000Z"
-    },
-    {
-      "id": "ST007",
-      "userId": "ndymGpBYjCc",
-      "title": "Taladro eléctrico profesional",
-      "description": "Taladro eléctrico con empuñadura ergonómica. Ideal para trabajos domésticos y proyectos de bricolaje.",
-      "condition": "Buen estado",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=900"
-      ],
-      "createdAt": "2026-11-12T14:15:00.000Z"
-    },
-    {
-      "id": "ST008",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Sillón de jardín",
-      "description": "Sillón de exterior con diseño moderno. Ideal para balcones, patios y jardines.",
-      "condition": "Como nuevo",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900"
-      ],
-      "createdAt": "2026-11-11T16:40:00.000Z"
-    },
-    {
-      "id": "ST009",
-      "userId": "ndymGpBYjCc",
-      "title": "Aspiradora compacta",
-      "description": "Aspiradora compacta y práctica para la limpieza diaria del hogar. Fácil de transportar y guardar.",
-      "condition": "Regular",
-      "status": "LISTED",
-      "images": [
-        "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=900"
-      ],
-      "createdAt": "2026-11-10T13:25:00.000Z"
+      "createdAt": "2026-11-25T22:04:06.429Z",
+      "id": "A_i5vLQJNG8"
     }
   ],
   "publications": [
     {
-      "id": "PUB001",
       "userId": "ndymGpBYjCc",
-      "title": "Mesa ratona de madera natural",
-      "description": "Mesa ratona minimalista para living. Excelente complemento para cualquier ambiente.",
-      "price": 85000,
+      "title": "Silla",
+      "description": "SillaSilla",
+      "price": 1200,
       "type": "INDIVIDUAL",
       "status": "ACTIVE",
       "category": "Muebles y Living",
       "itemIds": [
-        "ST001"
+        "7qhHFbuZd5w"
       ],
-      "createdAt": "2026-11-18T10:10:00.000Z"
+      "createdAt": "2026-11-25T22:04:17.470Z",
+      "id": "UeM4Xe2nzfk"
     },
     {
-      "id": "PUB002",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Lámpara de escritorio moderna",
-      "description": "Iluminá tu espacio de trabajo con esta lámpara de diseño moderno.",
-      "price": 32000,
+      "userId": "ndymGpBYjCc",
+      "title": "Mesa",
+      "description": "MesaMesaMesa",
+      "price": 13000,
+      "type": "INDIVIDUAL",
+      "status": "ACTIVE",
+      "category": "Muebles y Living",
+      "itemIds": [
+        "jreHOPhhwKI"
+      ],
+      "createdAt": "2026-11-25T22:04:32.590Z",
+      "id": "ezujNNXeYEQ"
+    },
+    {
+      "id": "L7E2u1DQe-k",
+      "userId": "ndymGpBYjCc",
+      "title": "Lampara",
+      "description": "LamparaLampara",
+      "price": 14000,
       "type": "INDIVIDUAL",
       "status": "ACTIVE",
       "category": "Decoración e Iluminación",
       "itemIds": [
-        "ST002"
+        "A_i5vLQJNG8"
       ],
-      "createdAt": "2026-11-17T15:40:00.000Z"
+      "createdAt": "2026-11-25T22:04:45.959Z"
     },
     {
-      "id": "PUB003",
+      "id": "Kj1SxoChu0Q",
       "userId": "ndymGpBYjCc",
-      "title": "Licuadora de acero inoxidable",
-      "description": "Licuadora funcional y potente para preparar tus recetas favoritas.",
-      "price": 48000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Electrodomésticos",
-      "itemIds": [
-        "ST003"
-      ],
-      "createdAt": "2026-11-16T12:10:00.000Z"
-    },
-    {
-      "id": "PUB004",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Set completo de vajilla cerámica",
-      "description": "Vajilla de cerámica con estilo artesanal. Ideal para renovar tu mesa.",
-      "price": 39000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Bazar y Utensilios",
-      "itemIds": [
-        "ST004"
-      ],
-      "createdAt": "2026-11-15T09:30:00.000Z"
-    },
-    {
-      "id": "PUB005",
-      "userId": "ndymGpBYjCc",
-      "title": "Juego de sábanas de algodón",
-      "description": "Sábanas suaves de algodón para cama de dos plazas.",
-      "price": 27000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Blanco y Cama (Sábanas, Toallas)",
-      "itemIds": [
-        "ST005"
-      ],
-      "createdAt": "2026-11-14T18:10:00.000Z"
-    },
-    {
-      "id": "PUB006",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Estantería organizadora de varios niveles",
-      "description": "Solución práctica para mantener tus ambientes organizados.",
-      "price": 55000,
-      "type": "INDIVIDUAL",
+      "title": "Living Comedor SUPER LINDO",
+      "description": "blaba",
+      "price": 10,
+      "type": "BATCH",
       "status": "ACTIVE",
       "category": "Organización y Almacenamiento",
       "itemIds": [
-        "ST006"
+        "7qhHFbuZd5w",
+        "jreHOPhhwKI",
+        "A_i5vLQJNG8"
       ],
-      "createdAt": "2026-11-13T12:00:00.000Z"
-    },
-    {
-      "id": "PUB007",
-      "userId": "ndymGpBYjCc",
-      "title": "Taladro eléctrico",
-      "description": "Herramienta versátil para trabajos de mantenimiento y bricolaje.",
-      "price": 65000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Herramientas y Bricolaje",
-      "itemIds": [
-        "ST007"
-      ],
-      "createdAt": "2026-11-12T14:30:00.000Z"
-    },
-    {
-      "id": "PUB008",
-      "userId": "Z1PwELJ8F_I",
-      "title": "Sillón moderno para jardín",
-      "description": "Sillón cómodo para disfrutar de tus espacios exteriores.",
-      "price": 72000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Jardín y Exteriores",
-      "itemIds": [
-        "ST008"
-      ],
-      "createdAt": "2026-11-11T16:50:00.000Z"
-    },
-    {
-      "id": "PUB009",
-      "userId": "ndymGpBYjCc",
-      "title": "Aspiradora compacta para el hogar",
-      "description": "Aspiradora práctica para la limpieza cotidiana. Funcional y fácil de guardar.",
-      "price": 43000,
-      "type": "INDIVIDUAL",
-      "status": "ACTIVE",
-      "category": "Limpieza y Cuidado del Hogar",
-      "itemIds": [
-        "ST009"
-      ],
-      "createdAt": "2026-11-10T13:35:00.000Z"
+      "createdAt": "2026-11-25T22:05:12.398Z"
     }
   ],
   "users": [
     {
       "photo": "https://res.cloudinary.com/vhycikpc/image/upload/v1794747282/Linkdin_profile_photo.png",
-      "firstName": "Ivan",
+      "firstName": "Iv",
       "lastName": "Jauregui Caffarel",
       "email": "ivanjauregui79@gmail.com",
       "password": "12345678",
@@ -252,12 +112,12 @@
       "id": "ndymGpBYjCc"
     },
     {
-      "photo": "",
+      "photo": "https://res.cloudinary.com/vhycikpc/image/upload/v1795631283/silita.jpg",
       "firstName": "Ivan",
       "lastName": "Jauregui Caffarel",
       "email": "ivanjauregui22@gmail.com",
       "password": "123456789",
-      "phoneNumber": "+542233009292",
+      "phoneNumber": "+542233009293",
       "country": "Argentina",
       "state": "Buenos aires",
       "city": "Mar del plata",
@@ -267,12 +127,28 @@
   ],
   "reservations": [
     {
-      "publicationId": "KxLeFMmm2yI",
+      "publicationId": "Kj1SxoChu0Q",
       "userId": "Z1PwELJ8F_I",
-      "price": 43232,
+      "price": 15000,
       "pickup_date": null,
-      "pin": "Ybqam",
-      "id": "5uL9h9lnQwk"
+      "pin": "mtCRr",
+      "id": "_nrolSuu1Dc"
+    },
+    {
+      "publicationId": "Kj1SxoChu0Q",
+      "userId": "Z1PwELJ8F_I",
+      "price": 15000,
+      "pickup_date": null,
+      "pin": "h6hma",
+      "id": "v1pk8P0Gnl8"
+    },
+    {
+      "publicationId": "Kj1SxoChu0Q",
+      "userId": "Z1PwELJ8F_I",
+      "price": 15000,
+      "pickup_date": null,
+      "pin": "KooB2",
+      "id": "chObbFIbYec"
     }
   ],
   "categories": [
@@ -311,6 +187,83 @@
     {
       "id": "9",
       "name": "Limpieza y Cuidado del Hogar"
+    }
+  ],
+  "boxes": [
+    {
+      "id": "1",
+      "title": "Cocina",
+      "userId": "ndymGpBYjCc",
+      "createdAt": "2026-11-25T10:30:00Z",
+      "publications": [
+        {
+          "id": "PUB004",
+          "userId": "Z1PwELJ8F_I",
+          "title": "Set completo de vajilla cerámica",
+          "description": "Vajilla de cerámica con estilo artesanal. Ideal para renovar tu mesa.",
+          "price": 39000,
+          "type": "INDIVIDUAL",
+          "status": "ACTIVE",
+          "category": "Bazar y Utensilios",
+          "createdAt": "2026-11-15T09:30:00.000Z",
+          "item": [
+            {
+              "id": "ST004",
+              "userId": "Z1PwELJ8F_I",
+              "title": "Set de vajilla cerámica",
+              "description": "Juego de vajilla de cerámica compuesto por platos playos, hondos y de postre. Estilo artesanal.",
+              "condition": "Como nuevo",
+              "status": "LISTED",
+              "images": [
+                "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=900"
+              ],
+              "createdAt": "2026-11-15T09:20:00.000Z"
+            }
+          ],
+          "coverImage": "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=900"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Tecnología y Programación",
+      "userId": "ndymGpBYjCc",
+      "createdAt": "2026-11-25T11:00:00Z",
+      "publications": [
+        {
+          "id": "PUB004",
+          "userId": "Z1PwELJ8F_I",
+          "title": "Set completo de vajilla cerámica",
+          "description": "Vajilla de cerámica con estilo artesanal. Ideal para renovar tu mesa.",
+          "price": 39000,
+          "type": "INDIVIDUAL",
+          "status": "ACTIVE",
+          "category": "Bazar y Utensilios",
+          "createdAt": "2026-11-15T09:30:00.000Z",
+          "item": [
+            {
+              "id": "ST004",
+              "userId": "Z1PwELJ8F_I",
+              "title": "Set de vajilla cerámica",
+              "description": "Juego de vajilla de cerámica compuesto por platos playos, hondos y de postre. Estilo artesanal.",
+              "condition": "Como nuevo",
+              "status": "LISTED",
+              "images": [
+                "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=900"
+              ],
+              "createdAt": "2026-11-15T09:20:00.000Z"
+            }
+          ],
+          "coverImage": "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=900"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Viajes y Escapadas",
+      "userId": "ndymGpBYjCc",
+      "createdAt": "2026-11-25T12:10:00Z",
+      "publications": []
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

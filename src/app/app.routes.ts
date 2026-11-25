@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { PublicLayoutComponent } from './layout/public-layout/public-layout.component';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 
+
 export const routes: Routes = [
 {
     path: '',
@@ -33,7 +34,6 @@ export const routes: Routes = [
     ]
   },
 
-  // 🛒 RUTAS COMPRADOR (Requieren Login, usan PublicLayout para conservar la navegación)
   {
     path: '',
     component: PublicLayoutComponent,
@@ -54,11 +54,14 @@ export const routes: Routes = [
       { 
         path: 'profile/me/edit', 
         loadComponent: () => import('./features/profile/pages//edit-profile/edit-profile.component').then(m=>m.EditProfileComponent)
+      },
+      { 
+        path: 'box/:id', 
+        loadComponent: () => import('./features/box/pages/box-details/box-details.component').then(m=>m.BoxDetailsComponent)
       }
     ]
   },
 
-  // 🏠 PANEL VENDEDOR CON LAYOUT DEDICADO (Sidebar Lateral + Header Interno)
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,

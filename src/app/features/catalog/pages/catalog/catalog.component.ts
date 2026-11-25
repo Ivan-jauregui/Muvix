@@ -3,7 +3,7 @@ import { PublicationService } from '../../../../core/services/publication/public
 import { Publication } from '../../../../core/models/publicacion';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { PublicationImages } from '../../../../core/models/publication-images';
+
 import { PublicationFilterComponent } from '../../components/publication-filter/publication-filter.component';
 import { ItemCondition, StorageItem } from '../../../../core/models/storage-item';
 import { StorageService } from '../../../vendor-dashboard/pages/storage/service/storage.service';

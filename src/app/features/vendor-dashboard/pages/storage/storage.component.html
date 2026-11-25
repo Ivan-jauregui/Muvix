@@ -30,16 +30,23 @@
                  opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         </div>
 
-        <button title="Publicar producto"
-          [routerLink]="['/dashboard/sell/form/publication/individual', item.id]"
-          class="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full bg-rose-600 px-2.5 py-1.5
-                 text-[11px] font-semibold text-white shadow-lg transition-all duration-200
+        <div
+          class="absolute top-2 right-2 z-10 flex items-center gap-1.5 transition-all duration-200
                  opacity-100 md:opacity-0 md:translate-y-1
-                 md:group-hover:opacity-100 md:group-hover:translate-y-0
-                 hover:bg-rose-700">
-          Publicar
-          <ng-icon name="heroArrowUpRight" size="12" />
-        </button>
+                 md:group-hover:opacity-100 md:group-hover:translate-y-0">
+          <button type="button" (click)="openDeleteModal(item)" title="Eliminar item" aria-label="Eliminar item"
+            class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow-md backdrop-blur-sm transition hover:bg-rose-600 hover:text-white">
+            <ng-icon name="heroTrash" size="14" />
+          </button>
+
+          <button type="button" title="Publicar producto"
+            [routerLink]="['/dashboard/sell/form/publication/individual', item.id]"d
+            class="inline-flex items-center gap-1 rounded-full bg-rose-600 px-2.5 py-1.5
+                   text-[11px] font-semibold text-white shadow-lg transition hover:bg-rose-700">
+            Publicar
+            <ng-icon name="heroArrowUpRight" size="12" />
+          </button>
+        </div>
       </figure>
 
       <div class="px-1 pt-2">
@@ -76,3 +83,48 @@
 
   </div>
 </main>
+
+
+
+@if (itemToDelete(); as target) {
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs"
+  (click)="closeDeleteModal()">
+  <div
+    class="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-xl"
+    (click)="$event.stopPropagation()">
+
+    <div class="flex items-start gap-3.5">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-50 text-rose-600">
+        <ng-icon name="heroTrash" size="20" />
+      </div>
+
+      <div class="flex-1">
+        <h3 class="text-base font-bold text-gray-900">Eliminar del inventario</h3>
+        <p class="mt-1 text-sm text-gray-500">
+          ¿Seguro que querés eliminar <span class="font-semibold text-gray-800">"{{ target.title }}"</span>? Esta acción no se puede deshacer.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex justify-end gap-2.5">
+      <button
+        type="button"
+        (click)="closeDeleteModal()"
+        [disabled]="isDeleting()"
+        class="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-50">
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        (click)="confirmDelete()"
+        [disabled]="isDeleting()"
+        class="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700 disabled:opacity-50">
+        <span>{{ isDeleting() ? 'Eliminando...' : 'Eliminar' }}</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+}

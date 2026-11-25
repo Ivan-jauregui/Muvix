@@ -2,7 +2,7 @@ import { Component, inject, input } from '@angular/core';
 import { Publication } from '../../../../core/models/publicacion';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { PublicationImages } from '../../../../core/models/publication-images';
+
 import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 
 @Component({

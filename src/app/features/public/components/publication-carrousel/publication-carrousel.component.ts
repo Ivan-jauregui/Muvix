@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { PublicationService } from '../../../../core/services/publication/publication-service';
 import { Publication } from '../../../../core/models/publicacion';
 import { CommonModule, DatePipe } from '@angular/common';
-import { PublicationImages } from '../../../../core/models/publication-images';
 import { RouterLink } from '@angular/router';
 import { PublicationResponse } from '../../../../core/models/dto/response/publication-response';
 

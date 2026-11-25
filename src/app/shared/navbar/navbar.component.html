@@ -83,9 +83,10 @@
         <ng-icon name="heroInboxStack" class="text-xl" />
       </button>
 
-      <button type="button" aria-label="Notificaciones"
+      <button type="button" aria-label="Catalogo"
+        routerLink="/catalog"
         class="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 sm:h-11 sm:w-11">
-        <ng-icon name="heroBell" class="text-xl" />
+        <ng-icon name="heroFilm" class="text-xl" />
       </button>
 
       <span class="mx-1 hidden h-7 w-px bg-gray-200 sm:block"></span>
@@ -183,6 +184,12 @@
 
 <app-login-modal [open]="showLogin()" (closed)="closeLogin()" (login)="login($event)"
   (forgotPassword)="recoverPassword($event)" (register)="register()" />
-
-<app-register-modal [open]="showRegister()" (closed)="showRegister.set(false)" (submitted)="createAccount($event)"
-  (login)="openLogin()" />
+  
+<app-register-modal
+  [open]="showRegister()"
+  [serverError]="registerError()"
+  (closed)="closeRegister()"
+  (submitted)="createAccount($event)"
+  (googleRegister)="googleRegister()"
+  (login)="openLogin()"
+/>
